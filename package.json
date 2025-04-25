@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "bootstrap": "^5.3.5",
-    "bootstrap-icons": "^1.11.3",
-    "ngx-mask": "^19.0.6",
-    "ngx-spinner": "^19.0.0",
-    "sweetalert2": "^11.19.1"
-  }
-}

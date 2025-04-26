@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-pagina-nao-encontrada',
@@ -8,5 +9,9 @@ import { Component } from '@angular/core';
   styleUrl: './pagina-nao-encontrada.component.css'
 })
 export class PaginaNaoEncontradaComponent {
+  constructor(private location: Location) {}
 
+  voltar() {
+    this.location.back();
+  }
 }

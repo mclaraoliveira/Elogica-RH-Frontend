@@ -9,26 +9,41 @@ export class ModalService {
 
   // Método pra mostrar um modal simples (com botão de ok)
   mostrarModalSimples(titulo: string, mensagem: string, icone?: SweetAlertIcon): Promise<SweetAlertResult> {
-    return Swal.fire({
+    const config: any = {
       title: titulo,
-      text: mensagem,
       icon: icone,
       confirmButtonText: 'OK'
-    });
+    };
+
+    // Verifica se a mensagem tem tags HTML e se tiver, usa a propriedade HTML. Se não, usa text
+    if (/<[a-z][\s\S]*>/i.test(mensagem)) {
+      config.html = mensagem;
+    } else {
+      config.text = mensagem;
+    }
+
+    return Swal.fire(config);
   }
 
   // Método pra modal de confirmação
   confirmar(titulo: string, mensagem: string, textoConfirmacao: string = 'Confirmar', textoCancelamento: string = 'Cancelar'): Promise<SweetAlertResult> {
-    return Swal.fire({
+    const config: any = {
       title: titulo,
-      text: mensagem,
       icon: 'question',
       showCancelButton: true,
       confirmButtonText: textoConfirmacao,
       cancelButtonText: textoCancelamento,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33'
-    });
+    };
+
+    if (/<[a-z][\s\S]*>/i.test(mensagem)) {
+      config.html = mensagem;
+    } else {
+      config.text = mensagem;
+    }
+
+    return Swal.fire(config);
   }
 
   // Método pra modal de sucesso
@@ -49,18 +64,6 @@ export class ModalService {
   // Método pra modal de informação
   informacao(titulo: string, mensagem: string): Promise<SweetAlertResult> {
     return this.mostrarModalSimples(titulo, mensagem, 'info');
-  }
-
-  // Método pra modal de carregamento
-  carregando(titulo: string, mensagem: string = 'Por favor, aguarde...'): void {
-    Swal.fire({
-      title: titulo,
-      text: mensagem,
-      allowOutsideClick: false,
-      didOpen: () => {
-        Swal.showLoading();
-      }
-    });
   }
 
   // Método pra fechar o modal

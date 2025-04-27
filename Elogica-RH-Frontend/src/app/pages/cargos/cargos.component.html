@@ -1,36 +1,37 @@
-<!-- src/app/pages/cargos/cargos.component.html -->
+<!--
 <div class="container-fluid p-4">
-  <!-- Modo Listagem -->
+
   <div *ngIf="modo === 'listar'">
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h2 class="mb-0">Cargos</h2>
-      <button class="btn btn-primary rounded-0 px-4" (click)="mudarModo('adicionar')">
-        <i class="bi bi-plus-lg me-2"></i>Adicionar
-      </button>
     </div>
 
-    <div class="card rounded-0 border-0 shadow-sm">
+    <div class="card rounded-0 border-0 shadow-sm mb-4">
       <div class="card-body p-0">
         <div class="table-responsive">
           <table class="table table-hover mb-0">
             <thead class="table-light">
               <tr>
-                <th class="py-3 px-4">A</th>
-                <th class="py-3 px-4">B</th>
-                <th class="py-3 px-4">C</th>
-                <th class="py-3 px-4 text-end">Ações</th>
+                <th class="py-3 px-4">Cargo</th>
+                <th class="py-3 px-4">Descrição</th>
+                <th class="py-3 px-4">Salário Base</th>
+                <th class="py-3 px-4">Setor</th>
+                <th class="py-3 px-4" colspan="2">Ações</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let cargo of cargos">
-                <td class="py-3 px-4">{{ cargo.a }}</td>
-                <td class="py-3 px-4">{{ cargo.b }}</td>
-                <td class="py-3 px-4">{{ cargo.c }}</td>
-                <td class="py-3 px-4 text-end">
-                  <button class="btn btn-sm btn-outline-primary rounded-0 me-2"
+                <td class="py-3 px-4">{{ cargo.cargo }}</td>
+                <td class="py-3 px-4">{{ cargo.descricao }}</td>
+                <td class="py-3 px-4">{{ cargo.salarioBase | currency:'BRL' }}</td>
+                <td class="py-3 px-4">{{ cargo.setor }}</td>
+                <td class="py-3 px-4 text-center">
+                  <button class="btn btn-sm btn-outline-primary rounded-0"
                           (click)="mudarModo('editar', cargo)">
                     <i class="bi bi-pencil"></i>
                   </button>
+                </td>
+                <td class="py-3 px-4 text-center">
                   <button class="btn btn-sm btn-outline-danger rounded-0"
                           (click)="excluirCargo(cargo)">
                     <i class="bi bi-trash"></i>
@@ -43,37 +44,45 @@
       </div>
     </div>
 
-    <div class="mt-4">
-      <h4>Graphs</h4>
-      <div class="table-responsive">
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>Graph</th>
-              <th>Variable</th>
-              <th>Value (x-axis)</th>
-              <th>Total</th>
-              <th>Value</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let graph of [1,2,3,4,5]; let i = index">
-              <td>Graph{{i+1}}</td>
-              <td>{{i < 2 ? 'Gamma' : 'Tumulus'}}</td>
-              <td>0.5 (100%)</td>
-              <td>Sum</td>
-              <td><i class="bi bi-check"></i></td>
-              <td><i class="bi bi-square"></i></td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="d-flex justify-content-end mb-4">
+      <button class="btn btn-primary rounded-0 px-4" (click)="mudarModo('adicionar')">
+        <i class="bi bi-plus-lg me-2"></i>Adicionar
+      </button>
+    </div>
+
+    <div class="card rounded-0 border-0 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Graphs</h5>
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Graph</th>
+                <th>Variable</th>
+                <th>Value (x-axis)</th>
+                <th>Total</th>
+                <th>Value</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let graph of [1,2,3,4,5]; let i = index">
+                <td>Graph{{i+1}}</td>
+                <td>{{i < 2 ? 'Gamma' : 'Tumulus'}}</td>
+                <td>0.5 (100%)</td>
+                <td>Sum</td>
+                <td><i class="bi bi-check"></i></td>
+                <td><i class="bi bi-square"></i></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-muted mt-2">Table of 1.4.2. Graphs available.</p>
       </div>
-      <p class="text-muted mt-2">Table of 1.4.2. Graphs available.</p>
     </div>
   </div>
 
-  <!-- Modo Adicionar -->
+
   <div *ngIf="modo === 'adicionar'">
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h2 class="mb-0">Adicionar Cargo</h2>
@@ -87,17 +96,148 @@
       <div class="card-body">
         <h5 class="card-title">Informações do Cargo</h5>
         <div class="row">
-          <div class="col-md-4 mb-3">
-            <label class="form-label">A</label>
-            <input type="text" class="form-control rounded-0" [(ngModel)]="novoCargo.a">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Cargo</label>
+            <input type="text" class="form-control rounded-0" [(ngModel)]="novoCargo.cargo">
           </div>
-          <div class="col-md-4 mb-3">
-            <label class="form-label">B</label>
-            <input type="text" class="form-control rounded-0" [(ngModel)]="novoCargo.b">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Setor</label>
+            <input type="text" class="form-control rounded-0" [(ngModel)]="novoCargo.setor">
           </div>
-          <div class="col-md-4 mb-3">
-            <label class="form-label">C</label>
-            <input type="text" class="form-control rounded-0" [(ngModel)]="novoCargo.c">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Descrição</label>
+            <textarea class="form-control rounded-0" [(ngModel)]="novoCargo.descricao" rows="2"></textarea>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Salário Base</label>
+            <input type="number" class="form-control rounded-0" [(ngModel)]="novoCargo.salarioBase">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div *ngIf="modo === 'editar'">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="mb-0">Editar Cargo</h2>
+      <div>
+        <button class="btn btn-outline-secondary rounded-0 me-2" (click)="cancelar()">Cancelar</button>
+        <button class="btn btn-primary rounded-0 px-4" (click)="salvarEdicao()">Salvar</button>
+      </div>
+    </div>
+
+    <div class="card rounded-0 border-0 shadow-sm mb-4">
+      <div class="card-body">
+        <h5 class="card-title">Informações do Cargo</h5>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Cargo</label>
+            <input type="text" class="form-control rounded-0" [(ngModel)]="cargoSelecionado.cargo">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Setor</label>
+            <input type="text" class="form-control rounded-0" [(ngModel)]="cargoSelecionado.setor">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Descrição</label>
+            <textarea class="form-control rounded-0" [(ngModel)]="cargoSelecionado.descricao" rows="2"></textarea>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Salário Base</label>
+            <input type="number" class="form-control rounded-0" [(ngModel)]="cargoSelecionado.salarioBase">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+ -->
+
+
+ <!-- src/app/pages/cargos/cargos.component.html -->
+<div class="container-fluid p-4">
+  <!-- Modo Listagem -->
+  <div *ngIf="modo === 'listar'">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="mb-0">Cargos</h2>
+    </div>
+
+    <div class="card rounded-0 border-0 shadow-sm mb-4">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover mb-0">
+            <thead class="table-light">
+              <tr>
+                <th class="py-3 px-4">Cargo</th>
+                <th class="py-3 px-4">Descrição</th>
+                <th class="py-3 px-4">Salário Base</th>
+                <th class="py-3 px-4">Setor</th>
+                <th class="py-3 px-4 text-center">Editar</th>
+                <th class="py-3 px-4 text-center">Excluir</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cargo of cargos">
+                <td class="py-3 px-4">{{ cargo.cargo }}</td>
+                <td class="py-3 px-4">{{ cargo.descricao }}</td>
+                <td class="py-3 px-4">{{ cargo.salarioBase | currency:'BRL' }}</td>
+                <td class="py-3 px-4">{{ cargo.setor }}</td>
+                <td class="py-3 px-4 text-center">
+                  <button class="btn btn-sm btn-outline-primary rounded-0"
+                          (click)="mudarModo('editar', cargo)">
+                    <i class="bi bi-pencil"></i>
+                  </button>
+                </td>
+                <td class="py-3 px-4 text-center">
+                  <button class="btn btn-sm btn-outline-danger rounded-0"
+                          (click)="excluirCargo(cargo)">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-primary rounded-0 px-4" (click)="mudarModo('adicionar')">
+        <i class="bi bi-plus-lg me-2"></i>Adicionar
+      </button>
+    </div>
+  </div>
+
+  <!-- Modo Adicionar -->
+  <div *ngIf="modo === 'adicionar'">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="mb-0">Adicionar Cargo</h2>
+      <div>
+        <button class="btn btn-outline-secondary rounded-0 me-2" (click)="cancelar()">Cancelar</button>
+        <button class="btn btn-primary rounded-0 px-4" (click)="adicionarCargo()">Salvar</button>
+      </div>
+    </div>
+
+    <div class="card rounded-0 border-0 shadow-sm">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Cargo*</label>
+            <input type="text" class="form-control rounded-0" [(ngModel)]="novoCargo.cargo" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Setor*</label>
+            <input type="text" class="form-control rounded-0" [(ngModel)]="novoCargo.setor" required>
+          </div>
+          <div class="col-md-12 mb-3">
+            <label class="form-label">Descrição</label>
+            <textarea class="form-control rounded-0" [(ngModel)]="novoCargo.descricao" rows="3"></textarea>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Salário Base*</label>
+            <input type="number" step="0.01" class="form-control rounded-0" [(ngModel)]="novoCargo.salarioBase" required>
           </div>
         </div>
       </div>
@@ -114,44 +254,26 @@
       </div>
     </div>
 
-    <div class="card rounded-0 border-0 shadow-sm mb-4">
-      <div class="card-body">
-        <h5 class="card-title">Diagrama</h5>
-        <div class="row">
-          <div class="col-md-4 mb-3">
-            <label class="form-label">A</label>
-            <input type="text" class="form-control rounded-0" [(ngModel)]="cargoSelecionado.a">
-          </div>
-          <div class="col-md-4 mb-3">
-            <label class="form-label">B</label>
-            <input type="text" class="form-control rounded-0" [(ngModel)]="cargoSelecionado.b">
-          </div>
-          <div class="col-md-4 mb-3">
-            <label class="form-label">C</label>
-            <input type="text" class="form-control rounded-0" [(ngModel)]="cargoSelecionado.c">
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="card rounded-0 border-0 shadow-sm">
       <div class="card-body">
-        <h5 class="card-title">Visualizar as editor</h5>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Favorable</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of ['Queries', 'Settings', 'Textiles', 'Textiles', 'Messages']">
-              <td><input type="checkbox" class="form-check-input"> User's</td>
-              <td>{{item}}</td>
-            </tr>
-          </tbody>
-        </table>
-        <p class="text-muted">Edit a bit of the main text.</p>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Cargo*</label>
+            <input type="text" class="form-control rounded-0" [(ngModel)]="cargoSelecionado.cargo" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Setor*</label>
+            <input type="text" class="form-control rounded-0" [(ngModel)]="cargoSelecionado.setor" required>
+          </div>
+          <div class="col-md-12 mb-3">
+            <label class="form-label">Descrição</label>
+            <textarea class="form-control rounded-0" [(ngModel)]="cargoSelecionado.descricao" rows="3"></textarea>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Salário Base*</label>
+            <input type="number" step="0.01" class="form-control rounded-0" [(ngModel)]="cargoSelecionado.salarioBase" required>
+          </div>
+        </div>
       </div>
     </div>
   </div>

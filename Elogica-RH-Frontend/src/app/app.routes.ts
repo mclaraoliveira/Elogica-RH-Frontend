@@ -38,7 +38,7 @@ export const routes: Routes = [
   {
     path: 'funcionarios-cadastro',
     component: FuncionarioCadastroComponent,
-    title: 'Funcinário Cadastro',
+    title: 'Funcionário Cadastro',
   },
   // {
   //   path: 'setores',

@@ -18,33 +18,18 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">Horário 1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>b</td>
-                <td>b</td>
+              
+              <tr *ngFor="let horario of horarios; let i = index">
+                <th scope="row">Horário {{i + 1}}</th>
+                <td>{{horario.inicio}}</td>
+                <td>{{horario.fim}}</td>
+                <td>{{horario.inicioIntervalo}}</td>
+                <td>{{horario.fimIntervalo}}</td>
                 <td><i class="bi bi-pen"></i></td>
                 <td><i class="bi bi-trash"></i></td>
               </tr>
-              <tr>
-                <th scope="row">Horário 2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>a</td>
-                <td>a</td>
-                <td><i class="bi bi-pen"></i></td>
-                <td><i class="bi bi-trash"></i></td>
-              </tr>
-              <tr>
-                <th scope="row">Horário 3</th>
-                <td>John</td>
-                <td>Doe</td>
-                <td>c</td>
-                <td>c</td>  
-                <td><i class="bi bi-pen"></i></td>
-                <td><i class="bi bi-trash"></i></td>
-              </tr>
+            
+             
             </tbody>
           </table>
           <hr>

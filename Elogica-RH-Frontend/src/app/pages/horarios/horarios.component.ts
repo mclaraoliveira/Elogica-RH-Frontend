@@ -3,6 +3,7 @@ import { HorariosService } from '../../services/horarios.service';
 import { CommonModule } from '@angular/common';
 import { Horario } from '../../shared/interfaces/horario';
 import Swal from 'sweetalert2';
+import { ModalService } from '../../shared/services/modal.service';
 
 @Component({
   selector: 'app-horarios',
@@ -35,6 +36,7 @@ export class HorariosComponent {
       }
     });
 
+    
 
 
   }
@@ -52,6 +54,7 @@ export class HorariosComponent {
     return `${hours}:${minutes}`;
   }
 
+//#region Modal Adicionar
   abrirModalAdicionar(): void {
     Swal.fire({
       title: '<i class="bi bi-plus-circle"></i> Adicionar',
@@ -127,6 +130,7 @@ export class HorariosComponent {
           next: (horario: Horario) => {
             this.horarios.push(horario);
             Swal.fire('Sucesso', 'Sua ação foi realizada com sucesso!', 'success');
+            this.carregarHorarios();
           },
           error: (err) => {
             console.error('Erro ao adicionar horário:', err);
@@ -136,6 +140,11 @@ export class HorariosComponent {
       }
     });
   }
+//#endregion
+
+
+//#region Modal Editar
+
 
   abrirModalEditar(horario: Horario, index: number): void {
     Swal.fire({
@@ -216,8 +225,10 @@ export class HorariosComponent {
         const horarioAtualizado: Horario = { ...horario, ...result.value };
         this.horariosService.atualizarHorario(horario.id!, horarioAtualizado).subscribe({
           next: (horario: Horario) => {
-            this.horarios[index] = horario;
+            console.log('Resposta do PUT (editar) - JSON bruto:', JSON.stringify(horario));
+            console.log('Resposta do PUT (editar):', horario);
             Swal.fire('Sucesso', 'Horário atualizado com sucesso!', 'success');
+            this.carregarHorarios();
           },
           error: (err) => {
             console.error('Erro ao atualizar horário:', err);
@@ -227,4 +238,38 @@ export class HorariosComponent {
       }
     });
   }
+//#endregion
+
+
+//#region Modal Exluir
+excluirHorario(id: number, index:number):void{
+  Swal.fire({
+    title:'Tem certeza?',
+    text:'Tem certeza que deseja excluir esse horário?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Sim',
+    cancelButtonText: 'Não'
+  }).then((result) =>{
+    if(result.isConfirmed){
+      this.horariosService.excluirHorario(id).subscribe({
+        next:(response) =>{
+          console.log('resposta da exclusão:', response);
+          Swal.fire('Sucesso', 'Horário excluído com sucesso!', 'success');
+          this.carregarHorarios();
+        },
+        error:(err) =>{
+          console.log('Erro ao excluir horario', err);
+        Swal.fire('Erro', 'Não foi possivel excluir esse horário', 'error');
+        }
+      });
+    }
+  });
+}
+          
+   
+
+
+//#endregion
+
 }

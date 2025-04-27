@@ -27,7 +27,7 @@
               <td>
                 <i class="bi bi-pen" (click)="abrirModalEditar(horario, i)" style="cursor: pointer;"></i>
               </td>
-              <td><i class="bi bi-trash"></i></td>
+              <td><i class="bi bi-trash" (click)="excluirHorario(horario.id, i)" style="cursor: pointer;"></i></td>
             </tr>
           </tbody>
         </table>

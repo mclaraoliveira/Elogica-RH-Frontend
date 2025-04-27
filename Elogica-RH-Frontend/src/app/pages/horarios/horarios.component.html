@@ -1,42 +1,41 @@
 <div class="container">
   <div class="container-fluid">
-    <a href="#"><p>voltar</p></a>
+    <a href="#"><p>Voltar</p></a>
     <div class="py-5 mt-5">
-    <h3 >Horários</h3>
-    <hr>
-    <div class="">
+      <h3>Horários</h3>
+      <hr>
+      <div class="">
         <table class="table table-striped">
-            <thead>
-              <tr class="table-secondary">
-                <th scope="col">Horários</th>
-                <th scope="col">Horário do inicio</th>
-                <th scope="col">Horário do fim</th>
-                <th scope="col">Início do intervalo</th>
-                <th scope="col">Fim do intervalo</th>
-                <th scope="col">Editar</th>
-                <th scope="col">Excluir</th>
-              </tr>
-            </thead>
-            <tbody>
-              
-              <tr *ngFor="let horario of horarios; let i = index">
-                <th scope="row">Horário {{i + 1}}</th>
-                <td>{{horario.inicio}}</td>
-                <td>{{horario.fim}}</td>
-                <td>{{horario.inicioIntervalo}}</td>
-                <td>{{horario.fimIntervalo}}</td>
-                <td><i class="bi bi-pen"></i></td>
-                <td><i class="bi bi-trash"></i></td>
-              </tr>
-            
-             
-            </tbody>
-          </table>
-          <hr>
-          <div class="d-flex justify-content-end py-5 mt-4">
-          <button type="button" class="btn btn-primary" >adicionar</button>
-          </div>
-    </div>
+          <thead>
+            <tr class="table-secondary">
+              <th scope="col">Horários</th>
+              <th scope="col">Horário do Início</th>
+              <th scope="col">Horário do Fim</th>
+              <th scope="col">Início do Intervalo</th>
+              <th scope="col">Fim do Intervalo</th>
+              <th scope="col">Editar</th>
+              <th scope="col">Excluir</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let horario of horarios; let i = index">
+              <th scope="row">Horário {{i + 1}}</th>
+              <td>{{ formatarHora(horario.horarioInicio) }} </td>
+              <td>{{ formatarHora(horario.horarioFim) }} </td>
+              <td>{{ formatarHora(horario.intervaloInicio)}} </td>
+              <td>{{ formatarHora(horario.intervaloFim) }} </td>
+              <td>
+                <i class="bi bi-pen" (click)="abrirModalEditar(horario, i)" style="cursor: pointer;"></i>
+              </td>
+              <td><i class="bi bi-trash"></i></td>
+            </tr>
+          </tbody>
+        </table>
+        <hr>
+        <div class="d-flex justify-content-end py-5 mt-4">
+          <button type="button" class="btn btn-primary" (click)="abrirModalAdicionar()">Adicionar</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

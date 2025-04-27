@@ -11,7 +11,7 @@ import { MenuLateralComponent } from './shared/components/menu-lateral/menu-late
   standalone: true,
  
 
-  imports: [CommonModule, MenuCabecalhoComponent, HorariosComponent, MenuLateralComponent],
+  imports: [CommonModule, MenuCabecalhoComponent, MenuLateralComponent, HorariosComponent],
 
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

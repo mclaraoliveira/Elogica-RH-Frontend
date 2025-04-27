@@ -1,4 +1,4 @@
-<section class="container-fluid p-4">
+<section class="container-fluid">
   <a href="#" class="d-block mb-3">Voltar</a>
 
   <form class="row g-3 align-items-end border mt-4 pb-3">
@@ -67,7 +67,7 @@
           <td>Setor</td>
           <td class="text-end">Ativo</td>
           <td class="text-end">
-            <button class="btn">
+            <button class="btn" [routerLink]="['/funcionarios-editar']">
               <i class="bi bi-pencil"></i>
             </button>
           </td>
@@ -84,7 +84,7 @@
           <td>Setor</td>
           <td class="text-end">Inativo</td>
           <td class="text-end">
-            <button class="btn ">
+            <button class="btn" [routerLink]="['/funcionarios-editar']">
               <i class="bi bi-pencil"></i>
             </button>
           </td>

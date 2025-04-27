@@ -7,6 +7,7 @@ import { InicialComponent } from './pages/inicial/inicial.component';
 // import { FeriasComponent } from './pages/ferias/ferias.component';
 import { PaginaNaoEncontradaComponent } from './pages/pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { FuncionariosComponent } from './pages/funcionarios/funcionarios.component';
+import { FuncionarioCadastroComponent } from './pages/funcionario-cadastro/funcionario-cadastro.component';
 
 export const routes: Routes = [
   {
@@ -33,6 +34,11 @@ export const routes: Routes = [
     path: 'funcionarios',
     component: FuncionariosComponent,
     title: 'Funcionários',
+  },
+  {
+    path: 'funcionarios-cadastro',
+    component: FuncionarioCadastroComponent,
+    title: 'Funcinário Cadastro',
   },
   // {
   //   path: 'setores',

@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { InicialComponent } from './pages/inicial/inicial.component';
 // import { ItensDeMenuComponent } from './pages/itens-de-menu/itens-de-menu.component';
-// import { CargosComponent } from './pages/cargos/cargos.component';
+import { CargosComponent } from './pages/cargos/cargos.component';
 // import { FuncionariosComponent } from './pages/funcionarios/funcionarios.component';
 // import { SetoresComponent } from './pages/setores/setores.component';
 // import { HorariosComponent } from './pages/horarios/horarios.component';
@@ -24,11 +24,11 @@ export const routes: Routes = [
   //   component: ItensDeMenuComponent,
   //   title: 'Itens de Menu'
   // },
-  // {
-  //   path: 'cargos',
-  //   component: CargosComponent,
-  //   title: 'Cargos'
-  // },
+  {
+      path: 'cargos',
+      component: CargosComponent,
+      title: 'Cargos'
+  },
   // {
   //   path: 'funcionarios',
   //   component: FuncionariosComponent,

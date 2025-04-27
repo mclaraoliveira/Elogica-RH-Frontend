@@ -1,15 +1,5 @@
-<app-menu-cabecalho></app-menu-cabecalho>
-
-<div class="container-fluid">
-  <div class="row">
-    
-    <div class="col-2 bg-light vh-100 p-0">
-      <app-menu-lateral></app-menu-lateral>
-    </div>
-
-
-    <div class="col-10">
-      <app-horarios></app-horarios>
-    </div>
-  </div>
+<div class="d-flex flex-column min-vh-100">
+  <app-menu-cabecalho></app-menu-cabecalho>
+  <router-outlet></router-outlet>
+  <app-menu-lateral></app-menu-lateral>
 </div>

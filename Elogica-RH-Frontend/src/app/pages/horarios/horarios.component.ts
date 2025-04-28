@@ -16,15 +16,9 @@ export class HorariosComponent {
 
   horarios: any[] = [];
 
-  paginaAtual: number = 1;
-  quantidadePorPagina: number = 10;
-  totalRegistros: number = 0;
-  totalRegistrosAPI: number = 0;
-  paginasVisiveis: (number | string)[] = []; 
-
-
-
-  constructor(private horariosService: HorariosService) { }
+  constructor(private horariosService: HorariosService,
+    private modalService:ModalService
+  ) { }
 
   ngOnInit(): void {
     this.carregarHorarios();
@@ -82,7 +76,7 @@ ValidarHorario(horario:Horario): {isValid: boolean; mensagemErro: string}{
 
 //#region  Carregar Horario
   carregarHorarios(): void {
-    this.horariosService.getHorarios().subscribe({
+    this.horariosService.buscarHorarios().subscribe({
       next: (response: any) => {
         console.log('Resposta da API:', response);
         
@@ -91,7 +85,7 @@ ValidarHorario(horario:Horario): {isValid: boolean; mensagemErro: string}{
       },
       error: (err) => {
         console.error('Erro ao carregar horários:', err);
-        Swal.fire('Erro', 'Não foi possível carregar os horários.', 'error');
+        this.modalService.erro("Erro","Ação não realizada, retorne e refaça.")
       }
     });
 
@@ -199,12 +193,12 @@ ValidarHorario(horario:Horario): {isValid: boolean; mensagemErro: string}{
         this.horariosService.adicionarHorario(novoHorario).subscribe({
           next: (horario: Horario) => {
             this.horarios.push(horario);
-            Swal.fire('Sucesso', 'Sua ação foi realizada com sucesso!', 'success');
+            this.modalService.sucesso("Sucesso!","Sua ação foi realizada com sucesso!")
             this.carregarHorarios();
           },
           error: (err) => {
             console.error('Erro ao adicionar horário:', err);
-            Swal.fire('Erro', 'Não foi possível adicionar o horário.', 'error');
+            this.modalService.erro("Erro","Ação não realizada, retorne e refaça.")
           }
         });
       }
@@ -303,12 +297,12 @@ ValidarHorario(horario:Horario): {isValid: boolean; mensagemErro: string}{
           next: (horario: Horario) => {
             console.log('Resposta do PUT (editar) - JSON bruto:', JSON.stringify(horario));
             console.log('Resposta do PUT (editar):', horario);
-            Swal.fire('Sucesso', 'Horário atualizado com sucesso!', 'success');
+            this.modalService.sucesso("Sucesso!","Sua ação foi realizada com sucesso!")
             this.carregarHorarios();
           },
           error: (err) => {
             console.error('Erro ao atualizar horário:', err);
-            Swal.fire('Erro', 'Não foi possível atualizar o horário.', 'error');
+            this.modalService.erro("Erro","Ação não realizada, retorne e refaça.")
           }
         });
       }
@@ -318,24 +312,17 @@ ValidarHorario(horario:Horario): {isValid: boolean; mensagemErro: string}{
 
 //#region Modal Exluir
 excluirHorario(id: number, index:number):void{
-  Swal.fire({
-    title:'Tem certeza?',
-    text:'Tem certeza que deseja excluir esse horário?',
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonText: 'Sim',
-    cancelButtonText: 'Não'
-  }).then((result) =>{
+  this.modalService.confirmar('Atenção','Deseja realmente excluir esse horário?').then((result) =>{
     if(result.isConfirmed){
       this.horariosService.excluirHorario(id).subscribe({
         next:(response) =>{
           console.log('resposta da exclusão:', response);
-          Swal.fire('Sucesso', 'Horário excluído com sucesso!', 'success');
+          this.modalService.sucesso("Sucesso!","Sua ação foi realizada com sucesso!")
           this.carregarHorarios();
         },
         error:(err) =>{
           console.log('Erro ao excluir horario', err);
-        Swal.fire('Erro', 'Não foi possivel excluir esse horário', 'error');
+          this.modalService.erro("Erro","Ação não realizada, retorne e refaça.")
         }
       });
     }
@@ -347,57 +334,4 @@ excluirHorario(id: number, index:number):void{
 
 //#endregion
 
-//#region retorno paginado
-
-proximaPagina(): void {
-  if (this.paginaAtual < this.totalPaginas()) {
-    this.paginaAtual++;
-    this.horarios
-  }
-}
-
-paginaAnterior(): void {
-  if (this.paginaAtual > 1) {
-    this.paginaAtual--;
-    this.horarios;
-  }
-}
-
-totalPaginas(): number {
-  return Math.ceil(this.totalRegistrosAPI / this.quantidadePorPagina);
-}
-
-calcularPaginasVisiveis(): void {
-  const total = this.totalPaginas();
-  const paginas = [];
-
-  for (let i = 1; i <= total; i++) {
-    if (
-      i <= 4 ||
-      i > total - 4 ||
-      (i >= this.paginaAtual - 1 && i <= this.paginaAtual + 1)
-    ) {
-      paginas.push(i);
-    }
-  }
-
-  if (total > 6) {
-    paginas.push('...');
-  }
-
-  if (paginas[paginas.length - 1] !== total) {
-    paginas.push(total);
-  }
-
-  this.paginasVisiveis = paginas;
-}
-
-irParaPagina(pagina: number | string): void {
-  if (typeof pagina === 'number') {
-    this.paginaAtual = pagina;
-    this.horarios;
-  }
-}
-
-//#endregion
 }

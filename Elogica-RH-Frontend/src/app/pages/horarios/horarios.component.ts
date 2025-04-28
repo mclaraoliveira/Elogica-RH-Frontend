@@ -16,14 +16,6 @@ export class HorariosComponent {
 
   horarios: any[] = [];
 
-  paginaAtual: number = 1;
-  quantidadePorPagina: number = 10;
-  totalRegistros: number = 0;
-  totalRegistrosAPI: number = 0;
-  paginasVisiveis: (number | string)[] = []; 
-
-
-
   constructor(private horariosService: HorariosService) { }
 
   ngOnInit(): void {
@@ -82,7 +74,7 @@ ValidarHorario(horario:Horario): {isValid: boolean; mensagemErro: string}{
 
 //#region  Carregar Horario
   carregarHorarios(): void {
-    this.horariosService.getHorarios().subscribe({
+    this.horariosService.buscarHorarios().subscribe({
       next: (response: any) => {
         console.log('Resposta da API:', response);
         
@@ -347,57 +339,4 @@ excluirHorario(id: number, index:number):void{
 
 //#endregion
 
-//#region retorno paginado
-
-proximaPagina(): void {
-  if (this.paginaAtual < this.totalPaginas()) {
-    this.paginaAtual++;
-    this.horarios
-  }
-}
-
-paginaAnterior(): void {
-  if (this.paginaAtual > 1) {
-    this.paginaAtual--;
-    this.horarios;
-  }
-}
-
-totalPaginas(): number {
-  return Math.ceil(this.totalRegistrosAPI / this.quantidadePorPagina);
-}
-
-calcularPaginasVisiveis(): void {
-  const total = this.totalPaginas();
-  const paginas = [];
-
-  for (let i = 1; i <= total; i++) {
-    if (
-      i <= 4 ||
-      i > total - 4 ||
-      (i >= this.paginaAtual - 1 && i <= this.paginaAtual + 1)
-    ) {
-      paginas.push(i);
-    }
-  }
-
-  if (total > 6) {
-    paginas.push('...');
-  }
-
-  if (paginas[paginas.length - 1] !== total) {
-    paginas.push(total);
-  }
-
-  this.paginasVisiveis = paginas;
-}
-
-irParaPagina(pagina: number | string): void {
-  if (typeof pagina === 'number') {
-    this.paginaAtual = pagina;
-    this.horarios;
-  }
-}
-
-//#endregion
 }

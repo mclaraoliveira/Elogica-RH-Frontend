@@ -14,7 +14,7 @@ private apiUrl = "https://localhost:7050/horarios"
 
   constructor(private http:HttpClient) { }
 
-  getHorarios():Observable<any[]>{
+  buscarHorarios():Observable<any[]>{
     return this.http.get<any[]>(this.apiUrl);
   }
 
@@ -29,7 +29,5 @@ private apiUrl = "https://localhost:7050/horarios"
     return this.http.delete<any>(`${this.apiUrl}/${id}`)
   }
 
-  retornoPaginado(pagina:number, quantidade:number):Observable<any[]>{
-    return this.http.get<any[]>(`${this.apiUrl}/${pagina}/${quantidade}`)
-  }
+  
 }

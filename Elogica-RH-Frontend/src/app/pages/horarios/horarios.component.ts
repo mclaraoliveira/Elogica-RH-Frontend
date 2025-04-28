@@ -16,6 +16,14 @@ export class HorariosComponent {
 
   horarios: any[] = [];
 
+  paginaAtual: number = 1;
+  quantidadePorPagina: number = 10;
+  totalRegistros: number = 0;
+  totalRegistrosAPI: number = 0;
+  paginasVisiveis: (number | string)[] = []; // tipo string para permitir ('...')
+
+
+
   constructor(private horariosService: HorariosService) { }
 
   ngOnInit(): void {
@@ -97,14 +105,14 @@ ValidarHorario(horario:Horario): {isValid: boolean; mensagemErro: string}{
 
   formatarHora(isoString: string): string {
     if (!isoString) return '';
-    const date = new Date(isoString);
+    const date = new Date(isoString + 'Z') ;
     if (isNaN(date.getTime())) {
       console.error(`Data inválida: ${isoString}`);
       return 'Horário inválido';
     }
-    const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
-    return `${hours}:${minutes}`;
+    const hours = date.getUTCHours().toString().padStart(2, '0');
+  const minutes = date.getUTCMinutes().toString().padStart(2, '0');
+  return `${hours}:${minutes}`;
   }
 
 //#endregion
@@ -172,7 +180,7 @@ ValidarHorario(horario:Horario): {isValid: boolean; mensagemErro: string}{
           return `${date}T${time}:00`;
         };
 
-        const novoHorario = {
+       const novoHorario ={
           horarioInicio: formatToISO(baseDate, inicio),
           horarioFim: formatToISO(baseDate, fim),
           intervaloInicio: formatToISO(baseDate, inicioIntervalo),
@@ -184,7 +192,7 @@ ValidarHorario(horario:Horario): {isValid: boolean; mensagemErro: string}{
         Swal.showValidationMessage(validacao.mensagemErro);
         return;
       }
-
+      return novoHorario;
       }
     }).then((result) => {
       if (result.isConfirmed) {
@@ -288,6 +296,7 @@ ValidarHorario(horario:Horario): {isValid: boolean; mensagemErro: string}{
         Swal.showValidationMessage(validacao.mensagemErro);
         return;
       }
+      return novoHorario;
       }
     }).then((result) => {
       if (result.isConfirmed) {
@@ -341,4 +350,59 @@ excluirHorario(id: number, index:number):void{
 
 //#endregion
 
+
+
+//#region retorno paginado
+
+proximaPagina(): void {
+  if (this.paginaAtual < this.totalPaginas()) {
+    this.paginaAtual++;
+    this.horarios
+  }
+}
+
+paginaAnterior(): void {
+  if (this.paginaAtual > 1) {
+    this.paginaAtual--;
+    this.horarios;
+  }
+}
+
+totalPaginas(): number {
+  return Math.ceil(this.totalRegistrosAPI / this.quantidadePorPagina);
+}
+
+calcularPaginasVisiveis(): void {
+  const total = this.totalPaginas();
+  const paginas = [];
+
+  for (let i = 1; i <= total; i++) {
+    if (
+      i <= 4 ||
+      i > total - 4 ||
+      (i >= this.paginaAtual - 1 && i <= this.paginaAtual + 1)
+    ) {
+      paginas.push(i);
+    }
+  }
+
+  if (total > 6) {
+    paginas.push('...');
+  }
+
+  if (paginas[paginas.length - 1] !== total) {
+    paginas.push(total);
+  }
+
+  this.paginasVisiveis = paginas;
+}
+
+irParaPagina(pagina: number | string): void {
+  if (typeof pagina === 'number') {
+    this.paginaAtual = pagina;
+    this.horarios;
+  }
+}
+
+//#endregion
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Funcionario } from '../shared/interfaces/funcionario';
 
 @Injectable({
   providedIn: 'root',
@@ -11,12 +12,16 @@ export class FuncionarioService {
   // URL para os endpoints de setores, cargos e horários
   private setoresUrl = 'https://localhost:7050/setores';
   private cargosUrl = 'https://localhost:7050/cargos';
-  private horariosUrl = 'https://localhost:7050/horarios'; 
+  private horariosUrl = 'https://localhost:7050/horarios';
 
   constructor(private http: HttpClient) {}
 
   getFuncionarios(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}`);
+  }
+
+  buscarPorId(id: number) {
+    return this.http.get<Funcionario>(`/api/funcionarios/${id}`);
   }
 
   getFuncionariosPaginados(

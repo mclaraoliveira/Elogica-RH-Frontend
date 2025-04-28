@@ -53,6 +53,7 @@ export class FuncionarioCadastroComponent implements OnInit {
     this.funcionarioService.getSetores().subscribe({
       next: (data) => {
         this.setores = Array.isArray(data) ? data : [];
+        console.log(this.setores);
       },
       error: (error) => {
         console.error('Erro ao carregar setores:', error);

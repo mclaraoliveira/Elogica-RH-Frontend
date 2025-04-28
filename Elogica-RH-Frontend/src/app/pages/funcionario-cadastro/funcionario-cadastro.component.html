@@ -118,7 +118,7 @@
           <option value="" selected>Selecionar...</option>
           @for (horario of horarios; track horario.id) {
           <option [value]="horario.id">
-            {{ horario.descricao }}
+            {{ horario.HorarioInicio }}
           </option>
           }
         </select>
@@ -136,8 +136,8 @@
         >
           <option value="" selected>Selecionar...</option>
           @for (setor of setores; track setor.id) {
-          <option [value]="setor.id">
-            {{ setor.nome }}
+          <option>
+            {{ setor.Nome }}
           </option>
           }
         </select>

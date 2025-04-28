@@ -20,7 +20,7 @@ export class HorariosComponent {
   quantidadePorPagina: number = 10;
   totalRegistros: number = 0;
   totalRegistrosAPI: number = 0;
-  paginasVisiveis: (number | string)[] = []; // tipo string para permitir ('...')
+  paginasVisiveis: (number | string)[] = []; 
 
 
 
@@ -117,7 +117,6 @@ ValidarHorario(horario:Horario): {isValid: boolean; mensagemErro: string}{
 
 //#endregion
 
-
 //#region Modal Adicionar
   abrirModalAdicionar(): void {
     Swal.fire({
@@ -212,7 +211,6 @@ ValidarHorario(horario:Horario): {isValid: boolean; mensagemErro: string}{
     });
   }
 //#endregion
-
 
 //#region Modal Editar
 
@@ -318,7 +316,6 @@ ValidarHorario(horario:Horario): {isValid: boolean; mensagemErro: string}{
   }
 //#endregion
 
-
 //#region Modal Exluir
 excluirHorario(id: number, index:number):void{
   Swal.fire({
@@ -349,8 +346,6 @@ excluirHorario(id: number, index:number):void{
 
 
 //#endregion
-
-
 
 //#region retorno paginado
 

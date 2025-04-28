@@ -16,7 +16,9 @@ export class HorariosComponent {
 
   horarios: any[] = [];
 
-  constructor(private horariosService: HorariosService) { }
+  constructor(private horariosService: HorariosService,
+    private modalService:ModalService
+  ) { }
 
   ngOnInit(): void {
     this.carregarHorarios();
@@ -83,7 +85,7 @@ ValidarHorario(horario:Horario): {isValid: boolean; mensagemErro: string}{
       },
       error: (err) => {
         console.error('Erro ao carregar horários:', err);
-        Swal.fire('Erro', 'Não foi possível carregar os horários.', 'error');
+        this.modalService.erro("Erro","Ação não realizada, retorne e refaça.")
       }
     });
 
@@ -191,12 +193,12 @@ ValidarHorario(horario:Horario): {isValid: boolean; mensagemErro: string}{
         this.horariosService.adicionarHorario(novoHorario).subscribe({
           next: (horario: Horario) => {
             this.horarios.push(horario);
-            Swal.fire('Sucesso', 'Sua ação foi realizada com sucesso!', 'success');
+            this.modalService.sucesso("Sucesso!","Sua ação foi realizada com sucesso!")
             this.carregarHorarios();
           },
           error: (err) => {
             console.error('Erro ao adicionar horário:', err);
-            Swal.fire('Erro', 'Não foi possível adicionar o horário.', 'error');
+            this.modalService.erro("Erro","Ação não realizada, retorne e refaça.")
           }
         });
       }
@@ -295,12 +297,12 @@ ValidarHorario(horario:Horario): {isValid: boolean; mensagemErro: string}{
           next: (horario: Horario) => {
             console.log('Resposta do PUT (editar) - JSON bruto:', JSON.stringify(horario));
             console.log('Resposta do PUT (editar):', horario);
-            Swal.fire('Sucesso', 'Horário atualizado com sucesso!', 'success');
+            this.modalService.sucesso("Sucesso!","Sua ação foi realizada com sucesso!")
             this.carregarHorarios();
           },
           error: (err) => {
             console.error('Erro ao atualizar horário:', err);
-            Swal.fire('Erro', 'Não foi possível atualizar o horário.', 'error');
+            this.modalService.erro("Erro","Ação não realizada, retorne e refaça.")
           }
         });
       }
@@ -310,24 +312,17 @@ ValidarHorario(horario:Horario): {isValid: boolean; mensagemErro: string}{
 
 //#region Modal Exluir
 excluirHorario(id: number, index:number):void{
-  Swal.fire({
-    title:'Tem certeza?',
-    text:'Tem certeza que deseja excluir esse horário?',
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonText: 'Sim',
-    cancelButtonText: 'Não'
-  }).then((result) =>{
+  this.modalService.confirmar('Atenção','Deseja realmente excluir esse horário?').then((result) =>{
     if(result.isConfirmed){
       this.horariosService.excluirHorario(id).subscribe({
         next:(response) =>{
           console.log('resposta da exclusão:', response);
-          Swal.fire('Sucesso', 'Horário excluído com sucesso!', 'success');
+          this.modalService.sucesso("Sucesso!","Sua ação foi realizada com sucesso!")
           this.carregarHorarios();
         },
         error:(err) =>{
           console.log('Erro ao excluir horario', err);
-        Swal.fire('Erro', 'Não foi possivel excluir esse horário', 'error');
+          this.modalService.erro("Erro","Ação não realizada, retorne e refaça.")
         }
       });
     }

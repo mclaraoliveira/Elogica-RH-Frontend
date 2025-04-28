@@ -22,6 +22,57 @@ export class HorariosComponent {
     this.carregarHorarios();
   }
 
+
+//#region Validar Horario
+
+ValidarHorario(horario:Horario): {isValid: boolean; mensagemErro: string}{
+
+
+  const inicio = new Date(horario.horarioInicio + 'Z');
+  const fim = new Date(horario.horarioFim + 'Z');
+  const intervaloInicio = new Date(horario.intervaloInicio + 'Z');
+  const intervaloFim = new Date(horario.intervaloFim + 'Z');
+
+
+
+  if (isNaN(inicio.getTime()) || isNaN(fim.getTime()) || isNaN(intervaloInicio.getTime()) || isNaN(intervaloFim.getTime())) {
+    return { isValid: false, mensagemErro: 'Um ou mais horários são inválidos.' };
+  }
+
+  const jornadaTotalMinutos = (fim.getTime() - inicio.getTime()) / (1000 * 60);
+
+  const intervaloMinutos = (intervaloFim.getTime() - intervaloInicio.getTime()) / (1000 * 60);
+
+  const tempoTrabalhoMinutos = jornadaTotalMinutos - intervaloMinutos;
+
+  const oitoHorasEmMinutos = 8 * 60;
+  if (tempoTrabalhoMinutos !== oitoHorasEmMinutos) {
+    const horasTrabalhadas = tempoTrabalhoMinutos / 60;
+    return {
+      isValid: false,
+      mensagemErro: `A jornada de trabalho deve ter exatamente 8 horas de trabalho líquido. Atualmente: ${horasTrabalhadas.toFixed(1)} horas.`
+    };
+  }
+
+  if (intervaloMinutos !== 60 && intervaloMinutos !== 120) {
+    const horasIntervalo = intervaloMinutos / 60;
+    return {
+      isValid: false,
+      mensagemErro: `O intervalo deve ser de 1 ou 2 horas. Atualmente: ${horasIntervalo.toFixed(1)} horas.`
+    };
+  }
+
+  if (intervaloInicio < inicio || intervaloFim > fim) {
+    return { isValid: false, mensagemErro: 'O intervalo deve estar dentro do horário da jornada.' };
+  }
+
+  return { isValid: true, mensagemErro: '' };
+}
+
+
+  //#endregion
+
+//#region  Carregar Horario
   carregarHorarios(): void {
     this.horariosService.getHorarios().subscribe({
       next: (response: any) => {
@@ -40,8 +91,10 @@ export class HorariosComponent {
 
 
   }
+  //#endregion
 
-  
+//#region formatar Hora
+
   formatarHora(isoString: string): string {
     if (!isoString) return '';
     const date = new Date(isoString);
@@ -53,6 +106,9 @@ export class HorariosComponent {
     const minutes = date.getMinutes().toString().padStart(2, '0');
     return `${hours}:${minutes}`;
   }
+
+//#endregion
+
 
 //#region Modal Adicionar
   abrirModalAdicionar(): void {
@@ -116,12 +172,19 @@ export class HorariosComponent {
           return `${date}T${time}:00`;
         };
 
-        return {
+        const novoHorario = {
           horarioInicio: formatToISO(baseDate, inicio),
           horarioFim: formatToISO(baseDate, fim),
           intervaloInicio: formatToISO(baseDate, inicioIntervalo),
           intervaloFim: formatToISO(baseDate, fimIntervalo)
         };
+
+        const validacao = this.ValidarHorario(novoHorario);
+      if (!validacao.isValid) {
+        Swal.showValidationMessage(validacao.mensagemErro);
+        return;
+      }
+
       }
     }).then((result) => {
       if (result.isConfirmed) {
@@ -213,12 +276,18 @@ export class HorariosComponent {
           return `${date}T${time}:00`;
         };
 
-        return {
+        const novoHorario = {
           horarioInicio: formatToISO(baseDate, inicio),
           horarioFim: formatToISO(baseDate, fim),
           intervaloInicio: formatToISO(baseDate, inicioIntervalo),
           intervaloFim: formatToISO(baseDate, fimIntervalo)
         };
+
+        const validacao = this.ValidarHorario(novoHorario);
+      if (!validacao.isValid) {
+        Swal.showValidationMessage(validacao.mensagemErro);
+        return;
+      }
       }
     }).then((result) => {
       if (result.isConfirmed) {

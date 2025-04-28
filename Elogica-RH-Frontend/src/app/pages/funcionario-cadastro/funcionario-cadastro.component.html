@@ -115,7 +115,12 @@
           name="horario"
           required
         >
-          <option selected>Selecionar...</option>
+          <option value="" selected>Selecionar...</option>
+          @for (horario of horarios; track horario.id) {
+          <option [value]="horario.id">
+            {{ horario.descricao }}
+          </option>
+          }
         </select>
       </div>
 
@@ -129,8 +134,12 @@
           name="setor"
           required
         >
-          <option selected>Selecionar...</option>
-          <!-- Adicione as opções de setores aqui -->
+          <option value="" selected>Selecionar...</option>
+          @for (setor of setores; track setor.id) {
+          <option [value]="setor.id">
+            {{ setor.nome }}
+          </option>
+          }
         </select>
       </div>
 
@@ -144,8 +153,12 @@
           name="cargo"
           required
         >
-          <option selected>Selecionar...</option>
-          <!-- Adicione as opções de cargos aqui -->
+          <option value="" selected>Selecionar...</option>
+          @for (cargo of cargos; track cargo.id) {
+          <option [value]="cargo.id">
+            {{ cargo.nome }}
+          </option>
+          }
         </select>
       </div>
       <div class="col-md-6">

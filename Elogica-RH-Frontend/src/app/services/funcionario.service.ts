@@ -9,9 +9,9 @@ export class FuncionarioService {
   private apiUrl = 'https://localhost:7050/funcionarios';
 
   // URL para os endpoints de setores, cargos e horários
-  private setoresUrl = 'https://localhost:7050/setores'; // Altere conforme sua API
-  private cargosUrl = 'https://localhost:7050/cargos'; // Altere conforme sua API
-  private horariosUrl = 'https://localhost:7050/horarios'; // Altere conforme sua API
+  private setoresUrl = 'https://localhost:7050/setores';
+  private cargosUrl = 'https://localhost:7050/cargos';
+  private horariosUrl = 'https://localhost:7050/horarios'; 
 
   constructor(private http: HttpClient) {}
 

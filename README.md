@@ -125,6 +125,9 @@ export const routes: Routes = [
    ```
 6. Acesse a aplicação em `http://localhost:4200`.
 
+## Onde encontrar o Back-end do projeto
+- O repositório da API utilizada neste mesmo projeto pode ser acessado [aqui](https://github.com/GabrieldSantana/Elogica-RH-Backend).
+
 ## Colaboradores
 - [Clara Oliveira](https://github.com/mclaraoliveira)
 - [Conrado Capistrano](https://github.com/ConradoCapistrano)

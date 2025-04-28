@@ -1,7 +1,14 @@
 export interface Funcionario {
-  cpf: string;
   nome: string;
-  cargo: string;
-  setor: string;
-  situacao: string;
+  cpf: string;
+  dataNascimento: string;
+  email: string;
+  telefone: string;
+  endereco: string;
+  dataContratacao: string;
+  salario: number;
+  ativo: boolean;
+  cargosId: number;
+  setoresId: number;
+  horariosId: number;
 }

@@ -72,7 +72,7 @@
         <input
           type="text"
           class="form-control"
-          [(ngModel)]="funcionario.contato"
+          [(ngModel)]="funcionario.telefone"
           name="contato"
           placeholder="00 00000-0000"
           required
@@ -118,7 +118,8 @@
           <option value="" selected>Selecionar...</option>
           @for (horario of horarios; track horario.id) {
           <option [value]="horario.id">
-            {{ horario.HorarioInicio }}
+            {{ horario.horarioInicio | date : "HH:mm" }} -
+            {{ horario.horarioFim | date : "HH:mm" }}
           </option>
           }
         </select>
@@ -136,9 +137,7 @@
         >
           <option value="" selected>Selecionar...</option>
           @for (setor of setores; track setor.id) {
-          <option>
-            {{ setor.Nome }}
-          </option>
+          <option [value]="setor.id">{{ setor.nome }}</option>
           }
         </select>
       </div>
@@ -156,7 +155,7 @@
           <option value="" selected>Selecionar...</option>
           @for (cargo of cargos; track cargo.id) {
           <option [value]="cargo.id">
-            {{ cargo.nome }}
+            {{ cargo.titulo }}
           </option>
           }
         </select>

@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="container-fluid">
+    <a href="#"><p>Voltar</p></a>
+    <div class="py-5 mt-5">
+      <h3>Horários</h3>
+      <hr>
+      <div class="">
+        <table class="table table-striped">
+          <thead>
+            <tr class="table-secondary">
+              <th scope="col">Horários</th>
+              <th scope="col">Horário do Início</th>
+              <th scope="col">Horário do Fim</th>
+              <th scope="col">Início do Intervalo</th>
+              <th scope="col">Fim do Intervalo</th>
+              <th scope="col">Editar</th>
+              <th scope="col">Excluir</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let horario of horarios; let i = index">
+              <th scope="row">Horário {{i + 1}}</th>
+              <td>{{ formatarHora(horario.horarioInicio) }} </td>
+              <td>{{ formatarHora(horario.horarioFim) }} </td>
+              <td>{{ formatarHora(horario.intervaloInicio)}} </td>
+              <td>{{ formatarHora(horario.intervaloFim) }} </td>
+              <td>
+                <i class="bi bi-pen" (click)="abrirModalEditar(horario, i)" style="cursor: pointer;"></i>
+              </td>
+              <td><i class="bi bi-trash" (click)="excluirHorario(horario.id, i)" style="cursor: pointer;"></i></td>
+            </tr>
+          </tbody>
+        </table>
+        <hr>
+        <div class="d-flex justify-content-end py-5 mt-4">
+          <button type="button" class="btn btn-primary" (click)="abrirModalAdicionar()">Adicionar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="d-flex justify-content-between align-items-center">
+  <p class="mb-0">
+    Lista de {{ (paginaAtual - 1) * quantidadePorPagina + 1 }} a
+    {{ paginaAtual * quantidadePorPagina }} de {{ totalRegistros }} resultados
+  </p>
+  <nav>
+    <ul class="pagination mb-0">
+      <li class="page-item" [ngClass]="{ disabled: paginaAtual === 1 }">
+        <a
+          class="page-link bg-light text-secondary border-secondary"
+          (click)="paginaAnterior()"
+          aria-label="Anterior"
+        >
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+
+      <!-- Exibe as páginas dinamicamente -->
+      <li
+        *ngFor="let pagina of paginasVisiveis"
+        class="page-item"
+        [ngClass]="{ active: pagina === paginaAtual }"
+      >
+        <a
+          class="page-link bg-light text-secondary border-secondary"
+          (click)="irParaPagina(pagina)"
+        >
+          {{ pagina }}
+        </a>
+      </li>
+
+      <li
+        class="page-item"
+        [ngClass]="{ disabled: paginaAtual === totalPaginas() }"
+      >
+        <a
+          class="page-link bg-light text-secondary border-secondary"
+          (click)="proximaPagina()"
+          aria-label="Próximo"
+        >
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

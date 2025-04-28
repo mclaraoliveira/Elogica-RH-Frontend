@@ -1,0 +1,44 @@
+/* Linhas alternadas mais suaves */
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f8f9fa; /* Cinza bem clarinho */
+}
+
+/* Hover na linha */
+.table-hover tbody tr:hover {
+  background-color: #e9ecef; /* Cinza mais forte no hover */
+}
+
+/* Ícone de editar com hover */
+button.btn.p-0 i {
+  color: #6c757d; /* Cor padrão cinza médio */
+  transition: color 0.2s ease;
+}
+
+button.btn.p-0:hover i {
+  color: #1f3e6a; /* Azul escuro no hover */
+}
+
+/* Ajustar botão Agendar */
+button.agendar-btn {
+  background-color: #1f3e6a;
+  color: #fff;
+  border-radius: 0;
+  padding: 0.5rem 1.5rem;
+  transition: background-color 0.3s ease;
+}
+
+button.agendar-btn:hover {
+  background-color: #163059; /* Um azul ainda mais escuro no hover */
+}
+
+/* Cabeçalho da Tabela */
+.table-secondary {
+  background-color: #f1f3f5 !important; /* Cinza claro para o cabeçalho */
+  color: #495057; /* Cor do texto */
+  font-weight: 600; /* Deixar mais forte */
+}
+
+/* Pequena margem no botão de lápis para não colar na borda */
+td .btn.p-0 {
+  margin-right: 8px;
+}

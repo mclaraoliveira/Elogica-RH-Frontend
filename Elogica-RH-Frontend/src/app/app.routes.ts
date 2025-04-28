@@ -7,6 +7,7 @@ import { InicialComponent } from './pages/inicial/inicial.component';
 // import { HorariosComponent } from './pages/horarios/horarios.component';
 // import { FeriasComponent } from './pages/ferias/ferias.component';
 import { PaginaNaoEncontradaComponent } from './pages/pagina-nao-encontrada/pagina-nao-encontrada.component';
+import { FeriasComponent } from './pages/ferias/ferias.component';
 
 export const routes: Routes = [
   {
@@ -44,11 +45,11 @@ export const routes: Routes = [
   //   component: HorariosComponent,
   //   title: 'Horários'
   // },
-  // {
-  //   path: 'ferias',
-  //   component: FeriasComponent,
-  //   title: 'Férias'
-  // },
+  {
+    path: 'ferias',
+    component: FeriasComponent,
+    title: 'Férias'
+  },
   {
     path: '**',
     component: PaginaNaoEncontradaComponent,

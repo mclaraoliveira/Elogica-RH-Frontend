@@ -122,7 +122,7 @@ export class CargosComponent {
 import { Component, OnInit } from '@angular/core';
 import { Cargo } from '../../shared/interfaces/cargo';
 import { RetornoPaginado } from '../../shared/interfaces/retornoPaginado';
-import { CargoService } from '../../services/cargos.service';
+import { CargosService } from '../../services/cargos.service';
 import { ModalService } from '../../shared/services/modal.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -142,13 +142,16 @@ export class CargosComponent implements OnInit {
     titulo: '',
     descricao: '',
     salarioBase: 0,
-    setores: []
+    setoresIds: []
+    // setores: []
   };
 
   novoCargo = {
+    id: 0,
     titulo: '',
     descricao: '',
-    salarioBase: 0
+    salarioBase: 0,
+    setoresIds: []
   };
 
   // Paginação
@@ -157,7 +160,7 @@ export class CargosComponent implements OnInit {
   totalRegistros = 0;
 
   constructor(
-    private cargoService: CargoService,
+    private cargoService: CargosService,
     private modalService: ModalService
   ) {}
 
@@ -203,7 +206,7 @@ export class CargosComponent implements OnInit {
   }
 
   carregarCargosPaginado(): void {
-    this.cargoService.listarCargosPaginado(this.paginaAtual, this.itensPorPagina)
+    this.cargoService.buscarCargosPaginado(this.paginaAtual, this.itensPorPagina)
       .subscribe({
         next: (retorno) => {
           this.cargos = retorno.registros;
@@ -228,7 +231,11 @@ export class CargosComponent implements OnInit {
     if (modo === 'editar' && cargo) {
       this.cargoSelecionado = { ...cargo };
     } else if (modo === 'adicionar') {
-      this.novoCargo = { titulo: '', descricao: '', salarioBase: 0 };
+      this.novoCargo = { id: 0,
+    titulo: '',
+    descricao: '',
+    salarioBase: 0,
+    setoresIds: [] };
     }
   }
 
@@ -246,7 +253,7 @@ export class CargosComponent implements OnInit {
 
   salvarEdicao(): void {
     const { id, ...dados } = this.cargoSelecionado;
-    this.cargoService.atualizarCargo(id, dados)
+    this.cargoService.atualizarCargo(id, this.cargoSelecionado)
       .subscribe({
         next: (sucesso) => {
           if (sucesso) {

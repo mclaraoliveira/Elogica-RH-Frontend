@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, HostListener, signal } from '@angular/core';
+import { Component, ElementRef, HostListener, Renderer2, signal } from '@angular/core';
 
 @Component({
   selector: 'app-menu-cabecalho',
@@ -9,12 +9,32 @@ import { Component, ElementRef, HostListener, signal } from '@angular/core';
   styleUrl: './menu-cabecalho.component.css'
 })
 export class MenuCabecalhoComponent {
+  theme: 'light' | 'dark' = 'dark';
+
   isNotificationsVisible = signal(false);
   isProfileVisible = signal(false);
   isMessagesVisible = signal(false);
   isSearchVisible = signal(false);
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef, private renderer: Renderer2) {
+    // Carrega tema salvo (se houver)
+    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
+    this.theme = savedTheme ?? 'dark';
+    this.applyTheme(this.theme);
+  }
+
+  // Aplica o tema no elemento <html>
+  private applyTheme(theme: 'light' | 'dark') {
+    const html = document.documentElement;
+    this.renderer.setAttribute(html, 'data-bs-theme', theme);
+  }
+
+  // Alterna tema e salva no localStorage
+  toggleTheme(): void {
+    this.theme = this.theme === 'dark' ? 'light' : 'dark';
+    this.applyTheme(this.theme);
+    localStorage.setItem('theme', this.theme);
+  }
 
   notifications = [
     { text: 'Solicitação negada', icon: 'bi bi-x-circle', color: 'text-danger', date: '22/03/2024 às 10:00' },

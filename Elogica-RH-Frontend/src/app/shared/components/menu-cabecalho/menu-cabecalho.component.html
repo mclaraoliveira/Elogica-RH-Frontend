@@ -6,8 +6,9 @@
 
   <div class="d-flex align-items-center gap-3 position-relative text-white">
     <div class="text-center me-2" style="font-size: 18px; line-height: 1.2; cursor: pointer;">
-      <i class="bi bi-lightbulb"></i>
-      <span id="themeText" class="d-block" style="font-size: 10px;">Claro</span>
+      <button class="btn text-light" (click)="toggleTheme()">
+        <i class="bi" [ngClass]="theme === 'dark' ? 'bi bi-lightbulb' : 'bi bi-lightbulb'"></i>
+      </button>
     </div>
 
     <div class="vr text-light"></div>

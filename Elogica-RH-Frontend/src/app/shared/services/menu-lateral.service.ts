@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map, catchError, throwError } from 'rxjs';
-import { Menu } from '../interfaces/menu';
+import { Menu } from '../interfaces/menu-lateral';
 
 export interface ApiResponse<T> {
   success: boolean;

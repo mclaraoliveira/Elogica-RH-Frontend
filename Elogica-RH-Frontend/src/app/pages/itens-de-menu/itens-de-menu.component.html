@@ -1,0 +1,145 @@
+@if (menus && menus.length > 0)
+{
+<section class="d-flex flex-column justify-content-center my-2">
+  <div class="border-bottom mt-5 mx-4">
+    <h3>Itens de menu</h3>
+  </div>
+  <div class="my-5 mx-3">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Item de Menu</th>
+          <th scope="col">Descrição</th>
+          <th scope="col">Url</th>
+          <th scope="col">Ícone</th>
+          <th scope="col">Ordem</th>
+          <th scope="col">Editar</th>
+          <th scope="col">Excluir</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (menu of menus; track $index){
+          @if (menu.menuPaiId != 0){
+            <tr>
+              <th scope="row">{{ menu.titulo }}</th>
+              <td>{{ menu.descricao }}</td>
+              <td><a class="text-decoration-underline">{{ menu.url }}</a></td>
+              <td>-</td>
+              <td>{{ menu.ordem }}</td>
+              <td><button class="bg-transparent border-0 p-0" (click)="abrirModalEditar(menu)"><i class="bi bi-pencil"></i></button></td>
+              <td><button class="bg-transparent border-0 p-0" (click)="confirmarExclusao(menu)"><i class="bi bi-trash"></i></button></td>
+            </tr>
+          }
+          @else {
+            <tr>
+              <th scope="row">{{ menu.titulo }}</th>
+              <td>{{ menu.descricao }}</td>
+              <td><a class="text-decoration-underline">-</a></td>
+              <td>{{ menu.icone }}</td>
+              <td>{{ menu.ordem }}</td>
+              <td><button class="bg-transparent border-0 p-0" (click)="abrirModalEditar(menu)"><i class="bi bi-pencil"></i></button></td>
+              <td><button class="bg-transparent border-0 p-0" (click)="confirmarExclusao(menu)"><i class="bi bi-trash"></i></button></td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-end mx-5">
+      <button type="button" class="btn btn-primary rounded-0" (click)="abrirModalAdicionar()">Adicionar</button>
+    </div>
+  </div>
+  <app-menu-modal
+  *ngIf="menuSelecionado"
+  [menu]="menuSelecionado"
+  (cancelar)="onCancelar()"
+  (salvar)="onSalvar($event)"
+  ></app-menu-modal>
+  <app-adicionar-menu-modal
+  *ngIf="exibirModalAdicionar"
+  [menus]="menus"
+  (cancelar)="onCancelar()"
+  (salvar)="onSalvar($event)"
+></app-adicionar-menu-modal>
+<div class="d-flex justify-content-between align-items-center m-3 mt-5">
+  <p class="mb-0">
+    Lista de {{ (paginaAtual - 1) * quantidadePorPagina + 1 }} a
+    {{ paginaAtual * quantidadePorPagina }} de {{ totalRegistros }} resultados
+  </p>
+  <nav class="mx-5">
+    <ul class="pagination mb-0">
+      <li class="page-item" [ngClass]="{ disabled: paginaAtual === 1 }">
+        <a
+          class="page-link bg-light text-secondary border-secondary"
+          (click)="paginaAnterior()"
+          aria-label="Anterior"
+        >
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+
+      <!-- Exibe as páginas dinamicamente -->
+      <li
+        *ngFor="let pagina of paginasVisiveis"
+        class="page-item"
+        [ngClass]="{ active: pagina === paginaAtual }"
+      >
+        <a
+          class="page-link bg-light text-secondary border-secondary"
+          (click)="irParaPagina(pagina)"
+        >
+          {{ pagina }}
+        </a>
+      </li>
+
+      <li
+        class="page-item"
+        [ngClass]="{ disabled: paginaAtual === totalPaginas() }"
+      >
+        <a
+          class="page-link bg-light text-secondary border-secondary"
+          (click)="proximaPagina()"
+          aria-label="Próximo"
+        >
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+</section>
+}
+@else{
+  <div class="m-5">
+    <h3 class="fs-5">Informações da pessoa</h3>
+    <div class="d-flex justify-content-between w-75 m-5 ">
+      <div>
+        <h3 class="fs-5">Identificação</h3>
+        <p>000.000.000-00</p>
+      </div>
+      <div>
+        <h3 class="fs-5">Nome</h3>
+        <p>Nome Sobrenome</p>
+      </div>
+      <div>
+        <h3 class="fs-5">Situação</h3>
+        <p>Ativo</p>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-between">
+    <div class="m-5">
+      <h2 class="fs-4 mb-5">Registro não encontrado</h2>
+      <p class="m-0">Não existem itens de menu registrados no sistema.</p>
+      <p class="mb-5">Faça o primeiro registro clicando em adicionar.</p>
+      <button type="button" class="btn btn-primary rounded-0 m-5" (click)="abrirModalAdicionar()">Adicionar</button>
+    </div>
+    <div><img src="/assets/SemRegistro.png" class="mx-5" alt="Foto sem registros"></div>
+  </div>
+  <app-adicionar-menu-modal
+  *ngIf="exibirModalAdicionar"
+  [menus]="menus"
+  (cancelar)="onCancelar()"
+  (salvar)="onSalvar($event)"
+></app-adicionar-menu-modal>
+}
+

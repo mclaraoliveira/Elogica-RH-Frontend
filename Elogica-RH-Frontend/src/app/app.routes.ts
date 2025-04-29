@@ -24,7 +24,7 @@ export const routes: Routes = [
     title: 'Página Inicial',
   },
   {
-    path: 'itens-de-menu',
+    path: 'itens-menu',
     component: ItensDeMenuComponent,
     title: 'Itens de Menu'
   },

@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 
 import { InicialComponent } from './pages/inicial/inicial.component';
 import { ItensDeMenuComponent } from './pages/itens-de-menu/itens-de-menu.component';
-import { CargosComponent } from './pages/cargos/cargos.component';
 import { SetoresComponent } from './pages/setores/setores.component';
 
 import { HorariosComponent } from './pages/horarios/horarios.component';
@@ -11,6 +10,7 @@ import { PaginaNaoEncontradaComponent } from './pages/pagina-nao-encontrada/pagi
 import { FuncionariosComponent } from './pages/funcionarios/funcionarios.component';
 import { FuncionarioCadastroComponent } from './pages/funcionario-cadastro/funcionario-cadastro.component';
 import { FuncionarioEditarComponent } from './pages/funcionario-editar/funcionario-editar.component';
+import { CargosComponent } from './pages/cargoss/cargos/cargos.component';
 
 export const routes: Routes = [
   {

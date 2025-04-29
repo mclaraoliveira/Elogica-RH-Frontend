@@ -7,6 +7,7 @@ import { CargosService } from '../../../services/cargos/cargos.service';
 import { ModalService } from '../../../shared/services/modal.service';
 import { Router } from '@angular/router';
 import { SetoresService } from '../../../services/setores/setores.service';
+import { Setores } from '../../../shared/interfaces/setores';
 
 @Component({
   selector: 'app-cargos',
@@ -40,6 +41,8 @@ export class CargosComponent implements OnInit {
   totalRegistros = 0;
   totalPaginas = 1;
 
+  setores: Setores[] = [];
+
   constructor(
     private cargoService: CargosService,
     private setorService: SetoresService,
@@ -49,6 +52,7 @@ export class CargosComponent implements OnInit {
 
   ngOnInit(): void {
     this.carregarCargosPaginado(this.paginaAtual, this.itensPorPagina);
+    this.carregarSetores();
   }
 
 
@@ -91,8 +95,13 @@ export class CargosComponent implements OnInit {
       this.cargoSelecionado.descricao = value;
     }
   }
+carregarSetores(): void{
+  this.cargoService.buscarCargoPorInner().subscribe((response)=>{
+    this.setores=response.data;
+    console.log(response.data, "Ola");
 
-
+  })
+}
 
   carregarCargosPaginado(pagina: number, quantidade: number): void {
     this.cargoService.buscarCargosPaginado(pagina, quantidade)

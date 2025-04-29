@@ -4,6 +4,7 @@ import { map, Observable } from 'rxjs';
 import { Cargo} from '../../shared/interfaces/cargo';
 import { RetornoPaginado } from '../../shared/interfaces/retornoPaginado';
 import { SetoresService } from '../setores/setores.service';
+import { Setores } from '../../shared/interfaces/setores';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,13 @@ export class CargosService {
 
 
   private readonly API = 'https://localhost:7050/cargos';
+  private readonly APINNER = 'https://localhost:7050/cargossetores/inner';
 
   constructor(private http: HttpClient, private setorService: SetoresService) { }
 
+  buscarCargoPorInner(): Observable<any> {
+    return this.http.get<Setores>(`${this.APINNER}`);
+  };
   buscarCargoPorId(id: number): Observable<Cargo> {
     return this.http.get<Cargo>(`${this.API}/${id}`);
   };

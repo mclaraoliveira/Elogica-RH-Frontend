@@ -114,8 +114,9 @@ ValidarHorario(horario:Horario): {isValid: boolean; mensagemErro: string}{
 //#region Modal Adicionar
   abrirModalAdicionar(): void {
     Swal.fire({
-      title: '<i class="bi bi-plus-circle"></i> Adicionar',
+      title: '<i class="bi bi-plus-circle " style="font-size: 3rem; color:#1F3E6A"></i> ',
       html: `
+        <p>Adicionar</p>
         <div class="container">
           <div class="row">
             <div class="col-md-6">
@@ -211,8 +212,9 @@ ValidarHorario(horario:Horario): {isValid: boolean; mensagemErro: string}{
 
   abrirModalEditar(horario: Horario, index: number): void {
     Swal.fire({
-      title: '<i class="bi bi-pen"></i> Editar',
+      title: '<i class="bi bi-pencil" style="font-size: 3rem; color:#1F3E6A"></i> ',
       html: `
+      <p>Editar</p>
         <div class="container">
           <div class="row">
             <div class="col-md-6">

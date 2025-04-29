@@ -1,18 +1,17 @@
+import { FuncionariosComponent } from './../../../pages/funcionarios/funcionarios.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MenuLateralComponent } from './menu-lateral.component';
-
-describe('MenuLateralComponent', () => {
-  let component: MenuLateralComponent;
-  let fixture: ComponentFixture<MenuLateralComponent>;
+describe('FuncionariosComponent', () => {
+  let component: FuncionariosComponent;
+  let fixture: ComponentFixture<FuncionariosComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MenuLateralComponent]
+      imports: [FuncionariosComponent]
     })
     .compileComponents();
-    
-    fixture = TestBed.createComponent(MenuLateralComponent);
+
+    fixture = TestBed.createComponent(FuncionariosComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

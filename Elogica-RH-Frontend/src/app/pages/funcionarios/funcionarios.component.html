@@ -1,0 +1,158 @@
+<section class="container-fluid">
+  <a href="#" class="d-block mb-3">Voltar</a>
+
+  <form
+    class="row g-3 align-items-end border mt-4 pb-3"
+    (ngSubmit)="buscarFuncionarios()"
+  >
+    <h2 class="fs-3 fw-bold" style="color: #1f3e6a">Busca</h2>
+
+    <div class="col-md-3">
+      <label for="cpfInput" class="form-label"><strong>CPF</strong></label>
+      <input
+        type="text"
+        class="form-control rounded-0"
+        id="cpfInput"
+        [(ngModel)]="cpfInput"
+        name="cpfInput"
+        placeholder="Digitar..."
+      />
+    </div>
+
+    <div class="col-md-3">
+      <label for="nomeInput" class="form-label"><strong>Nome</strong></label>
+      <input
+        type="text"
+        class="form-control rounded-0"
+        id="nomeInput"
+        [(ngModel)]="nomeInput"
+        name="nomeInput"
+        placeholder="Digitar..."
+      />
+    </div>
+
+    <div class="col-md-6 d-flex justify-content-end gap-2">
+      <button
+        type="reset"
+        class="btn rounded-0 btn-outline-secondary"
+        (click)="limparBusca()"
+      >
+        <i class="bi bi-eraser"></i> Limpar
+      </button>
+
+      <button
+        type="submit"
+        class="btn rounded-0"
+        style="color: white; background-color: #1f3e6a"
+      >
+        <i class="bi bi-search"></i> Buscar
+      </button>
+    </div>
+  </form>
+
+  <div class="d-flex justify-content-between align-items-center mt-5 mb-2">
+    <h3 class="fs-4 fw-bold mb-0">Funcionários</h3>
+    <a href="#" class="text-primary text-decoration-none">
+      <i class="bi bi-funnel"></i> Filtrar
+    </a>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+      <thead class="table-secondary">
+        <tr>
+          <th>Nome</th>
+          <th>CPF</th>
+          <th>Cargo</th>
+          <th>Setor</th>
+          <th class="text-end">Situação</th>
+          <th class="text-end">Editar</th>
+          <th class="text-end">Demitir</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (funcionario of funcionarios; track funcionario.id) {
+        <tr>
+          <td>{{ funcionario.nome }}</td>
+          <td>{{ funcionario.cpf | mask : "000.000.000-00" }}</td>
+          <td>{{ funcionario.cargosId }}</td>
+          <td>{{ funcionario.setoresId }}</td>
+          <td class="text-end">
+            {{ funcionario.ativo ? "Ativo" : "Inativo" }}
+          </td>
+          <td class="text-end">
+            <button
+              class="btn"
+              [routerLink]="['/funcionarios-editar', funcionario.id]"
+            >
+              <i class="bi bi-pencil"></i>
+            </button>
+          </td>
+          <td class="text-end">
+            <button class="btn" (click)="demitirFuncionario(funcionario.id)">
+              <i class="bi bi-trash"></i>
+            </button>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <div class="d-flex justify-content-end mt-3 mb-5">
+    <button
+      class="btn rounded-0"
+      style="background-color: #1f3e6a; color: white"
+      [routerLink]="['/funcionarios-cadastro']"
+    >
+      Adicionar
+    </button>
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center">
+    <p class="mb-0">
+      Lista de {{ (paginaAtual - 1) * quantidadePorPagina + 1 }} a
+      {{ paginaAtual * quantidadePorPagina }} de {{ totalRegistros }} resultados
+    </p>
+    <nav>
+      <ul class="pagination mb-0">
+        <li class="page-item" [ngClass]="{ disabled: paginaAtual === 1 }">
+          <a
+            class="page-link bg-light text-secondary border-secondary"
+            (click)="paginaAnterior()"
+            aria-label="Anterior"
+          >
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+
+        <!-- Exibe as páginas dinamicamente -->
+        <li
+          *ngFor="let pagina of paginasVisiveis"
+          class="page-item"
+          [ngClass]="{ active: pagina === paginaAtual }"
+        >
+          <a
+            class="page-link bg-light text-secondary border-secondary"
+            (click)="irParaPagina(pagina)"
+          >
+            {{ pagina }}
+          </a>
+        </li>
+
+        <li
+          class="page-item"
+          [ngClass]="{ disabled: paginaAtual === totalPaginas() }"
+        >
+          <a
+            class="page-link bg-light text-secondary border-secondary"
+            (click)="proximaPagina()"
+            aria-label="Próximo"
+          >
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</section>

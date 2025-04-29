@@ -3,11 +3,13 @@ import { FuncionarioService } from '../../services/funcionario.service';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 @Component({
   selector: 'app-funcionario-cadastro',
   standalone: true,
-  imports: [RouterModule, FormsModule, CommonModule],
+  imports: [RouterModule, FormsModule, CommonModule, NgxMaskDirective],
+  providers: [provideNgxMask()],
   templateUrl: './funcionario-cadastro.component.html',
 })
 export class FuncionarioCadastroComponent implements OnInit {

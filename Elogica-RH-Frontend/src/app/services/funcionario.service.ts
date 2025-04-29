@@ -53,3 +53,4 @@ export class FuncionarioService {
     return this.http.post<any>(this.apiUrl, funcionario);
   }
 }
+

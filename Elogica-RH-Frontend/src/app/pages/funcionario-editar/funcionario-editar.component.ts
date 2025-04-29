@@ -4,11 +4,13 @@ import { FuncionarioService } from '../../services/funcionario.service';
 import { Funcionario } from '../../shared/interfaces/funcionario';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 @Component({
   selector: 'app-editar-funcionario',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule, NgxMaskDirective],
+  providers: [provideNgxMask()],
   templateUrl: './funcionario-editar.component.html',
   styleUrls: ['./funcionario-editar.component.css'],
 })
@@ -83,7 +85,7 @@ export class FuncionarioEditarComponent implements OnInit {
       this.funcionarioService
         .atualizar(this.funcionario.id, this.funcionario)
         .subscribe(() => {
-          this.router.navigate(['/funcionarios']);
+          this.router.navigate(['/cadastros']);
         });
     }
   }

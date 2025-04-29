@@ -34,10 +34,11 @@ export class FuncionarioEditarComponent implements OnInit {
 
   buscarFuncionario(id: number) {
     this.funcionarioService.buscarPorId(id).subscribe((dados) => {
-      this.funcionario = dados;
-      // Se necessário, formata a data para o input
-      this.funcionario.dataNascimento = dados.dataNascimento?.split('T')[0];
-      this.funcionario.dataContratacao = dados.dataContratacao?.split('T')[0];
+      this.funcionario = dados.data;
+      this.funcionario.dataNascimento =
+        dados.data.dataNascimento?.split('T')[0];
+      this.funcionario.dataContratacao =
+        dados.data.dataContratacao?.split('T')[0];
     });
   }
 

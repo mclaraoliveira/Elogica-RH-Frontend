@@ -9,7 +9,7 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterOutlet, RouterLink],
   templateUrl: './menu-lateral.component.html',
-  styleUrl: './menu-lateral.component.css'
+  styleUrl: './menu-lateral.component.css',
 })
 export class MenuLateralComponent implements OnInit {
 
@@ -19,18 +19,20 @@ export class MenuLateralComponent implements OnInit {
 
     constructor(private menuLateralService: MenuLateralService, private router: Router) { }
 
-    ngOnInit(): void {
-      this.menuLateralService.listar().subscribe(menus => {
-        this.menusPais = menus.filter(menu => menu.menuPaiId === 0)
-                               .sort((a, b) => a.ordem - b.ordem);
+  ngOnInit(): void {
+    this.menuLateralService.listar().subscribe((menus) => {
+      this.menusPais = menus
+        .filter((menu) => menu.menuPaiId === 0)
+        .sort((a, b) => a.ordem - b.ordem);
 
-        menus.filter(menu => menu.menuPaiId !== 0)
-             .forEach(filho => {
-               if (!this.menusFilhos[filho.menuPaiId]) {
-                 this.menusFilhos[filho.menuPaiId] = [];
-               }
-               this.menusFilhos[filho.menuPaiId].push(filho);
-             });
+      menus
+        .filter((menu) => menu.menuPaiId !== 0)
+        .forEach((filho) => {
+          if (!this.menusFilhos[filho.menuPaiId]) {
+            this.menusFilhos[filho.menuPaiId] = [];
+          }
+          this.menusFilhos[filho.menuPaiId].push(filho);
+        });
 
         for (let key in this.menusFilhos) {
           this.menusFilhos[key] = this.menusFilhos[key].sort((a, b) => a.ordem - b.ordem);

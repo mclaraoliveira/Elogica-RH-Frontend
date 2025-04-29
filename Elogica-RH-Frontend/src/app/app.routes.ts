@@ -41,7 +41,7 @@ export const routes: Routes = [
   //   title: 'Cargos'
   // },
   {
-    path: 'funcionarios',
+    path: 'cadastros',
     component: FuncionariosComponent,
     title: 'Funcionários',
   },
@@ -64,7 +64,7 @@ export const routes: Routes = [
   {
     path: 'horarios',
     component: HorariosComponent,
-    title: 'Horários'
+    title: 'Horários',
   },
 
   // {

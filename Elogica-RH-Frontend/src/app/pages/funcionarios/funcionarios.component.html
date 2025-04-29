@@ -74,10 +74,12 @@
         @for (funcionario of funcionarios; track funcionario.id) {
         <tr>
           <td>{{ funcionario.nome }}</td>
-          <td>{{ funcionario.cpf }}</td>
+          <td>{{ funcionario.cpf | mask : "000.000.000-00" }}</td>
           <td>{{ funcionario.cargosId }}</td>
           <td>{{ funcionario.setoresId }}</td>
-          <td class="text-end">{{ funcionario.ativo }}</td>
+          <td class="text-end">
+            {{ funcionario.ativo ? "Ativo" : "Inativo" }}
+          </td>
           <td class="text-end">
             <button
               class="btn"

@@ -5,11 +5,13 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Funcionario } from '../../shared/interfaces/funcionario';
 import { ModalService } from '../../shared/services/modal.service';
+import { NgxMaskDirective, provideNgxMask, NgxMaskPipe } from 'ngx-mask';
 
 @Component({
   selector: 'app-funcionarios',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, NgxMaskPipe],
+  providers: [provideNgxMask()],
   templateUrl: './funcionarios.component.html',
 })
 export class FuncionariosComponent implements OnInit {

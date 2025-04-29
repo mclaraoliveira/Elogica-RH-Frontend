@@ -15,8 +15,6 @@
         <th>Cargo</th>
         <th>Setor</th>
         <th class="text-end">Situação</th>
-        <th class="text-end">Editar</th>
-        <th class="text-end">Demitir</th>
       </tr>
     </thead>
     <tbody>
@@ -30,6 +28,7 @@
             type="radio"
             class="form-check-input"
             name="funcionarioSelecionado"
+            (change)="selecionarFuncionario(funcionario)"
           >
         </td>
         <td>{{ funcionario.nome }}</td>
@@ -37,16 +36,6 @@
         <td>{{ funcionario.cargosId }}</td>
         <td>{{ funcionario.setoresId }}</td>
         <td class="text-end">{{ funcionario.ativo }}</td>
-        <td class="text-end">
-          <button class="btn p-0">
-            <i class="bi bi-pencil"></i>
-          </button>
-        </td>
-        <td class="text-end">
-          <button class="btn p-0">
-            <i class="bi bi-trash"></i>
-          </button>
-        </td>
       </tr>
     </tbody>
   </table>
@@ -56,6 +45,9 @@
   <button
     class="btn rounded-0"
     style="background-color: #1f3e6a; color: white"
+    [routerLink]="['/ferias-salvar']"
+    [queryParams]="{id: funcionarioSelecionado?.id}"
+    [disabled]="!funcionarioSelecionado"
   >
     Selecionar
   </button>

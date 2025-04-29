@@ -1,18 +1,11 @@
 import { Routes } from '@angular/router';
 
-// import { InicialComponent } from './pages/inicial/inicial.component';
-
 import { InicialComponent } from './pages/inicial/inicial.component';
-
-// import { ItensDeMenuComponent } from './pages/itens-de-menu/itens-de-menu.component';
-// import { CargosComponent } from './pages/cargos/cargos.component';
-// import { SetoresComponent } from './pages/setores/setores.component';
+import { ItensDeMenuComponent } from './pages/itens-de-menu/itens-de-menu.component';
+import { CargosComponent } from './pages/cargos/cargos.component';
+import { SetoresComponent } from './pages/setores/setores.component';
 
 import { HorariosComponent } from './pages/horarios/horarios.component';
-// import { FeriasComponent } from './pages/ferias/ferias.component';
-// import { PaginaNaoEncontradaComponent } from './pages/pagina-nao-encontrada/pagina-nao-encontrada.component';
-
-// import { HorariosComponent } from './pages/horarios/horarios.component';
 // import { FeriasComponent } from './pages/ferias/ferias.component';
 import { PaginaNaoEncontradaComponent } from './pages/pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { FuncionariosComponent } from './pages/funcionarios/funcionarios.component';
@@ -30,16 +23,16 @@ export const routes: Routes = [
     component: InicialComponent,
     title: 'Página Inicial',
   },
-  // {
-  //   path: 'itens-de-menu',
-  //   component: ItensDeMenuComponent,
-  //   title: 'Itens de Menu'
-  // },
-  // {
-  //   path: 'cargos',
-  //   component: CargosComponent,
-  //   title: 'Cargos'
-  // },
+  {
+    path: 'itens-de-menu',
+    component: ItensDeMenuComponent,
+    title: 'Itens de Menu'
+  },
+  {
+    path: 'cargos',
+    component: CargosComponent,
+    title: 'Cargos'
+  },
   {
     path: 'cadastros',
     component: FuncionariosComponent,
@@ -55,11 +48,11 @@ export const routes: Routes = [
     component: FuncionarioEditarComponent,
     title: 'Funcionário Editar',
   },
-  // {
-  //   path: 'setores',
-  //   component: SetoresComponent,
-  //   title: 'Setores'
-  // },
+  {
+    path: 'setores',
+    component: SetoresComponent,
+    title: 'Setores'
+  },
 
   {
     path: 'horarios',
@@ -67,11 +60,11 @@ export const routes: Routes = [
     title: 'Horários',
   },
 
-  // {
-  //   path: 'horarios',
-  //   component: HorariosComponent,
-  //   title: 'Horários'
-  // },
+  {
+    path: 'horarios',
+    component: HorariosComponent,
+    title: 'Horários'
+  },
 
   // {
   //   path: 'ferias',

@@ -83,6 +83,7 @@ export class FuncionarioCadastroComponent implements OnInit {
     );
 
     const payload = {
+      id: this.funcionario.id,
       nome: this.funcionario.nome,
       cpf: this.funcionario.cpf,
       dataNascimento: this.funcionario.dataNascimento,

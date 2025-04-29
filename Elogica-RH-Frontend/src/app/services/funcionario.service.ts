@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Funcionario } from '../shared/interfaces/funcionario';
 
 @Injectable({
@@ -8,8 +8,6 @@ import { Funcionario } from '../shared/interfaces/funcionario';
 })
 export class FuncionarioService {
   private apiUrl = 'https://localhost:7050/funcionarios';
-
-  // URL para os endpoints de setores, cargos e horários
   private setoresUrl = 'https://localhost:7050/setores';
   private cargosUrl = 'https://localhost:7050/cargos';
   private horariosUrl = 'https://localhost:7050/horarios';
@@ -17,11 +15,15 @@ export class FuncionarioService {
   constructor(private http: HttpClient) {}
 
   getFuncionarios(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}`);
+    return this.http.get<any[]>(this.apiUrl);
   }
 
-  buscarPorId(id: number) {
-    return this.http.get<Funcionario>(`/api/funcionarios/${id}`);
+  buscarPorId(id: number): Observable<Funcionario> {
+    return this.http.get<Funcionario>(`${this.apiUrl}/${id}`);
+  }
+
+  atualizar(id: number, funcionario: Funcionario): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, funcionario);
   }
 
   getFuncionariosPaginados(
@@ -31,23 +33,25 @@ export class FuncionarioService {
     return this.http.get<any>(`${this.apiUrl}/${pagina}/${quantidade}`);
   }
 
-  // Método para obter setores
   getSetores(): Observable<any[]> {
     return this.http.get<any[]>(this.setoresUrl);
   }
 
-  // Método para obter cargos
   getCargos(): Observable<any[]> {
-    return this.http.get<any[]>(this.cargosUrl);
+    return this.http.get<any>(this.cargosUrl).pipe(
+      map((response) => response.items) // <- Ajusta para pegar a lista certa
+    );
   }
 
-  // Método para obter horários
+  desativarFuncionario(id: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/desativa/${id}`, { ativo: false });
+  }
+
   getHorarios(): Observable<any[]> {
     return this.http.get<any[]>(this.horariosUrl);
   }
 
-  // Método para cadastrar um novo funcionário
-  cadastrarFuncionario(funcionario: any): Observable<any> {
+  cadastrarFuncionario(funcionario: Funcionario): Observable<any> {
     return this.http.post<any>(this.apiUrl, funcionario);
   }
 }

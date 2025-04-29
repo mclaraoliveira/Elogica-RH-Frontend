@@ -31,7 +31,7 @@
 
   <h2 class="mt-5 mb-4">Editar funcionário</h2>
 
-  <form class="border p-4 rounded">
+  <form class="border p-4 rounded" (ngSubmit)="salvarFuncionario()">
     <div class="row g-3">
       <div class="col-md-4">
         <label class="form-label">
@@ -127,9 +127,11 @@
           [(ngModel)]="funcionario.horariosId"
           name="horariosId"
         >
-          <option [ngValue]="null" selected>Selecionar...</option>
-          @for (horario of horarios; track horario.id){
-          <option [value]="horario.id">{{ horario.nome }}</option>
+          @for (horario of horarios; track horario.id) {
+          <option [value]="horario.id">
+            {{ horario.horarioInicio | date : "HH:mm" }} -
+            {{ horario.horarioFim | date : "HH:mm" }}
+          </option>
           }
         </select>
       </div>
@@ -161,7 +163,7 @@
         >
           <option [ngValue]="null" selected>Selecionar...</option>
           @for (cargo of cargos; track cargo.id){
-          <option [value]="cargo.id">{{ cargo.nome }}</option>
+          <option [value]="cargo.id">{{ cargo.titulo }}</option>
           }
         </select>
       </div>

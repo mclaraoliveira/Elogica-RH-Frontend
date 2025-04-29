@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Funcionario } from '../../shared/interfaces/funcionario';
+import { ModalService } from '../../shared/services/modal.service';
 
 @Component({
   selector: 'app-funcionarios',
@@ -23,10 +24,46 @@ export class FuncionariosComponent implements OnInit {
   cpfInput: string = '';
   nomeInput: string = '';
 
-  constructor(private funcionarioService: FuncionarioService) {}
+  constructor(
+    private funcionarioService: FuncionarioService,
+    private modalService: ModalService
+  ) {}
 
   ngOnInit(): void {
     this.buscarFuncionarios();
+  }
+
+  demitirFuncionario(funcionarioId: number) {
+    this.modalService
+      .confirmar(
+        'Aviso',
+        'Você tem certeza que deseja demitir este funcionário?',
+        'Sim',
+        'Não'
+      )
+      .then((result) => {
+        if (result.isConfirmed) {
+          this.funcionarioService.desativarFuncionario(funcionarioId).subscribe(
+            (response) => {
+              console.log('Funcionário desativado', funcionarioId);
+              // Chama o modal de sucesso
+              this.modalService
+                .sucesso('Sucesso', 'Funcionário desativado com sucesso!')
+                .then(() => {
+                  this.buscarFuncionarios();
+                });
+            },
+            (error) => {
+              console.error('Erro ao desativar funcionário', error);
+
+              this.modalService.erro(
+                'Erro',
+                'Ocorreu um erro ao desativar o funcionário. Tente novamente.'
+              );
+            }
+          );
+        }
+      });
   }
 
   buscarFuncionarios(): void {

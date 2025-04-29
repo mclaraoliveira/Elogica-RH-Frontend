@@ -3,7 +3,7 @@ import { InicialComponent } from './pages/inicial/inicial.component';
 // import { ItensDeMenuComponent } from './pages/itens-de-menu/itens-de-menu.component';
 // import { CargosComponent } from './pages/cargos/cargos.component';
 // import { FuncionariosComponent } from './pages/funcionarios/funcionarios.component';
-// import { SetoresComponent } from './pages/setores/setores.component';
+import { SetoresComponent } from './pages/setores/setores.component';
 // import { HorariosComponent } from './pages/horarios/horarios.component';
 // import { FeriasComponent } from './pages/ferias/ferias.component';
 import { PaginaNaoEncontradaComponent } from './pages/pagina-nao-encontrada/pagina-nao-encontrada.component';
@@ -34,11 +34,11 @@ export const routes: Routes = [
   //   component: FuncionariosComponent,
   //   title: 'Funcionários'
   // },
-  // {
-  //   path: 'setores',
-  //   component: SetoresComponent,
-  //   title: 'Setores'
-  // },
+  {
+    path: 'setores',
+    component: SetoresComponent,
+    title: 'Setores'
+  },
   // {
   //   path: 'horarios',
   //   component: HorariosComponent,

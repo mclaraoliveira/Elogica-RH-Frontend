@@ -12,6 +12,6 @@ export class InicialComponent {
   constructor(private router: Router) {}
 
   iniciar() {
-    this.router.navigate(['/funcionarios']);
+    this.router.navigate(['/cadastros']);
   }
 }

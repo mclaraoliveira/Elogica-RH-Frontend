@@ -1,4 +1,4 @@
- <div class="container-fluid p-4">
+<div class="container-fluid p-4">
   <a href="#" class="d-block mb-3">Voltar</a>
 
   <div *ngIf="modo === 'listar'">
@@ -23,15 +23,25 @@
               <tr *ngFor="let cargo of cargos">
                 <td class="py-3 px-4">{{ cargo.titulo }}</td>
                 <td class="py-3 px-4">{{ cargo.descricao }}</td>
-                <td class="py-3 px-4">{{ cargo.salarioBase | currency:'BRL' }}</td>
-                <td class="py-3 px-4">{{ cargo.setoresIds }}</td>
+                <td class="py-3 px-4">
+                  {{ cargo.salarioBase | currency : "BRL" }}
+                </td>
+                <div class="d-flex flex-column">
+                @for(setor of setores; track $index) { @if(cargo.id ===
+                setor.idCargo) {
+                <td class="py-3 px-4">{{ setor.setorNome }}</td>
+                } }</div>
                 <td class="py-3 px-4 text-center">
-                  <button class="btn btn-sm btn-outline-primary rounded-0 me-2"
-                          (click)="mudarModo('editar', cargo)">
+                  <button
+                    class="btn btn-sm btn-outline-primary rounded-0 me-2"
+                    (click)="mudarModo('editar', cargo)"
+                  >
                     <i class="bi bi-pencil"></i>
                   </button>
-                  <button class="btn btn-sm btn-outline-danger rounded-0"
-                          (click)="excluirCargo(cargo.id)">
+                  <button
+                    class="btn btn-sm btn-outline-danger rounded-0"
+                    (click)="excluirCargo(cargo.id)"
+                  >
                     <i class="bi bi-trash"></i>
                   </button>
                 </td>
@@ -42,40 +52,68 @@
       </div>
     </div>
 
-
     <div class="d-flex justify-content-end mb-4">
-      <button class="btn rounded-0" (click)="mudarModo('adicionar')"
-              style="background-color: #1f3e6a; color: white">
+      <button
+        class="btn rounded-0"
+        (click)="mudarModo('adicionar')"
+        style="background-color: #1f3e6a; color: white"
+      >
         Adicionar
       </button>
     </div>
-
-
 
     <div class="d-flex justify-content-between align-items-center mt-5 me-2">
       <p class="mb-0">Lista de 1 a 10 de 200 resultados</p>
 
       <nav>
         <ul class="pagination d-flex justify-content-center p-4 m-0">
-          <li class="page-item"><a class="page-link" aria-label="Default pagination"(click)="paginaAtual ==1 ? null :paginaAtual=paginaAtual-1; carregarCargosPaginado(paginaAtual,itensPorPagina)"><span aria-hidden="true">&laquo;</span></a></li>
-          <li class="page-item" ><a class="page-link" href="#">{{paginaAtual}}</a></li>
-          <li class="page-item"><a class="page-link" (click)="paginaAtual=paginaAtual+1; carregarCargosPaginado(paginaAtual,itensPorPagina)"><span aria-hidden="true">&raquo;</span></a></li>
+          <li class="page-item">
+            <a
+              class="page-link"
+              aria-label="Default pagination"
+              (click)="
+                paginaAtual == 1 ? null : (paginaAtual = paginaAtual - 1);
+                carregarCargosPaginado(paginaAtual, itensPorPagina)
+              "
+              ><span aria-hidden="true">&laquo;</span></a
+            >
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">{{ paginaAtual }}</a>
+          </li>
+          <li class="page-item">
+            <a
+              class="page-link"
+              (click)="
+                paginaAtual = paginaAtual + 1;
+                carregarCargosPaginado(paginaAtual, itensPorPagina)
+              "
+              ><span aria-hidden="true">&raquo;</span></a
+            >
+          </li>
         </ul>
       </nav>
-
     </div>
   </div>
 
   <div *ngIf="modo !== 'listar'">
     <div class="d-flex justify-content-between align-items-center mb-4">
-      <h2 class="mb-0">{{ modo === 'adicionar' ? 'Adicionar' : 'Editar' }} Cargo</h2>
+      <h2 class="mb-0">
+        {{ modo === "adicionar" ? "Adicionar" : "Editar" }} Cargo
+      </h2>
       <div>
-        <button class="btn btn-outline-secondary rounded-0 me-2" (click)="cancelar()">Cancelar</button>
-        <button class="btn btn-primary rounded-0 px-4"
-                (click)="modo === 'adicionar' ? adicionarCargo() : salvarEdicao()">
+        <button
+          class="btn btn-outline-secondary rounded-0 me-2"
+          (click)="cancelar()"
+        >
+          Cancelar
+        </button>
+        <button
+          class="btn btn-primary rounded-0 px-4"
+          (click)="modo === 'adicionar' ? adicionarCargo() : salvarEdicao()"
+        >
           Salvar
         </button>
-
       </div>
     </div>
 
@@ -84,18 +122,30 @@
         <div class="row">
           <div class="col-md-6 mb-3">
             <label class="form-label">Título*</label>
-            <input type="text" class="form-control rounded-0"
-                   [(ngModel)]="titulo" required>
+            <input
+              type="text"
+              class="form-control rounded-0"
+              [(ngModel)]="titulo"
+              required
+            />
           </div>
           <div class="col-md-6 mb-3">
             <label class="form-label">Salário Base*</label>
-            <input type="number" step="0.01" class="form-control rounded-0"
-                   [(ngModel)]="salarioBase" required>
+            <input
+              type="number"
+              step="0.01"
+              class="form-control rounded-0"
+              [(ngModel)]="salarioBase"
+              required
+            />
           </div>
           <div class="col-md-12 mb-3">
             <label class="form-label">Descrição</label>
-            <textarea class="form-control rounded-0" rows="3"
-                      [(ngModel)]="descricao"></textarea>
+            <textarea
+              class="form-control rounded-0"
+              rows="3"
+              [(ngModel)]="descricao"
+            ></textarea>
           </div>
         </div>
       </div>
@@ -115,16 +165,21 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let setor of setores">
+                @for(setor of setores; track $index){
+                <tr>
                   <td class="py-3 px-4 text-center">
-                    <div class="form-check d-flex justify-content-center">
-                      <input type="checkbox" class="form-check-input m-0"
-                             [(ngModel)]="setor.selecionado" [name]="'setor-' + setor.Id">
+                    <div class="form-check justify-content-center">
+                      <input
+                        type="checkbox"
+                        class="form-check-input m-0"
+                        [name]="'setor-' + setor.idSetor"
+                      />
                     </div>
                   </td>
-                  <td class="py-3 px-4">{{ setor.Nome }}</td>
-                  <td class="py-3 px-4">{{ setor.Descricao }}</td>
+                  <td class="py-3 px-4">{{ setor.setorNome }}</td>
+                  <td class="py-3 px-4">{{ setor.setorDescricao }}</td>
                 </tr>
+                }
               </tbody>
             </table>
           </div>
@@ -133,4 +188,3 @@
     </div>
   </div>
 </div>
-

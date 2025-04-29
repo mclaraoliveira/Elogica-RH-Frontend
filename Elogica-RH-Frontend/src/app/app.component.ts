@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MenuCabecalhoComponent } from './shared/components/menu-cabecalho/menu-cabecalho.component';
 import { MenuLateralComponent } from './shared/components/menu-lateral/menu-lateral.component';
 import { RouterOutlet } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,7 @@ import { RouterOutlet } from '@angular/router';
     MenuCabecalhoComponent,
     MenuLateralComponent,
     RouterOutlet,
+    HttpClientModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

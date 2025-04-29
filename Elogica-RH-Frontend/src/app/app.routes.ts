@@ -9,6 +9,8 @@ import { PaginaNaoEncontradaComponent } from './pages/pagina-nao-encontrada/pagi
 import { FuncionariosComponent } from './pages/funcionarios/funcionarios.component';
 import { FuncionarioCadastroComponent } from './pages/funcionario-cadastro/funcionario-cadastro.component';
 import { FuncionarioEditarComponent } from './pages/funcionario-editar/funcionario-editar.component';
+import { CargosComponent } from './pages/cargoss/cargos/cargos.component';
+//import { CargosFormComponent } from './pages/cargoss/cargos-forms/cargos-forms.component';
 
 export const routes: Routes = [
   {
@@ -26,11 +28,16 @@ export const routes: Routes = [
   //   component: ItensDeMenuComponent,
   //   title: 'Itens de Menu'
   // },
+  {
+    path: 'cargos',
+    component: CargosComponent },
   // {
-  //   path: 'cargos',
-  //   component: CargosComponent,
-  //   title: 'Cargos'
-  // },
+  //   path: 'cargos/adicionar',
+  //   component: CargosFormComponent },
+  // {
+  // path: 'cargos/editar/:id',
+  // component: CargosFormComponent },
+
   {
     path: 'funcionarios',
     component: FuncionariosComponent,

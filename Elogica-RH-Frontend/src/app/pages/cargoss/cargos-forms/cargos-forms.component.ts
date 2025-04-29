@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Cargo, CriarCargoDto, AtualizarCargoDto } from '../../../shared/interfaces/cargo';
+import { Cargo } from '../../../shared/interfaces/cargo';
 import { RetornoPaginado } from '../../../shared/interfaces/retornoPaginado';
 import { CargosService } from '../../../services/cargos/cargos.service';
 import { ModalService } from '../../../shared/services/modal.service';

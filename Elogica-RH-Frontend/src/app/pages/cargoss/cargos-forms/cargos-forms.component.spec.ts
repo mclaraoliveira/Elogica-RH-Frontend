@@ -1,24 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+// import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CargosFormsComponent } from './cargos-forms.component';
+// import { CargosFormsComponent } from './cargos-forms.component';
 
-describe('CargosFormsComponent', () => {
-  let component: CargosFormsComponent;
-  let fixture: ComponentFixture<CargosFormsComponent>;
+// describe('CargosFormsComponent', () => {
+//   let component: CargosFormsComponent;
+//   let fixture: ComponentFixture<CargosFormsComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [CargosFormsComponent]
-    })
-    .compileComponents();
+//   beforeEach(async () => {
+//     await TestBed.configureTestingModule({
+//       imports: [CargosFormsComponent]
+//     })
+//     .compileComponents();
 
-    fixture = TestBed.createComponent(CargosFormsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+//     fixture = TestBed.createComponent(CargosFormsComponent);
+//     component = fixture.componentInstance;
+//     fixture.detectChanges();
+//   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });
 

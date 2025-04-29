@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener, Renderer2, signal } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu-cabecalho',
@@ -16,7 +17,7 @@ export class MenuCabecalhoComponent {
   isMessagesVisible = signal(false);
   isSearchVisible = signal(false);
 
-  constructor(private elementRef: ElementRef, private renderer: Renderer2) {
+  constructor(private elementRef: ElementRef, private renderer: Renderer2, private router: Router) {
     // Carrega tema salvo (se houver)
     const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
     this.theme = savedTheme ?? 'dark';
@@ -79,6 +80,12 @@ export class MenuCabecalhoComponent {
     this.isMessagesVisible.set(false);
     this.isNotificationsVisible.set(false);
     this.isProfileVisible.set(false);
+  }
+
+  navegar(rota?: string) {
+    if (rota) {
+      this.router.navigate([rota]);
+    }
   }
 
   getRowClass(index: number): string {

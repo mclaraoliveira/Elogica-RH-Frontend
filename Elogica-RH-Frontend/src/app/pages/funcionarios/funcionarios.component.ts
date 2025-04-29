@@ -163,3 +163,4 @@ export class FuncionariosComponent implements OnInit {
     this.buscarFuncionarios();
   }
 }
+

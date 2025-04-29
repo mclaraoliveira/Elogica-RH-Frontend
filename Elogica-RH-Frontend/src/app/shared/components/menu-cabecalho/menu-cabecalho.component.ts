@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener, signal } from '@angular/core';
 
+
 @Component({
   selector: 'app-menu-cabecalho',
   standalone: true,

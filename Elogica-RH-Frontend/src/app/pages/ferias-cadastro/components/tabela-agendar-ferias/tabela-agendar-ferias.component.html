@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-between align-items-center mt-5 mb-2">
+  <h3 class="fs-4 fw-bold mb-0">{{ tituloTabela }}</h3>
+  <a href="#" class="text-primary text-decoration-none">
+    <i class="bi bi-funnel"></i> Filtrar
+  </a>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-hover align-middle">
+    <thead class="table-secondary">
+      <tr>
+        <th><!-- Cabeçalho vazio para o radio --></th>
+        <th>Nome</th>
+        <th>CPF</th>
+        <th>Cargo</th>
+        <th>Setor</th>
+        <th class="text-end">Situação</th>
+        <th class="text-end">Editar</th>
+        <th class="text-end">Demitir</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="funcionarios.length === 0">
+        <td colspan="8" class="text-center">Nenhum funcionário encontrado</td>
+      </tr>
+
+      <tr *ngFor="let funcionario of funcionarios">
+        <td>
+          <input
+            type="radio"
+            class="form-check-input"
+            name="funcionarioSelecionado"
+          >
+        </td>
+        <td>{{ funcionario.nome }}</td>
+        <td>{{ funcionario.cpf | mask: '000.000.000-00' }}</td>
+        <td>{{ funcionario.cargosId }}</td>
+        <td>{{ funcionario.setoresId }}</td>
+        <td class="text-end">{{ funcionario.ativo }}</td>
+        <td class="text-end">
+          <button class="btn p-0">
+            <i class="bi bi-pencil"></i>
+          </button>
+        </td>
+        <td class="text-end">
+          <button class="btn p-0">
+            <i class="bi bi-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="d-flex justify-content-end mt-3 mb-5">
+  <button
+    class="btn rounded-0"
+    style="background-color: #1f3e6a; color: white"
+  >
+    Selecionar
+  </button>
+</div>

@@ -3,18 +3,23 @@ import { map, Observable } from 'rxjs';
 import Ferias from '../shared/interfaces/ferias';
 import { HttpClient } from '@angular/common/http';
 
+type ResponseApiFerias = {
+  success: boolean;
+  data: Ferias[];
+};
+
 @Injectable({
   providedIn: 'root'
 })
 export class FeriasService {
 
-  private readonly UriApi = "http://localhost:5276";
+  private readonly UriApi = "http://localhost:7050";
 
   constructor(private http: HttpClient) { }
 
 
   buscarFerias(): Observable<Ferias[]> {
-    return this.http.get<{ success: boolean, data: Ferias[] }>(`${this.UriApi}/ferias`)
+    return this.http.get<ResponseApiFerias>(`${this.UriApi}/ferias`)
       .pipe(
         map(response => response.data) // Extrai apenas o array `data`
       );

@@ -19,6 +19,7 @@ import { FuncionariosComponent } from './pages/funcionarios/funcionarios.compone
 import { FuncionarioCadastroComponent } from './pages/funcionario-cadastro/funcionario-cadastro.component';
 import { FuncionarioEditarComponent } from './pages/funcionario-editar/funcionario-editar.component';
 import { FeriasComponent } from './pages/ferias/ferias.component';
+import { FeriasCadastroComponent } from './pages/ferias-cadastro/ferias-cadastro.component';
 
 export const routes: Routes = [
   {
@@ -78,6 +79,11 @@ export const routes: Routes = [
     path: 'ferias',
     component: FeriasComponent,
     title: 'Férias'
+  },
+  {
+    path: 'ferias-cadastro',
+    component: FeriasCadastroComponent,
+    title: 'Férias-cadastro'
   },
   {
     path: '**',

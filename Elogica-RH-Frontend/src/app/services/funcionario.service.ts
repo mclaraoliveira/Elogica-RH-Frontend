@@ -7,7 +7,7 @@ import { Funcionario } from '../shared/interfaces/funcionario';
   providedIn: 'root',
 })
 export class FuncionarioService {
-  private apiUrl = 'https://localhost:7050/funcionarios';
+  private apiUrl = 'http://localhost:7050/funcionarios';
   private setoresUrl = 'https://localhost:7050/setores';
   private cargosUrl = 'https://localhost:7050/cargos';
   private horariosUrl = 'https://localhost:7050/horarios';
@@ -16,6 +16,13 @@ export class FuncionarioService {
 
   getFuncionarios(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
+  }
+
+  listaFuncionarios(): Observable<Funcionario[]> {
+    return this.http.get<{ success: boolean, data: Funcionario[] }>(this.apiUrl)
+      .pipe(
+        map(response => response.data) // Extrai apenas o array `data`
+      );
   }
 
   buscarPorId(id: number): Observable<Funcionario> {

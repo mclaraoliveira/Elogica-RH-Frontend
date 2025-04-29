@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuLateralService, Menu } from '../../services/menu-lateral.service';
+import { MenuLateralService } from '../../services/menu-lateral.service';
 import { CommonModule } from '@angular/common';
+import { Menu } from '../../interfaces/menu';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-menu-lateral',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterOutlet, RouterLink],
   templateUrl: './menu-lateral.component.html',
   styleUrl: './menu-lateral.component.css'
 })
@@ -13,9 +15,9 @@ export class MenuLateralComponent implements OnInit {
 
     menusPais: Menu[] = [];
     menusFilhos: { [key: number]: Menu[] } = {};
-    menusAbertos: { [key: number]: boolean } = {}; // <<< Aqui controla abertos
+    menusAbertos: { [key: number]: boolean } = {};
 
-    constructor(private menuLateralService: MenuLateralService) { }
+    constructor(private menuLateralService: MenuLateralService, private router: Router) { }
 
     ngOnInit(): void {
       this.menuLateralService.listar().subscribe(menus => {
@@ -34,6 +36,11 @@ export class MenuLateralComponent implements OnInit {
           this.menusFilhos[key] = this.menusFilhos[key].sort((a, b) => a.ordem - b.ordem);
         }
       });
+    }
+    navegar(rota?: string) {
+      if (rota) {
+        this.router.navigate([rota]);
+      }
     }
 
     toggleMenu(menuId: number) {

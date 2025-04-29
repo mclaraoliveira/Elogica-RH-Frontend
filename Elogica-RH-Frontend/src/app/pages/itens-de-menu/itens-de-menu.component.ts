@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ItensMenuService } from '../../services/itens-menu.service';
-import { Menu } from '../../shared/interfaces/menu';
 import { MenuModalComponent } from "../../shared/components/menu-modal/menu-modal.component";
 import Swal from 'sweetalert2';
 import { AdicionarMenuModalComponent } from "../../shared/components/adicionar-menu-modal/adicionar-menu-modal.component";
 import { ModalService } from '../../shared/services/modal.service';
+import { ItemMenu } from '../../shared/interfaces/itemMenu';
 
 @Component({
   selector: 'app-itens-de-menu',
@@ -18,9 +18,9 @@ export class ItensDeMenuComponent implements OnInit {
 
   constructor(private _itensMenuService: ItensMenuService, private _modalService: ModalService){}
 
-  @Input() menus: Menu[] = [];
+  @Input() menus: ItemMenu[] = [];
   exibirModalAdicionar: boolean = false;
-  menuSelecionado: Menu | null = null;
+  menuSelecionado: ItemMenu | null = null;
 
   paginaAtual: number = 1;
   quantidadePorPagina: number = 10;
@@ -54,7 +54,7 @@ export class ItensDeMenuComponent implements OnInit {
       });
   }
 
-  abrirModalEditar(menu: Menu): void {
+  abrirModalEditar(menu: ItemMenu): void {
     this.menuSelecionado = menu;
   }
 
@@ -68,7 +68,7 @@ export class ItensDeMenuComponent implements OnInit {
   }
 
   onSalvar(formValue: any) {
-    const menu: Menu = formValue;
+    const menu: ItemMenu = formValue;
     console.log(menu, "oi");
 
     if (menu.id) {
@@ -86,7 +86,7 @@ export class ItensDeMenuComponent implements OnInit {
     this.exibirModalAdicionar = false; // Fechar o modal após salvar
   }
 
-  confirmarExclusao(menu: Menu): void {
+  confirmarExclusao(menu: ItemMenu): void {
     if (!menu?.id) {
       return; // Garante que há um ID para deletar
     }

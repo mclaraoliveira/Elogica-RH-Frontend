@@ -6,15 +6,15 @@
   <div *ngIf="funcionario" class="row bg-body-secondary p-3 rounded">
     <div class="col-4">
       <p class="fw-bold">Nome</p>
-      <p>{{ funcionario.nome }}</p>
+      <p>{{ funcionarioService?.funcionarioSelecionado!.nome }}</p>
     </div>
     <div class="col-4">
       <p class="fw-bold">CPF</p>
-      <p>{{ funcionario.cpf | mask: '000.000.000-00' }}</p>
+      <p>{{ funcionarioService?.funcionarioSelecionado!.cpf | mask: '000.000.000-00' }}</p>
     </div>
     <div class="col-4">
       <p class="fw-bold">Situação</p>
-      <p>{{ funcionario.ativo ? 'Ativo' : 'Inativo' }}</p>
+      <p>{{ funcionarioService?.funcionarioSelecionado!.ativo ? 'Ativo' : 'Inativo' }}</p>
     </div>
   </div>
 </div>

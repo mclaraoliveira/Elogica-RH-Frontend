@@ -2,6 +2,10 @@ import { Component, Input } from '@angular/core';
 import { Funcionario } from '../../../../shared/interfaces/funcionario';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FuncionarioService } from '../../../../services/funcionario.service';
+import { FeriasService } from '../../../../services/ferias.service';
+import Ferias from '../../../../shared/interfaces/ferias';
+import { ModalService } from '../../../../shared/services/modal.service';
 
 @Component({
   selector: 'app-form-registro',
@@ -18,16 +22,23 @@ export class FormRegistroComponent {
     dataFim: new FormControl('', Validators.required)
   });
 
+  constructor(
+    public funcionarioService: FuncionarioService,
+    private readonly feriasService: FeriasService,
+    private readonly modalService: ModalService
+  ) {}
+
   onSubmit() {
+    console.log(this.feriasForm.valid);
     if (this.feriasForm.valid && this.funcionario) {
-      const feriasData = {
-        dataInicio: this.feriasForm.value.dataInicio,
-        dataFim: this.feriasForm.value.dataFim,
-        funcionarioId: this.funcionario.id
+      const feriasData: Ferias = {
+        dataInicio: new Date(this.feriasForm.value.dataInicio!),
+        dataFim: new Date(this.feriasForm.value.dataFim!),
+        funcionarioId: this.funcionario?.id
       };
-      console.log('Dados para enviar:', feriasData);
-      // TODO: Chamar o serviço para salvar as férias
-      // Exemplo: this.feriasService.salvarFerias(feriasData).subscribe(...)
+
+      this.feriasService.adicionarFerias(feriasData)
+      console.log(feriasData)
     }
   }
 }

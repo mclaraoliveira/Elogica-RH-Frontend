@@ -17,7 +17,7 @@ export class TabelaAgendarFeriasComponent implements OnInit {
   funcionarioSelecionado: Funcionario | null = null;
   @Input() tituloTabela: string = "";
 
-  constructor(private readonly funcionarioService: FuncionarioService) {}
+  constructor(private funcionarioService: FuncionarioService) {}
 
   ngOnInit() {
     this.funcionarioService.listaFuncionarios().subscribe({
@@ -33,5 +33,8 @@ export class TabelaAgendarFeriasComponent implements OnInit {
 
   selecionarFuncionario(funcionario: Funcionario) {
     this.funcionarioSelecionado = funcionario;
+    this.funcionarioService.funcionarioSelecionado = this.funcionarioSelecionado
+    console.log('FUNCIONARIO :::::', this.funcionarioSelecionado);
+
   }
 }

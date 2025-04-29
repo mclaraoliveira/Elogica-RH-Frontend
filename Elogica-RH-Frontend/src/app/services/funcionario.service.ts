@@ -12,6 +12,8 @@ export class FuncionarioService {
   private cargosUrl = 'https://localhost:7050/cargos';
   private horariosUrl = 'https://localhost:7050/horarios';
 
+  funcionarioSelecionado: Funcionario | null = null;
+
   constructor(private http: HttpClient) {}
 
   getFuncionarios(): Observable<any[]> {

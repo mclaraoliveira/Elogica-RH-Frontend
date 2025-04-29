@@ -17,12 +17,12 @@ export class FuncionarioCadastroComponent implements OnInit {
     dataNascimento: '',
     email: '',
     telefone: '',
-    dataContratacao: '',
     endereco: '',
-    horario: '',
-    setor: '',
-    cargo: '',
+    dataContratacao: '',
     salario: '',
+    cargosId: '',
+    setoresId: '',
+    horariosId: '',
   };
 
   horarios: any[] = [];
@@ -75,32 +75,31 @@ export class FuncionarioCadastroComponent implements OnInit {
   }
 
   cadastrarFuncionario() {
-    const salarioTratado = parseFloat(
-      String(this.funcionario.salario)
-        .replace(/\./g, '')
-        .replace(',', '.')
-        .replace(/[^\d.]/g, '')
-    );
-
     const payload = {
-      id: this.funcionario.id,
       nome: this.funcionario.nome,
       cpf: this.funcionario.cpf,
-      dataNascimento: this.funcionario.dataNascimento,
+      dataNascimento: new Date(this.funcionario.dataNascimento).toISOString(),
       email: this.funcionario.email,
       telefone: this.funcionario.telefone,
       endereco: this.funcionario.endereco,
-      dataContratacao: this.funcionario.dataContratacao,
-      salario: salarioTratado,
+      dataContratacao: new Date(this.funcionario.dataContratacao).toISOString(),
+      salario: this.funcionario.salario,
       ativo: true,
-      cargosId: this.funcionario.cargo,
-      setoresId: this.funcionario.setor,
-      horariosId: this.funcionario.horario,
+      cargosId: this.funcionario.cargosId ? +this.funcionario.cargosId : null,
+      setoresId: this.funcionario.setoresId
+        ? +this.funcionario.setoresId
+        : null,
+      horariosId: this.funcionario.horariosId
+        ? +this.funcionario.horariosId
+        : null,
     };
+
+    console.log('Payload enviado:', payload);
 
     this.funcionarioService.cadastrarFuncionario(payload).subscribe({
       next: () => {
         console.log('Funcionário cadastrado com sucesso!');
+        this.router.navigate(['/funcionarios']);
       },
       error: (err: any) => {
         console.error('Erro ao cadastrar funcionário', err);

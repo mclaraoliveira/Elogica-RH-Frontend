@@ -1,5 +1,5 @@
 export interface Funcionario {
-  id: number;
+  id?: number;
   nome: string;
   cpf: string;
   dataNascimento: string;
@@ -9,7 +9,7 @@ export interface Funcionario {
   dataContratacao: string;
   salario: number;
   ativo: boolean;
-  cargosId: number;
-  setoresId: number;
-  horariosId: number;
+  cargosId: number | null;
+  setoresId: number | null;
+  horariosId: number | null;
 }

@@ -38,9 +38,7 @@ export class FuncionarioService {
   }
 
   getCargos(): Observable<any[]> {
-    return this.http.get<any>(this.cargosUrl).pipe(
-      map((response) => response.items) // <- Ajusta para pegar a lista certa
-    );
+    return this.http.get<any>(this.cargosUrl);
   }
 
   desativarFuncionario(id: number): Observable<any> {

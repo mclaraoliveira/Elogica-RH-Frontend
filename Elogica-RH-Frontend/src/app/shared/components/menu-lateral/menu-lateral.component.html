@@ -1,13 +1,12 @@
 <div class="d-grid" style="grid-template-columns: 239px 1fr; height: calc(100vh - 62px); width: 100%;">
-  <aside class="bg-light sombra" style="height: 100%;">
+  <aside class="sombra" style="height: 100%;">
     <div class="my-3 ms-4">
 
       <!-- Menus Pais -->
       <div *ngFor="let menuPai of menusPais">
         <div class="d-flex align-items-center menu-pai" [class.hovered]="menusAbertos[menuPai.id]"
           style="width: 151px; height: 35px; padding: 8px; cursor: pointer;"
-          (click)="menusFilhos[menuPai.id] ? toggleMenu(menuPai.id) : null"
-
+          (click)="menusFilhos[menuPai.id] ? toggleMenu(menuPai.id) : navegar('/inicial')"
           >
           <i [class]="menuPai.icone + ' me-2'"></i>
           <div>{{ menuPai.titulo }}</div>

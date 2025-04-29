@@ -1,17 +1,17 @@
 .menu-filho:hover {
-  background-color: #e6e6e6;
+  background-color: var(--bs-secondary-bg);
   font-weight: bold;
 }
 
 .menu-filho.active {
-  background-color: #d6d1d5;
+  background-color: var(--bs-secondary-bg);
   font-weight: bold;
 }
 .menu-pai:hover {
-  background-color: #f0f0f0;
+  background-color: var(--bs-secondary-bg);
   font-weight: bold;
 }
 
 .menu-pai.hovered {
-  background-color: #e0e0e0;
+  background-color: var(--bs-secondary-bg);
 }

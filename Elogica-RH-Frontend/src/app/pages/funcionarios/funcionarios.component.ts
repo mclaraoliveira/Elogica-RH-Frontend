@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { Funcionario } from '../../shared/interfaces/funcionario';
 import { ModalService } from '../../shared/services/modal.service';
 import { NgxMaskDirective, provideNgxMask, NgxMaskPipe } from 'ngx-mask';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-funcionarios',
@@ -33,6 +34,64 @@ export class FuncionariosComponent implements OnInit {
 
   ngOnInit(): void {
     this.buscarFuncionarios();
+  }
+
+  abrirModalFiltrar(): void {
+    Swal.fire({
+      html: `
+        <div class="text-center p-3">
+          <i class="bi bi-funnel" style="font-size: 3rem; color:#1F3E6A"></i>
+          <h5 class="mt-2 mb-4 fw-bold">Filtrar</h5>
+
+          <div class="text-start mb-3">
+            <label for="setorSelect" class="form-label fw-bold">Setor</label>
+            <select class="form-select" id="setorSelect">
+              <option selected>Selecionar...</option>
+              <!-- opções dinâmicas -->
+            </select>
+          </div>
+
+          <div class="text-start mb-4">
+            <label for="cargoSelect" class="form-label fw-bold">Cargo</label>
+            <select class="form-select" id="cargoSelect">
+              <option selected>Selecionar...</option>
+              <!-- opções dinâmicas -->
+            </select>
+          </div>
+
+          <div class="d-flex justify-content-center gap-2 mt-4">
+            <button id="cancelBtn" class="btn btn-outline-primary">Cancelar</button>
+            <button id="filtrarBtn" class="btn btn-primary">Filtrar</button>
+          </div>
+        </div>
+      `,
+      showConfirmButton: false,
+      showCloseButton: true,
+      customClass: {
+        popup: 'p-0',
+      },
+      didOpen: () => {
+        // Eventos dos botões
+        const cancelar = document.getElementById('cancelBtn')!;
+        const filtrar = document.getElementById('filtrarBtn')!;
+
+        cancelar.addEventListener('click', () => Swal.close());
+
+        filtrar.addEventListener('click', () => {
+          const setor = (
+            document.getElementById('setorSelect') as HTMLSelectElement
+          ).value;
+          const cargo = (
+            document.getElementById('cargoSelect') as HTMLSelectElement
+          ).value;
+
+          // add logica de filtrara aqui
+          console.log({ setor, cargo });
+
+          Swal.close();
+        });
+      },
+    });
   }
 
   demitirFuncionario(funcionarioId: number) {

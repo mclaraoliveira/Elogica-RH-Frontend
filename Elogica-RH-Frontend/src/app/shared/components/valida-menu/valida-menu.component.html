@@ -1,0 +1,17 @@
+@if(control.errors && control.touched){
+  @if(control.errors['required']) {
+      <div class="mensagem-erro my-1 text-danger">
+          Campo obrigatório
+      </div>
+  }
+  @else if (control.errors['min']) {
+    <div class="mensagem-erro my-1 text-danger">
+      O valor deve ser maior que 0
+    </div>
+  }
+  @else if (control.errors['nonZero']) {
+    <div class="mensagem-erro my-1 text-danger">
+      Selecione um item válido
+    </div>
+  }
+}

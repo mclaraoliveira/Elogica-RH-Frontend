@@ -1,7 +1,38 @@
 <div class="d-grid" style="grid-template-columns: 239px 1fr; height: calc(100vh - 62px); width: 100%;">
-  <aside class="bg-light sombra" style="height: 100%;">
+  <aside class="Larger shadow
+  " style="height: 100%;">
+    <div class="my-3 ms-4">
+
+      <!-- Menus Pais -->
+      <div *ngFor="let menuPai of menusPais">
+        <div class="d-flex align-items-center menu-pai" [class.hovered]="menusAbertos[menuPai.id]"
+          style="width: 151px; height: 35px; padding: 8px; cursor: pointer;"
+          (click)="menusFilhos[menuPai.id] ? toggleMenu(menuPai.id) : navegar('/inicial')"
+          >
+          <i [class]="menuPai.icone + ' me-2'"></i>
+          <div>{{ menuPai.titulo }}</div>
+
+          <!-- Só mostra o ícone se tiver filhos -->
+          <i *ngIf="menusFilhos[menuPai.id]"
+            [class]="'bi ms-auto ' + (menusAbertos[menuPai.id] ? 'bi-chevron-up' : 'bi-chevron-down')"></i>
+        </div>
+
+        <!-- Menus Filhos -->
+        <div *ngIf="menusFilhos[menuPai.id] && menusAbertos[menuPai.id]" class="d-flex flex-column ms-4">
+          <div
+            *ngFor="let menuFilho of menusFilhos[menuPai.id]"
+            class="d-flex align-items-center w-75 px-2 py-1 menu-filho"
+            [routerLink]="menuFilho.url"
+            style="cursor: pointer;"
+            >
+            {{ menuFilho.titulo }}
+          </div>
+        </div>
+      </div>
+    </div>
   </aside>
   <main>
     <router-outlet></router-outlet>
   </main>
 </div>
+

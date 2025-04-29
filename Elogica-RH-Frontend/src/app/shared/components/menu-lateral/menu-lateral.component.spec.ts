@@ -1,6 +1,5 @@
+import { FuncionariosComponent } from './../../../pages/funcionarios/funcionarios.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { FuncionariosComponent } from './funcionarios.component';
 
 describe('FuncionariosComponent', () => {
   let component: FuncionariosComponent;
@@ -11,7 +10,7 @@ describe('FuncionariosComponent', () => {
       imports: [FuncionariosComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(FuncionariosComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

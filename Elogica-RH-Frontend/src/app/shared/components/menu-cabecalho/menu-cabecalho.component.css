@@ -1,0 +1,67 @@
+.search-container {
+  top: 62px;
+  left: 0 !important;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 8px 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-container input {
+  background-color: #2C3E50;
+  color: #ECF0F1;
+}
+
+.search-container input::placeholder {
+  color: var(--bs-secondary-bg);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.messages-list-wrapper::-webkit-scrollbar-thumb:hover {
+  background-color: #aaa;
+}
+
+.messages-list-wrapper.scrollbar-dark::-webkit-scrollbar-track {
+  background: #343a40;
+}
+
+.messages-list-wrapper.scrollbar-light::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.bg-dark-line {
+  background-color: #1b1b1b;
+}
+
+.bg-light-line {
+  background-color: #212529;
+}
+
+.bg-light {
+  background-color: #ffffff;
+}
+
+.bg-light-blue {
+  background-color: #dde4eb;
+}
+
+.header-button:hover,
+.message-item-wrapper:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+[data-bs-theme="dark"] .header-button:hover,
+[data-bs-theme="dark"] .message-item-wrapper:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}

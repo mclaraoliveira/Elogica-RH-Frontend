@@ -2,10 +2,11 @@
   <a
     href="#"
     class="text-decoration-none small ms-3"
-    [routerLink]="['/funcionarios']"
+    [routerLink]="['/cadastros']"
     routerLinkActive="router-link-active"
-    >Voltar</a
   >
+    Voltar
+  </a>
 
   <div class="p-3 rounded mt-4">
     <h6><strong>Informações da pessoa</strong></h6>
@@ -13,42 +14,59 @@
       <div class="col-md-4">
         <small><strong>Nome</strong></small
         ><br />
-        <span>Nome</span>
+        <span>{{ funcionario.nome }}</span>
       </div>
       <div class="col-md-4">
         <small><strong>CPF</strong></small
         ><br />
-        <span>000.000.000-00</span>
+        <span>{{ funcionario.cpf }}</span>
       </div>
       <div class="col-md-4">
         <small><strong>Situação</strong></small
         ><br />
-        <span>Ativo</span>
+        <span>{{ funcionario.ativo ? "Ativo" : "Inativo" }}</span>
       </div>
     </div>
   </div>
 
-  <h2 class="mt-5 mb-4">Cadastrar funcionário</h2>
+  <h2 class="mt-5 mb-4">Editar funcionário</h2>
 
-  <form class="border p-4 rounded">
+  <form class="border p-4 rounded" (ngSubmit)="salvarFuncionario()">
     <div class="row g-3">
       <div class="col-md-4">
         <label class="form-label">
           <strong>Nome completo</strong><span class="text-danger">*</span>
         </label>
-        <input type="text" class="form-control" placeholder="Digitar..." />
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Digitar..."
+          [(ngModel)]="funcionario.nome"
+          name="nome"
+        />
       </div>
       <div class="col-md-4">
         <label class="form-label">
           <strong>CPF</strong><span class="text-danger">*</span>
         </label>
-        <input type="text" class="form-control" placeholder="000.000.000-00" />
+        <input
+          type="text"
+          class="form-control"
+          placeholder="000.000.000-00"
+          [(ngModel)]="funcionario.cpf"
+          name="cpf"
+        />
       </div>
       <div class="col-md-4">
         <label class="form-label">
           <strong>Data de nascimento</strong><span class="text-danger">*</span>
         </label>
-        <input type="date" class="form-control" />
+        <input
+          type="date"
+          class="form-control"
+          [(ngModel)]="funcionario.dataNascimento"
+          name="dataNascimento"
+        />
       </div>
 
       <div class="col-md-4">
@@ -59,19 +77,32 @@
           type="email"
           class="form-control"
           placeholder="email@email.com"
+          [(ngModel)]="funcionario.email"
+          name="email"
         />
       </div>
       <div class="col-md-4">
         <label class="form-label">
           <strong>Contato</strong><span class="text-danger">*</span>
         </label>
-        <input type="text" class="form-control" placeholder="00 00000-0000" />
+        <input
+          type="text"
+          class="form-control"
+          placeholder="00 00000-0000"
+          [(ngModel)]="funcionario.telefone"
+          name="telefone"
+        />
       </div>
       <div class="col-md-4">
         <label class="form-label">
           <strong>Data da contratação</strong><span class="text-danger">*</span>
         </label>
-        <input type="date" class="form-control" />
+        <input
+          type="date"
+          class="form-control"
+          [(ngModel)]="funcionario.dataContratacao"
+          name="dataContratacao"
+        />
       </div>
 
       <div class="col-md-6">
@@ -82,22 +113,42 @@
           type="text"
           class="form-control"
           placeholder="Rua, Bairro, Cidade Estado"
+          [(ngModel)]="funcionario.endereco"
+          name="endereco"
         />
       </div>
+
       <div class="col-md-3">
         <label class="form-label">
           <strong>Horário</strong><span class="text-danger">*</span>
         </label>
-        <select class="form-select">
-          <option selected>Selecionar...</option>
+        <select
+          class="form-select"
+          [(ngModel)]="funcionario.horariosId"
+          name="horariosId"
+        >
+          @for (horario of horarios; track horario.id) {
+          <option [value]="horario.id">
+            {{ horario.horarioInicio | date : "HH:mm" }} -
+            {{ horario.horarioFim | date : "HH:mm" }}
+          </option>
+          }
         </select>
       </div>
+
       <div class="col-md-3">
         <label class="form-label">
           <strong>Setor</strong><span class="text-danger">*</span>
         </label>
-        <select class="form-select">
-          <option selected>Selecionar...</option>
+        <select
+          class="form-select"
+          [(ngModel)]="funcionario.setoresId"
+          name="setoresId"
+        >
+          <option [ngValue]="null" selected>Selecionar...</option>
+          @for (setor of setores; track setor.id){
+          <option [value]="setor.id">{{ setor.nome }}</option>
+          }
         </select>
       </div>
 
@@ -105,15 +156,29 @@
         <label class="form-label">
           <strong>Cargo</strong><span class="text-danger">*</span>
         </label>
-        <select class="form-select">
-          <option selected>Selecionar...</option>
+        <select
+          class="form-select"
+          [(ngModel)]="funcionario.cargosId"
+          name="cargosId"
+        >
+          <option [ngValue]="null" selected>Selecionar...</option>
+          @for (cargo of cargos; track cargo.id){
+          <option [value]="cargo.id">{{ cargo.titulo }}</option>
+          }
         </select>
       </div>
+
       <div class="col-md-6">
         <label class="form-label">
           <strong>Salário</strong><span class="text-danger">*</span>
         </label>
-        <input type="text" class="form-control" placeholder="R$ 1.000,00" />
+        <input
+          type="text"
+          class="form-control"
+          placeholder="R$ 2.000,00"
+          [(ngModel)]="funcionario.salario"
+          name="salario"
+        />
       </div>
     </div>
 

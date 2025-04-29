@@ -1,7 +1,7 @@
 # Front-end do Sistema Elógica RH
 
 ## Descrição do Projeto
-Este projeto é o front-end de um sistema de gerenciamento de Recursos Humanos (RH), utilizando **Angular 17** e **Bootstrap 5**. O projeto visa atender às necessidades de gestão de funcionários, cargos, setores, férias e horários. O sistema inclui validações, interface responsiva e funcionalidades como modo claro/escuro, busca no menu e paginação em listagens.
+Este projeto é o front-end de um sistema de gerenciamento de Recursos Humanos (RH), utilizando **Angular 17** e **Bootstrap 5**. O projeto visa atender às necessidades de gestão de funcionários, cargos, setores, férias e horários. Também inclui validações, funcionalidades como modo claro/escuro, busca no menu e paginação em listagens.
 
 ### Funcionalidades
 - **Gestão de Funcionários**: Cadastro, edição, exclusão e visualização de dados pessoais, cargos e salários.

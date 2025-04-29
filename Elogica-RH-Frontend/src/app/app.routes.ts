@@ -26,12 +26,12 @@ export const routes: Routes = [
   {
     path: 'itens-menu',
     component: ItensDeMenuComponent,
-    title: 'Itens de Menu'
+    title: 'Itens de Menu',
   },
   {
     path: 'cargos',
     component: CargosComponent,
-    title: 'Cargos'
+    title: 'Cargos',
   },
   {
     path: 'cadastros',
@@ -51,7 +51,7 @@ export const routes: Routes = [
   {
     path: 'setores',
     component: SetoresComponent,
-    title: 'Setores'
+    title: 'Setores',
   },
 
   {
@@ -63,7 +63,7 @@ export const routes: Routes = [
   {
     path: 'horarios',
     component: HorariosComponent,
-    title: 'Horários'
+    title: 'Horários',
   },
 
   // {

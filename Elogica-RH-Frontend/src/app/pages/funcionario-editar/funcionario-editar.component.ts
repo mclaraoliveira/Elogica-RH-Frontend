@@ -83,7 +83,7 @@ export class FuncionarioEditarComponent implements OnInit {
       this.funcionarioService
         .atualizar(this.funcionario.id, this.funcionario)
         .subscribe(() => {
-          this.router.navigate(['/funcionarios']);
+          this.router.navigate(['/cadastros']);
         });
     }
   }

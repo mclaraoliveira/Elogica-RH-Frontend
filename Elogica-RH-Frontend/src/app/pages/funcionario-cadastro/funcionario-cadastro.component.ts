@@ -99,7 +99,7 @@ export class FuncionarioCadastroComponent implements OnInit {
     this.funcionarioService.cadastrarFuncionario(payload).subscribe({
       next: () => {
         console.log('Funcionário cadastrado com sucesso!');
-        this.router.navigate(['/funcionarios']);
+        this.router.navigate(['/cadastros']);
       },
       error: (err: any) => {
         console.error('Erro ao cadastrar funcionário', err);

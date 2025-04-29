@@ -24,7 +24,7 @@ export const routes: Routes = [
     title: 'Página Inicial',
   },
   {
-    path: 'itens-menu',
+    path: 'itensmenu',
     component: ItensDeMenuComponent,
     title: 'Itens de Menu',
   },
@@ -52,12 +52,6 @@ export const routes: Routes = [
     path: 'setores',
     component: SetoresComponent,
     title: 'Setores',
-  },
-
-  {
-    path: 'horarios',
-    component: HorariosComponent,
-    title: 'Horários',
   },
 
   {

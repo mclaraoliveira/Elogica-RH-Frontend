@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Menu } from '../shared/interfaces/menu';
-import Swal, { SweetAlertResult } from 'sweetalert2';
+import { ItemMenu } from '../shared/interfaces/itemMenu';
 
 @Injectable({
   providedIn: 'root'
@@ -21,16 +20,16 @@ export class ItensMenuService {
     return this.http.get<any>(url);
   }
 
-  obterMenuPorId(id: number): Observable<Menu> {
+  obterMenuPorId(id: number): Observable<ItemMenu> {
     const url = `${this.API}/${id}`;
-    return this.http.get<Menu>(url);
+    return this.http.get<ItemMenu>(url);
   }
 
-  adicionarMenu(menu: Menu): Observable<boolean> {
+  adicionarMenu(menu: ItemMenu): Observable<boolean> {
     return this.http.post<boolean>(this.API, menu);
   }
 
-  atualizarMenu(menu: Menu): Observable<boolean> {
+  atualizarMenu(menu: ItemMenu): Observable<boolean> {
     const url = `${this.API}/${menu.id}`;
     return this.http.put<boolean>(url, menu);
   }

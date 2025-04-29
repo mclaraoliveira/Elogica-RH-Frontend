@@ -1,5 +1,5 @@
-export interface Menu {
-  id: number;
+export interface ItemMenu {
+  id: number | undefined;
   titulo: string;
   descricao: string;
   url: string | null;

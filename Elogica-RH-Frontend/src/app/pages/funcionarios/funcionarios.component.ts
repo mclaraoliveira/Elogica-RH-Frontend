@@ -47,7 +47,6 @@ export class FuncionariosComponent implements OnInit {
             <label for="setorSelect" class="form-label fw-bold">Setor</label>
             <select class="form-select" id="setorSelect">
               <option selected>Selecionar...</option>
-              <!-- opções dinâmicas -->
             </select>
           </div>
 
@@ -55,13 +54,12 @@ export class FuncionariosComponent implements OnInit {
             <label for="cargoSelect" class="form-label fw-bold">Cargo</label>
             <select class="form-select" id="cargoSelect">
               <option selected>Selecionar...</option>
-              <!-- opções dinâmicas -->
             </select>
           </div>
 
           <div class="d-flex justify-content-center gap-2 mt-4">
-            <button id="cancelBtn" class="btn btn-outline-primary">Cancelar</button>
-            <button id="filtrarBtn" class="btn btn-primary">Filtrar</button>
+            <button id="cancelBtn" class="btn rounded-0" style="border-color: #1f3e6a; color: #1f3e6a" >Cancelar</button>
+            <button id="filtrarBtn" class="btn rounded-0" style="background-color: #1f3e6a; color: white">Filtrar</button>
           </div>
         </div>
       `,

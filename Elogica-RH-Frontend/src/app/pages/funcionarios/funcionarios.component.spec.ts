@@ -1,5 +1,5 @@
-import { FuncionariosComponent } from './../../../pages/funcionarios/funcionarios.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FuncionariosComponent } from './funcionarios.component';
 
 describe('FuncionariosComponent', () => {
   let component: FuncionariosComponent;
@@ -7,9 +7,8 @@ describe('FuncionariosComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FuncionariosComponent]
-    })
-    .compileComponents();
+      imports: [FuncionariosComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(FuncionariosComponent);
     component = fixture.componentInstance;

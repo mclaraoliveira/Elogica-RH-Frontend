@@ -19,13 +19,19 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Nome</td>
-        <td>000.000.000-00</td>
-        <td>Cargo</td>
-        <td>Setor</td>
-        <td>DD/MM/AAAA</td>
-        <td>DD/MM/AAAA</td>
+      <!-- Linha que será exibida quando a lista estiver vazia -->
+      <tr *ngIf="ferias.length === 0">
+        <td colspan="7" class="text-center">Nenhum registro de férias encontrado</td>
+      </tr>
+
+      <!-- Linhas iteradas para cada item de férias -->
+      <tr *ngFor="let feriasItem of ferias">
+        <!-- <td>{{ feriasItem.nome }}</td>
+        <td>{{ feriasItem.cpf | mask: '000.000.000-00' }}</td>
+        <td>{{ feriasItem.cargo }}</td>
+        <td>{{ feriasItem.setor }}</td> -->
+        <td>{{ feriasItem.dataInicio | date:'dd/MM/yyyy' }}</td>
+        <td>{{ feriasItem.dataFim | date:'dd/MM/yyyy' }}</td>
         <td class="text-end">
           <button class="btn p-0">
             <i class="bi bi-pencil"></i>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import Ferias from '../shared/interfaces/ferias';
 import { HttpClient } from '@angular/common/http';
 
@@ -12,8 +12,12 @@ export class FeriasService {
 
   constructor(private http: HttpClient) { }
 
+
   buscarFerias(): Observable<Ferias[]> {
-    return this.http.get<Ferias[]>(`${this.UriApi}/ferias`);
+    return this.http.get<{ success: boolean, data: Ferias[] }>(`${this.UriApi}/ferias`)
+      .pipe(
+        map(response => response.data) // Extrai apenas o array `data`
+      );
   }
 
   buscarFeriasPorId(id: number): Observable<Ferias> {

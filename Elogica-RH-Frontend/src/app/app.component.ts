@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
+import { HorariosComponent } from './pages/horarios/horarios.component';
 import { MenuCabecalhoComponent } from './shared/components/menu-cabecalho/menu-cabecalho.component';
 import { MenuLateralComponent } from './shared/components/menu-lateral/menu-lateral.component';
-import { HttpClientModule } from '@angular/common/http';
 
 
 @Component({
@@ -12,8 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     MenuCabecalhoComponent,
     MenuLateralComponent,
-    HttpClientModule
-  ],
+    RouterOutlet
+],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

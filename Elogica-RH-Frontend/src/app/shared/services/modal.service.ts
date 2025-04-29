@@ -29,7 +29,7 @@ export class ModalService {
   confirmar(titulo: string, mensagem: string, textoConfirmacao: string = 'Confirmar', textoCancelamento: string = 'Cancelar'): Promise<SweetAlertResult> {
     const config: any = {
       title: titulo,
-      icon: 'question',
+      icon: 'warning',
       showCancelButton: true,
       confirmButtonText: textoConfirmacao,
       cancelButtonText: textoCancelamento,
@@ -64,25 +64,6 @@ export class ModalService {
   // Método pra modal de informação
   informacao(titulo: string, mensagem: string): Promise<SweetAlertResult> {
     return this.mostrarModalSimples(titulo, mensagem, 'info');
-  }
-
-  // Método pra modal de carregamento
-  carregando(titulo: string, mensagem: string = 'Por favor, aguarde...'): void {
-    const config: any = {
-      title: titulo,
-      allowOutsideClick: false,
-      didOpen: () => {
-        Swal.showLoading();
-      }
-    };
-
-    if (/<[a-z][\s\S]*>/i.test(mensagem)) {
-      config.html = mensagem;
-    } else {
-      config.text = mensagem;
-    }
-
-    Swal.fire(config);
   }
 
   // Método pra fechar o modal

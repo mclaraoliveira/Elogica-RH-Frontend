@@ -1,9 +1,5 @@
-<!-- app.component.html ou seu componente container -->
-<div class="d-flex flex-column" style="height: 100vh;">
+<div class="d-flex flex-column min-vh-100">
   <app-menu-cabecalho></app-menu-cabecalho>
-
-  <div class="d-flex flex-grow-1" style="overflow: hidden;">
-    <app-menu-lateral></app-menu-lateral>
-    <app-ferias class="flex-grow-1" style="overflow: auto;"></app-ferias>
-  </div>
+  <router-outlet></router-outlet>
+  <app-menu-lateral></app-menu-lateral>
 </div>

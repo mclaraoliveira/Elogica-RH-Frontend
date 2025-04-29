@@ -11,7 +11,6 @@ import { PaginaNaoEncontradaComponent } from './pages/pagina-nao-encontrada/pagi
 import { FuncionariosComponent } from './pages/funcionarios/funcionarios.component';
 import { FuncionarioCadastroComponent } from './pages/funcionario-cadastro/funcionario-cadastro.component';
 import { FuncionarioEditarComponent } from './pages/funcionario-editar/funcionario-editar.component';
-import { ItensDeMenuComponent } from './pages/itens-de-menu/itens-de-menu.component';
 
 export const routes: Routes = [
   {
@@ -27,12 +26,12 @@ export const routes: Routes = [
   {
     path: 'itens-menu',
     component: ItensDeMenuComponent,
-    title: 'Itens de Menu'
+    title: 'Itens de Menu',
   },
   {
     path: 'cargos',
     component: CargosComponent,
-    title: 'Cargos'
+    title: 'Cargos',
   },
   {
     path: 'cadastros',
@@ -52,7 +51,7 @@ export const routes: Routes = [
   {
     path: 'setores',
     component: SetoresComponent,
-    title: 'Setores'
+    title: 'Setores',
   },
 
   {
@@ -64,7 +63,7 @@ export const routes: Routes = [
   {
     path: 'horarios',
     component: HorariosComponent,
-    title: 'Horários'
+    title: 'Horários',
   },
 
   // {

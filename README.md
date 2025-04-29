@@ -39,17 +39,14 @@ O projeto segue uma organização modular para facilitar manutenção e colabora
 - **style.css**: Define a fonte Inter como global.
 
 ### Configuração do Layout
-O layout principal é estruturado no `app.component.html` com o uso de `router-outlet` para renderização dinâmica das páginas:
+O layout principal é estruturado no `app.component.html` e o `router-outlet` foi posicionado dentro componente de menu lateral para evitar sobreposições e renderizar dinamicamente a página:
 
 ```html
 <div class="d-flex flex-column min-vh-100">
   <app-menu-cabecalho></app-menu-cabecalho>
-  <router-outlet></router-outlet>
   <app-menu-lateral></app-menu-lateral>
 </div>
 ```
-
-O `router-outlet` foi posicionado no componente de menu lateral para evitar sobreposições e garantir a correta renderização das páginas.
 
 ### Rotas
 As rotas da aplicação estão definidas no arquivo `app.routes.ts`:

@@ -18,8 +18,8 @@ export class FuncionarioService {
     return this.http.get<any[]>(this.apiUrl);
   }
 
-  buscarPorId(id: number): Observable<Funcionario> {
-    return this.http.get<Funcionario>(`${this.apiUrl}/${id}`);
+  buscarPorId(id: number): Observable<{ data: Funcionario }> {
+    return this.http.get<{ data: Funcionario }>(`${this.apiUrl}/${id}`);
   }
 
   atualizar(id: number, funcionario: Funcionario): Observable<any> {
@@ -38,9 +38,7 @@ export class FuncionarioService {
   }
 
   getCargos(): Observable<any[]> {
-    return this.http.get<any>(this.cargosUrl).pipe(
-      map((response) => response.items) // <- Ajusta para pegar a lista certa
-    );
+    return this.http.get<any>(this.cargosUrl);
   }
 
   desativarFuncionario(id: number): Observable<any> {

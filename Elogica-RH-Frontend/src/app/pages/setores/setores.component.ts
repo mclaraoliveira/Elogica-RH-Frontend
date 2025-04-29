@@ -280,7 +280,7 @@ export class SetoresComponent implements OnInit{
   }
   //#endregion
 
-  voltar(): void {
+  voltarUrl(): void {
     this.location.back();
   }
 }

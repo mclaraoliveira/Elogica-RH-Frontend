@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuLateralService } from '../../services/menu-lateral.service';
 import { CommonModule } from '@angular/common';
-import { Menu } from '../../interfaces/menu';
+import { Menu } from '../../interfaces/menu-lateral';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
@@ -45,7 +45,7 @@ export class MenuLateralComponent implements OnInit {
       }
     }
 
-  toggleMenu(menuId: number) {
-    this.menusAbertos[menuId] = !this.menusAbertos[menuId];
+    toggleMenu(menuId: number) {
+      this.menusAbertos[menuId] = !this.menusAbertos[menuId];
+    }
   }
-}

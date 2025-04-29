@@ -14,7 +14,7 @@
 }
 
 .search-container input::placeholder {
-  color: #95A5A6;
+  color: var(--bs-secondary-bg);
 }
 
 @keyframes fadeIn {

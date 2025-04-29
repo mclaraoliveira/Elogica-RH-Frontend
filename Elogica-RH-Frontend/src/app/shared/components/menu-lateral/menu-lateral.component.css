@@ -1,17 +1,7 @@
-.menu-filho:hover {
+.menu-filho:hover,
+.menu-filho.active,
+.menu-pai:hover,
+.menu-pai.hovered{
   background-color: var(--bs-secondary-bg);
   font-weight: bold;
-}
-
-.menu-filho.active {
-  background-color: var(--bs-secondary-bg);
-  font-weight: bold;
-}
-.menu-pai:hover {
-  background-color: var(--bs-secondary-bg);
-  font-weight: bold;
-}
-
-.menu-pai.hovered {
-  background-color: var(--bs-secondary-bg);
 }

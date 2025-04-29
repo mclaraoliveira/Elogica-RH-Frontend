@@ -5,19 +5,104 @@
 
   <div class="container-fluid">
     <h3>Setores</h3>
-    <table class="table">
-      <thead class="table-active">
+  </div>
+
+  <hr>
+
+  <div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+      <thead class="table-secondary">
         <tr>
           <th>Setor</th>
           <th>Descricao</th>
-          <th>Editar</th>
-          <th>Excluir</th>
+          <th class="text-end">Editar</th>
+          <th class="text-end">Excluir</th>
         </tr>
       </thead>
       <tbody>
-
+        @for (setor of setores; track setor.id) {
+          <tr>
+            <td>{{ setor.nome }}</td>
+            <td>{{setor.descricao}}</td>
+            <td class="text-end">
+              <button
+              class="btn"
+              (click)="editarSetorModal(setor, setor.id)"
+              >
+                <i class="bi bi-pencil"></i>
+              </button>
+            </td>
+            <td class="text-end">
+              <button
+              class="btn"
+              (click)="deletarSetorModal(setor.id)">
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          </tr>
+        }
       </tbody>
     </table>
+  </div>
+
+  <div class="d-flex justify-content-end mt-3 mb-5">
+    <button
+      class="btn rounded-0"
+      style="background-color: #1f3e6a; color: white"
+      (click)="adicionarSetorModal()"
+    >
+      Adicionar
+    </button>
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center">
+    <p class="mb-0">
+      Lista de {{ (paginaAtual - 1) * qtdPagina + 1 }} a
+      {{ paginaAtual * qtdPagina }} de {{ totalRegistros }} resultados
+    </p>
+    <nav>
+      <ul class="pagination mb-0">
+        <li class="page-item" [ngClass]="{ disabled: paginaAtual === 1 }">
+          <a
+            style="cursor: pointer;"
+            class="page-link bg-light text-secondary border-secondary"
+            (click)="paginaAnterior()"
+            aria-label="Anterior"
+          >
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+
+        <!-- Exibe as páginas dinamicamente -->
+        <li
+          *ngFor="let pagina of paginasVisiveis"
+          class="page-item"
+          [ngClass]="{ active: pagina === paginaAtual }"
+        >
+          <a
+            style="cursor: pointer;"
+            class="page-link bg-light text-secondary border-secondary"
+            (click)="irParaPagina(pagina)"
+          >
+            {{ pagina }}
+          </a>
+        </li>
+
+        <li
+          class="page-item"
+          [ngClass]="{ disabled: paginaAtual === totalPaginas() }"
+        >
+          <a
+            style="cursor: pointer;"
+            class="page-link bg-light text-secondary border-secondary"
+            (click)="proximaPagina()"
+            aria-label="Próximo"
+          >
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
   </div>
 </section>
 

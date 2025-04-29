@@ -39,3 +39,4 @@ export class CargosService {
     return this.http.put<Cargo>(`${this.API}/${idCargo}/setores`, { setoresIds });
   }
 }
+//

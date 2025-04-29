@@ -30,7 +30,7 @@ O projeto segue uma organização modular para facilitar manutenção e colabora
   - **services/**: Services individuais para comunicação com a API por tela.
   - **shared/**:
     - **components/**: Componentes reutilizáveis.
-    - **interfaces/**: Interface `retornoPaginado.ts` para tipagem de respostas paginadas.
+    - **interfaces/**: Interface `retornoPaginado.ts` para tipagem de respostas paginadas e interfaces específicas para páginas individuais (como `cargo.ts` e `funcionario.ts`).
     - **services/**: Services compartilhados:
       - `modal.service.ts`: Gerenciamento de modais.
       - `tratamento-erros.service.ts`: Tratamento de mensagens de erros da API para exibição em modais.
@@ -90,10 +90,8 @@ export const routes: Routes = [
   - Suporta um nível de submenu.
   - Itens pai possuem ícones e não têm URLs.
   - Itens filhos possuem URLs, item pai e não têm ícones.
-  - A tela atual é destacada visualmente.
 - **Cabeçalho**:
   - Informações de perfil mockadas.
-  - Lupa funcional para busca nos itens de menu.
   - Lâmpada funcional para alternar entre modo claro/escuro.
 - **Regras Específicas**:
   - **Funcionários**: Campos de cargo e salário bloqueados até a seleção de setor e cargo, respectivamente.

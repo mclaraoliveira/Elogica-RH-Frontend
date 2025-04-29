@@ -100,7 +100,7 @@ export const routes: Routes = [
 ## Instalação e Configuração
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/<seu-usuario>/Elogica-RH-Frontend.git
+   git clone https://github.com/mclaraoliveira/Elogica-RH-Frontend.git
    ```
 2. Acesse o diretório do projeto:
    ```bash

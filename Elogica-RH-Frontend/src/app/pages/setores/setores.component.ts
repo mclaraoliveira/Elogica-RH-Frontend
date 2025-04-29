@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Setor, SetorDto, SetoresService } from './../../services/setores/setores.service';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 
 @Component({
   selector: 'app-setores',
@@ -27,7 +27,8 @@ export class SetoresComponent implements OnInit{
   constructor(
     private setoresService: SetoresService,
     private router: Router,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -278,4 +279,8 @@ export class SetoresComponent implements OnInit{
     }
   }
   //#endregion
+
+  voltar(): void {
+    this.location.back();
+  }
 }

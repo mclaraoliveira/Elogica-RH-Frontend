@@ -89,12 +89,18 @@
               class="btn"
               [routerLink]="['/funcionarios-editar', funcionario.id]"
             >
-              <i class="bi bi-pencil"></i>
+              <i
+                class="bi bi-pencil"
+                style="font-size: 1.5rem; color: #1f3e6a"
+              ></i>
             </button>
           </td>
           <td class="text-end">
             <button class="btn" (click)="demitirFuncionario(funcionario.id)">
-              <i class="bi bi-trash"></i>
+              <i
+                class="bi bi-trash"
+                style="font-size: 1.5rem; color: #1f3e6a"
+              ></i>
             </button>
           </td>
         </tr>

@@ -51,7 +51,7 @@ export const routes: Routes = [
     title: 'Funcionário Cadastro',
   },
   {
-    path: 'funcionarios-editar',
+    path: 'funcionarios-editar/:id',
     component: FuncionarioEditarComponent,
     title: 'Funcionário Editar',
   },

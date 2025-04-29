@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Menu } from '../../interfaces/menu';
 import { ItensMenuService } from '../../../services/itens-menu.service';
 import { Subscription } from 'rxjs';
 import { nonZeroValidator, ValidaMenuComponent } from "../valida-menu/valida-menu.component";
+import { ItemMenu } from '../../interfaces/itemMenu';
 
 @Component({
   selector: 'app-menu-modal',
@@ -14,8 +14,8 @@ import { nonZeroValidator, ValidaMenuComponent } from "../valida-menu/valida-men
   styleUrl: './menu-modal.component.css'
 })
 export class MenuModalComponent implements OnInit, OnChanges, OnDestroy {
-  @Input() menu: Menu | null = null;
-  @Input() menus: Menu[] = [];
+  @Input() menu: ItemMenu | null = null;
+  @Input() menus: ItemMenu[] = [];
   @Output() salvar = new EventEmitter<any>();
   @Output() cancelar = new EventEmitter<void>();
   abrirModalEditar = false;
@@ -109,7 +109,7 @@ export class MenuModalComponent implements OnInit, OnChanges, OnDestroy {
       const formValues = this.formulario.value;
 
       // Cria o objeto Menu mapeando os valores do formulário
-      const menu: Menu = {
+      const menu: ItemMenu = {
         id: this.menu?.id, // Preserva o ID se o menu já existir (edição)
         titulo: formValues.titulo,
         descricao: formValues.descricao,
@@ -130,7 +130,7 @@ export class MenuModalComponent implements OnInit, OnChanges, OnDestroy {
   carregarMenus() {
     this._itensMenuService.obterMenus().subscribe((response) => {
       const menus = response.data;
-      this.menus = menus.filter((m: Menu) => m.menuPaiId === 0);
+      this.menus = menus.filter((m: ItemMenu) => m.menuPaiId === 0);
     });
   }
 

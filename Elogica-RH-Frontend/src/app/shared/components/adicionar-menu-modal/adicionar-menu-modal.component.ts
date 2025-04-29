@@ -2,9 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ValidaMenuComponent, nonZeroValidator } from "../valida-menu/valida-menu.component";
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ItensMenuService } from '../../../services/itens-menu.service';
-import { Menu } from '../../interfaces/menu';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { ItemMenu } from '../../interfaces/itemMenu';
 
 @Component({
   selector: 'app-adicionar-menu-modal',
@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
 })
 export class AdicionarMenuModalComponent  implements OnInit {
 
-  @Input() menus: Menu[] = [];
+  @Input() menus: ItemMenu[] = [];
   formulario: FormGroup;
   @Output() salvar = new EventEmitter<any>();
   @Output() cancelar = new EventEmitter<void>();

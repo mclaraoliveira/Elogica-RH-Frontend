@@ -22,25 +22,25 @@ export class SetoresService {
 
   constructor(private http: HttpClient) { }
 
-  buscarSetoresPaginado(pagina: number, qtdRegistros: number): Observable<RetornoPaginado<Setor>>{
-    return this.http.get<RetornoPaginado<Setor>>(this.API)
+  buscarSetoresPaginado(pagina: number, qtdRegistros: number): Observable<any>{
+    return this.http.get<RetornoPaginado<Setor>>(`${this.API}/${pagina}/${qtdRegistros}`);
   }
 
-  buscarSetorPorId(id: number): Observable<Setor> {
+  buscarSetorPorId(id: number): Observable<any> {
     const URL = `${this.API}/${id}`;
     return this.http.get<Setor>(URL);
   }
 
-  adicionarSetor(setorDto: SetorDto): Observable<SetorDto> {
+  adicionarSetor(setorDto: SetorDto): Observable<any> {
     return this.http.post<SetorDto>(this.API, setorDto);
   }
 
-  atualizarSetor(setor: Setor): Observable<Setor> {
-    const URL = `${this.API}/${setor.id}`
+  atualizarSetor(id: number, setor: SetorDto): Observable<any> {
+    const URL = `${this.API}/${id}`
     return this.http.put<Setor>(URL, setor);
   }
 
-  excluirSetor(id: number): Observable<Setor> {
+  excluirSetor(id: number): Observable<any> {
     const URL = `${this.API}/${id}`;
     return this.http.delete<Setor>(URL);
   }

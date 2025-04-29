@@ -25,15 +25,15 @@
               <td>{{ formatarHora(horario.intervaloInicio)}} </td>
               <td>{{ formatarHora(horario.intervaloFim) }} </td>
               <td>
-                <i class="bi bi-pen" (click)="abrirModalEditar(horario, i)" style="cursor: pointer;"></i>
+                <i class="bi bi-pencil "style="font-size: 3rem; color:#1F3E6A" (click)="abrirModalEditar(horario, i)" style="cursor: pointer;font-size: 1.5rem; color:#1F3E6A"></i>
               </td>
-              <td><i class="bi bi-trash" (click)="excluirHorario(horario.id, i)" style="cursor: pointer;"></i></td>
+              <td><i class="bi bi-trash" (click)="excluirHorario(horario.id, i)" style="cursor: pointer; font-size: 1.5rem; color:#1F3E6A"> </i></td>
             </tr>
           </tbody>
         </table>
         <hr>
         <div class="d-flex justify-content-end py-5 mt-4">
-          <button type="button" class="btn btn-primary" (click)="abrirModalAdicionar()">Adicionar</button>
+          <button type="button" class="btn btn-primary" (click)="abrirModalAdicionar()" style="background-color: #1F3E6A;  width:120px; height:35px">Adicionar</button>
         </div>
       </div>
     </div>

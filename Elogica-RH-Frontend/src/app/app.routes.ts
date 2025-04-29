@@ -1,16 +1,13 @@
 import { Routes } from '@angular/router';
 import { InicialComponent } from './pages/inicial/inicial.component';
-// import { ItensDeMenuComponent } from './pages/itens-de-menu/itens-de-menu.component';
-// import { CargosComponent } from './pages/cargos/cargos.component';
-// import { SetoresComponent } from './pages/setores/setores.component';
-// import { HorariosComponent } from './pages/horarios/horarios.component';
-// import { FeriasComponent } from './pages/ferias/ferias.component';
 import { PaginaNaoEncontradaComponent } from './pages/pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { FuncionariosComponent } from './pages/funcionarios/funcionarios.component';
 import { FuncionarioCadastroComponent } from './pages/funcionario-cadastro/funcionario-cadastro.component';
 import { FuncionarioEditarComponent } from './pages/funcionario-editar/funcionario-editar.component';
 import { CargosComponent } from './pages/cargoss/cargos/cargos.component';
-//import { CargosFormComponent } from './pages/cargoss/cargos-forms/cargos-forms.component';
+import { SetoresComponent } from './pages/setores/setores.component';
+import { HorariosComponent } from './pages/horarios/horarios.component';
+
 
 export const routes: Routes = [
   {
@@ -49,20 +46,28 @@ export const routes: Routes = [
     title: 'Funcionário Cadastro',
   },
   {
-    path: 'funcionarios-editar',
+    path: 'funcionarios-editar/:id',
     component: FuncionarioEditarComponent,
     title: 'Funcionário Editar',
   },
-  // {
-  //   path: 'setores',
-  //   component: SetoresComponent,
-  //   title: 'Setores'
-  // },
-  // {
-  //   path: 'horarios',
-  //   component: HorariosComponent,
-  //   title: 'Horários'
-  // },
+  {
+    path: 'setores',
+    component: SetoresComponent,
+    title: 'Setores'
+  },
+
+  {
+    path: 'horarios',
+    component: HorariosComponent,
+    title: 'Horários',
+  },
+
+  {
+    path: 'horarios',
+    component: HorariosComponent,
+    title: 'Horários'
+  },
+
   // {
   //   path: 'ferias',
   //   component: FeriasComponent,

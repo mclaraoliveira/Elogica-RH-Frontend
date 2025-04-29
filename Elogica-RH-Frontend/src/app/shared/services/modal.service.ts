@@ -29,7 +29,7 @@ export class ModalService {
   confirmar(titulo: string, mensagem: string, textoConfirmacao: string = 'Confirmar', textoCancelamento: string = 'Cancelar'): Promise<SweetAlertResult> {
     const config: any = {
       title: titulo,
-      icon: 'question',
+      icon: 'warning',
       showCancelButton: true,
       confirmButtonText: textoConfirmacao,
       cancelButtonText: textoCancelamento,

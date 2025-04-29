@@ -1,7 +1,10 @@
 <section class="container-fluid">
   <a href="#" class="d-block mb-3">Voltar</a>
 
-  <form class="row g-3 align-items-end border mt-4 pb-3">
+  <form
+    class="row g-3 align-items-end border mt-4 pb-3"
+    (ngSubmit)="buscarFuncionarios()"
+  >
     <h2 class="fs-3 fw-bold" style="color: #1f3e6a">Busca</h2>
 
     <div class="col-md-3">
@@ -10,6 +13,8 @@
         type="text"
         class="form-control rounded-0"
         id="cpfInput"
+        [(ngModel)]="cpfInput"
+        name="cpfInput"
         placeholder="Digitar..."
       />
     </div>
@@ -20,12 +25,18 @@
         type="text"
         class="form-control rounded-0"
         id="nomeInput"
+        [(ngModel)]="nomeInput"
+        name="nomeInput"
         placeholder="Digitar..."
       />
     </div>
 
     <div class="col-md-6 d-flex justify-content-end gap-2">
-      <button type="reset" class="btn rounded-0 btn-outline-secondary">
+      <button
+        type="reset"
+        class="btn rounded-0 btn-outline-secondary"
+        (click)="limparBusca()"
+      >
         <i class="bi bi-eraser"></i> Limpar
       </button>
 
@@ -60,40 +71,30 @@
         </tr>
       </thead>
       <tbody>
+        @for (funcionario of funcionarios; track funcionario.id) {
         <tr>
-          <td>Nome</td>
-          <td>000.000.000-00</td>
-          <td>Cargo</td>
-          <td>Setor</td>
-          <td class="text-end">Ativo</td>
+          <td>{{ funcionario.nome }}</td>
+          <td>{{ funcionario.cpf | mask : "000.000.000-00" }}</td>
+          <td>{{ funcionario.cargosId }}</td>
+          <td>{{ funcionario.setoresId }}</td>
           <td class="text-end">
-            <button class="btn" [routerLink]="['/funcionarios-editar']">
+            {{ funcionario.ativo ? "Ativo" : "Inativo" }}
+          </td>
+          <td class="text-end">
+            <button
+              class="btn"
+              [routerLink]="['/funcionarios-editar', funcionario.id]"
+            >
               <i class="bi bi-pencil"></i>
             </button>
           </td>
           <td class="text-end">
-            <button class="btn">
+            <button class="btn" (click)="demitirFuncionario(funcionario.id)">
               <i class="bi bi-trash"></i>
             </button>
           </td>
         </tr>
-        <tr>
-          <td>Nome</td>
-          <td>000.000.000-00</td>
-          <td>Cargo</td>
-          <td>Setor</td>
-          <td class="text-end">Inativo</td>
-          <td class="text-end">
-            <button class="btn" [routerLink]="['/funcionarios-editar']">
-              <i class="bi bi-pencil"></i>
-            </button>
-          </td>
-          <td class="text-end">
-            <button class="btn">
-              <i class="bi bi-trash"></i>
-            </button>
-          </td>
-        </tr>
+        }
       </tbody>
     </table>
   </div>
@@ -108,58 +109,44 @@
     </button>
   </div>
 
-  <div class="d-flex justify-content-between align-items-center mt-5">
-    <p class="mb-0">Lista de 1 a 10 de 200 resultados</p>
+  <div class="d-flex justify-content-between align-items-center">
+    <p class="mb-0">
+      Lista de {{ (paginaAtual - 1) * quantidadePorPagina + 1 }} a
+      {{ paginaAtual * quantidadePorPagina }} de {{ totalRegistros }} resultados
+    </p>
     <nav>
       <ul class="pagination mb-0">
-        <li class="page-item">
+        <li class="page-item" [ngClass]="{ disabled: paginaAtual === 1 }">
           <a
             class="page-link bg-light text-secondary border-secondary"
-            href="#"
+            (click)="paginaAnterior()"
             aria-label="Anterior"
           >
             <span aria-hidden="true">&laquo;</span>
           </a>
         </li>
-        <li class="page-item">
-          <a class="page-link bg-light text-secondary border-secondary" href="#"
-            >1</a
-          >
-        </li>
-        <li class="page-item">
-          <a class="page-link bg-light text-secondary border-secondary" href="#"
-            >2</a
-          >
-        </li>
-        <li class="page-item">
-          <a class="page-link bg-light text-secondary border-secondary" href="#"
-            >3</a
-          >
-        </li>
-        <li class="page-item">
-          <a class="page-link bg-light text-secondary border-secondary" href="#"
-            >4</a
-          >
-        </li>
-        <li class="page-item">
-          <a class="page-link bg-light text-secondary border-secondary" href="#"
-            >...</a
-          >
-        </li>
-        <li class="page-item">
-          <a class="page-link bg-light text-secondary border-secondary" href="#"
-            >10</a
-          >
-        </li>
-        <li class="page-item">
-          <a class="page-link bg-light text-secondary border-secondary" href="#"
-            >11</a
-          >
-        </li>
-        <li class="page-item">
+
+        <!-- Exibe as páginas dinamicamente -->
+        <li
+          *ngFor="let pagina of paginasVisiveis"
+          class="page-item"
+          [ngClass]="{ active: pagina === paginaAtual }"
+        >
           <a
             class="page-link bg-light text-secondary border-secondary"
-            href="#"
+            (click)="irParaPagina(pagina)"
+          >
+            {{ pagina }}
+          </a>
+        </li>
+
+        <li
+          class="page-item"
+          [ngClass]="{ disabled: paginaAtual === totalPaginas() }"
+        >
+          <a
+            class="page-link bg-light text-secondary border-secondary"
+            (click)="proximaPagina()"
             aria-label="Próximo"
           >
             <span aria-hidden="true">&raquo;</span>

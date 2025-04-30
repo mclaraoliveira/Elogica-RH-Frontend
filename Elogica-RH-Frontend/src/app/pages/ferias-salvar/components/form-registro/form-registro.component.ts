@@ -45,7 +45,7 @@ export class FormRegistroComponent {
           });
         },
         error: (err) => {
-          this.modalService.erro('Erro ao salvar férias:', err);
+          this.modalService.erro('Erro ao salvar férias:', err.message);
         }
       });
     }

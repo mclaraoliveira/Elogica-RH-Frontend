@@ -7,7 +7,7 @@ import { Funcionario } from '../shared/interfaces/funcionario';
   providedIn: 'root',
 })
 export class FuncionarioService {
-  private apiUrl = 'http://localhost:7050/funcionarios';
+  private apiUrl = 'https://localhost:7050/funcionarios';
   private setoresUrl = 'https://localhost:7050/setores';
   private cargosUrl = 'https://localhost:7050/cargos';
   private horariosUrl = 'https://localhost:7050/horarios';

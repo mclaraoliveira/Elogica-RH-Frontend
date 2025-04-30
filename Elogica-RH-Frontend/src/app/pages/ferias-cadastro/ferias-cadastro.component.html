@@ -3,7 +3,15 @@
 
   <app-form-busca></app-form-busca>
 
-  <app-tabela-agendar-ferias [tituloTabela]="'Férias Agendadas'" ></app-tabela-agendar-ferias>
+  <app-tabela-agendar-ferias
+    [tituloTabela]="'Férias Agendadas'"
+    #tabelaRef
+  ></app-tabela-agendar-ferias>
 
+  <app-paginacao-selecionar-usuario
+    [paginaAtual]="tabelaRef.paginaAtual"
+    [totalItens]="tabelaRef.totalItens"
+    [itensPorPagina]="tabelaRef.itensPorPagina"
+    (paginaMudou)="tabelaRef.onPaginaMudou($event)"
+  ></app-paginacao-selecionar-usuario>
 </section>
-

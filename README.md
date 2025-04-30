@@ -29,10 +29,10 @@ O projeto segue uma organização modular para facilitar manutenção e colabora
   - **pages/**: Contém os componentes das páginas da aplicação.
   - **services/**: Services individuais para comunicação com a API por tela.
   - **shared/**:
-    - **components/**: Componentes reutilizáveis.
+    - **components/**: Componentes compartilhados (relacionados ao menu).
     - **interfaces/**: Interface `retornoPaginado.ts` para tipagem de respostas paginadas e interfaces específicas para páginas individuais (como `cargo.ts` e `funcionario.ts`).
     - **services/**: Services compartilhados:
-    - - `menu-lateral.service.ts`: Buscar da API as rotas que serão exibidas no menu lateral.
+    - - `menu-lateral.service.ts`: Busca da API as rotas que serão exibidas no menu lateral.
       - `modal.service.ts`: Gerenciamento de modais.
       - `tratamento-erros.service.ts`: Tratamento de mensagens de erros da API para exibição em modais.
 - **assets/**: Contém ilustrações e recursos visuais acessíveis a todos os colaboradores.

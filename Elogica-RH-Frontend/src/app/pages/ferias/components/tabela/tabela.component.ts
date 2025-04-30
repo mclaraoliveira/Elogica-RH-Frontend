@@ -15,8 +15,13 @@ import { RouterLink } from '@angular/router';
   styleUrl: './tabela.component.css'
 })
 export class TabelaComponent implements OnInit {
-  feriasComFuncionarios: any[] = []; // Array combinado
-  @Input() tituloTabela: string = ""
+  feriasComFuncionarios: any[] = [];
+  @Input() tituloTabela: string = "";
+
+  paginaAtual = 1;
+  itensPorPagina = 10;
+  feriasComFuncionariosPaginados: any[] = [];
+  totalItens = 0;
 
   constructor(
     private readonly feriasService: FeriasService,
@@ -28,10 +33,8 @@ export class TabelaComponent implements OnInit {
   }
 
   carregarDados() {
-    // Busca ambas as listas em paralelo
     this.feriasService.buscarFerias().subscribe(ferias => {
       this.funcionarioService.listaFuncionarios().subscribe(funcionarios => {
-        // Combina os dados
         this.feriasComFuncionarios = ferias.map(feria => {
           const funcionario = funcionarios.find(f => f.id === feria.funcionarioId);
           return {
@@ -39,7 +42,21 @@ export class TabelaComponent implements OnInit {
             funcionario: funcionario || null
           };
         });
+
+        this.totalItens = this.feriasComFuncionarios.length;
+        this.atualizarPagina();
       });
     });
+  }
+
+  atualizarPagina() {
+    const inicio = (this.paginaAtual - 1) * this.itensPorPagina;
+    const fim = inicio + this.itensPorPagina;
+    this.feriasComFuncionariosPaginados = this.feriasComFuncionarios.slice(inicio, fim);
+  }
+
+  onPaginaMudou(novaPagina: number) {
+    this.paginaAtual = novaPagina;
+    this.atualizarPagina();
   }
 }

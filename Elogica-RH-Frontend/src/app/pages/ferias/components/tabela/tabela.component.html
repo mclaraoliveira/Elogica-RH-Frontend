@@ -21,7 +21,7 @@
         <td colspan="7" class="text-center">Nenhum registro de férias encontrado</td>
       </tr>
 
-      <tr *ngFor="let item of feriasComFuncionarios">
+      <tr *ngFor="let item of feriasComFuncionariosPaginados">
         <td>{{ item.funcionario?.nome || 'N/A' }}</td>
         <td>{{ item.funcionario?.cpf | mask: '000.000.000-00' || 'N/A' }}</td>
         <td>{{ item.dataInicio | date:'dd/MM/yyyy' }}</td>

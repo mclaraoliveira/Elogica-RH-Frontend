@@ -5,9 +5,14 @@
 
   <app-tabela
     [tituloTabela]="'Férias Agendadas'"
-  >
-  </app-tabela>
+    #tabelaRef
+  ></app-tabela>
 
- <app-paginacao></app-paginacao>
+  <app-paginacao
+    [paginaAtual]="tabelaRef.paginaAtual"
+    [totalItens]="tabelaRef.totalItens"
+    [itensPorPagina]="tabelaRef.itensPorPagina"
+    (paginaMudou)="tabelaRef.onPaginaMudou($event)"
+  ></app-paginacao>
 </section>
 

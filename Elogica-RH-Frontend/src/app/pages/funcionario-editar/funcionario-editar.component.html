@@ -2,7 +2,7 @@
   <a
     href="#"
     class="text-decoration-none small ms-3"
-    [routerLink]="['/funcionarios']"
+    [routerLink]="['/cadastros']"
     routerLinkActive="router-link-active"
   >
     Voltar
@@ -175,9 +175,14 @@
         <input
           type="text"
           class="form-control"
-          placeholder="R$ 2.000,00"
           [(ngModel)]="funcionario.salario"
           name="salario"
+          placeholder="R$ 0.000,00"
+          mask="separator.2"
+          prefix="R$ "
+          thousandSeparator="."
+          decimalMarker=","
+          required
         />
       </div>
     </div>

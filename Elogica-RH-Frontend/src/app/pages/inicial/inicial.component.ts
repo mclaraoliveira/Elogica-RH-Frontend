@@ -6,12 +6,12 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [],
   templateUrl: './inicial.component.html',
-  styleUrl: './inicial.component.css'
+  styleUrl: './inicial.component.css',
 })
 export class InicialComponent {
   constructor(private router: Router) {}
 
   iniciar() {
-    this.router.navigate(['/funcionarios']);
+    this.router.navigate(['/cadastros']);
   }
 }

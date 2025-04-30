@@ -1,0 +1,133 @@
+<div class="container-fluid p-4">
+  <a href="#" class="d-block mb-3" (click)="cancelar()">Voltar</a>
+
+  <div *ngIf="modo === 'listar'">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="mb-0">Cargos</h2>
+    </div>
+
+    <div class="card rounded-0 border-0 shadow-sm mb-4">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover mb-0">
+            <thead class="table-light">
+              <tr>
+                <th class="py-3 px-4">Cargos</th>
+                <th class="py-3 px-4">Descrição</th>
+                <th class="py-3 px-4">Salário Base</th>
+                <th class="py-3 px-4 text-center">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cargo of cargos">
+                <td class="py-3 px-4 text-dark">{{ cargo.titulo}}</td>
+                <td class="py-3 px-4">{{ cargo.descricao }}</td>
+                <td class="py-3 px-4">{{ cargo.salarioBase | currency:'BRL' }}</td>
+                <td class="py-3 px-4 text-center">
+                  <button class="btn btn-sm btn-outline-primary rounded-0 me-2"
+                          (click)="mudarModo('editar', cargo)">
+                    <i class="bi bi-pencil"></i>
+                  </button>
+                  <button class="btn btn-sm btn-outline-danger rounded-0"
+                          (click)="excluirCargo(cargo.id)">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end mb-4">
+      <button class="btn rounded-0" (click)="mudarModo('adicionar')"
+              style="background-color: #1f3e6a; color: white">
+        Adicionar
+      </button>
+    </div>
+
+    <nav *ngIf="totalRegistros > itensPorPagina">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" [class.disabled]="paginaAtual === 1">
+          <a class="page-link" (click)="mudarPagina(paginaAtual - 1)">Anterior</a>
+        </li>
+        <li *ngFor="let pagina of getTotalPaginas()" class="page-item" [class.active]="pagina === paginaAtual">
+          <a class="page-link" (click)="mudarPagina(pagina)">{{ pagina }}</a>
+        </li>
+        <li class="page-item" [class.disabled]="paginaAtual === getTotalPaginas().length">
+          <a class="page-link" (click)="mudarPagina(paginaAtual + 1)">Próxima</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="d-flex justify-content-between align-items-center mt-5 me-2">
+      <p class="mb-0">Lista de {{ paginaAtual * itensPorPagina - itensPorPagina + 1 }} a {{ Math.min(paginaAtual * itensPorPagina, totalRegistros) }} de {{ totalRegistros }} resultados</p>
+    </div>
+  </div>
+
+  <div *ngIf="modo !== 'listar'">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="mb-0">{{ modo === 'adicionar' ? 'Adicionar' : 'Editar' }} Cargo</h2>
+      <div>
+        <button class="btn btn-outline-secondary rounded-0 me-2" (click)="cancelar()">Cancelar</button>
+        <button class="btn btn-primary rounded-0 px-4"
+                (click)="modo === 'adicionar' ? adicionarCargo() : salvarEdicao()">
+          Salvar
+        </button>
+      </div>
+    </div>
+
+    <div class="card rounded-0 border-0 shadow-sm">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label ">Título*</label>
+            <input type="text" class="form-control rounded-0"
+                   [(ngModel)]="cargo.titulo" name="titulo" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Salário Base*</label>
+            <input type="number" step="0.01" class="form-control rounded-0"
+                   [(ngModel)]="cargo.salarioBase" name="salarioBase" required>
+          </div>
+          <div class="col-md-12 mb-3">
+            <label class="form-label">Descrição</label>
+            <textarea class="form-control rounded-0" rows="3"
+                      [(ngModel)]="cargo.descricao" name="descricao"></textarea>
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <h5>Vincular ao setor</h5>
+          <div class="card rounded-0 border-0 shadow-sm">
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                  <thead class="table-light">
+                    <tr>
+                      <th class="py-3 px-4"></th>
+                      <th class="py-3 px-4">Setor</th>
+                      <th class="py-3 px-4">Descrição</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let setor of setores">
+                      <td class="py-3 px-4 text-center">
+                        <div class="form-check d-flex justify-content-center">
+                          <input type="checkbox" class="form-check-input m-0"
+                                 [(ngModel)]="setor.selecionado" [name]="'setor-' + setor.Id">
+                        </div>
+                      </td>
+                      <td class="py-3 px-4">{{ setor.Nome }}</td>
+                      <td class="py-3 px-4">{{ setor.Descricao }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

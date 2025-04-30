@@ -13,8 +13,7 @@ import { MenuLateralComponent } from './shared/components/menu-lateral/menu-late
     CommonModule,
     MenuCabecalhoComponent,
     MenuLateralComponent,
-    RouterOutlet,
-    HorariosComponent
+    RouterOutlet
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

@@ -52,7 +52,11 @@
 
   <div class="d-flex justify-content-between align-items-center mt-5 mb-2">
     <h3 class="fs-4 fw-bold mb-0">Funcionários</h3>
-    <a href="#" class="text-primary text-decoration-none">
+    <a
+      class="text-decoration-none"
+      (click)="abrirModalFiltrar()"
+      style="cursor: pointer; color: #1f3e6a"
+    >
       <i class="bi bi-funnel"></i> Filtrar
     </a>
   </div>
@@ -74,21 +78,29 @@
         @for (funcionario of funcionarios; track funcionario.id) {
         <tr>
           <td>{{ funcionario.nome }}</td>
-          <td>{{ funcionario.cpf }}</td>
+          <td>{{ funcionario.cpf | mask : "000.000.000-00" }}</td>
           <td>{{ funcionario.cargosId }}</td>
           <td>{{ funcionario.setoresId }}</td>
-          <td class="text-end">{{ funcionario.ativo }}</td>
+          <td class="text-end">
+            {{ funcionario.ativo ? "Ativo" : "Inativo" }}
+          </td>
           <td class="text-end">
             <button
               class="btn"
               [routerLink]="['/funcionarios-editar', funcionario.id]"
             >
-              <i class="bi bi-pencil"></i>
+              <i
+                class="bi bi-pencil"
+                style="font-size: 1.5rem; color: #1f3e6a"
+              ></i>
             </button>
           </td>
           <td class="text-end">
             <button class="btn" (click)="demitirFuncionario(funcionario.id)">
-              <i class="bi bi-trash"></i>
+              <i
+                class="bi bi-trash"
+                style="font-size: 1.5rem; color: #1f3e6a"
+              ></i>
             </button>
           </td>
         </tr>

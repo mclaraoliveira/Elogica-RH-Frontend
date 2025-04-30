@@ -29,7 +29,7 @@ export class FeriasSalvarComponent implements OnInit {
       if (id) {
         this.funcionarioService.buscarPorId(id).subscribe({
           next: (funcionario) => {
-            this.funcionario = funcionario;
+            this.funcionario = funcionario.data;
             this.error = null;
           },
           error: (err) => {

@@ -34,11 +34,18 @@ export class FormRegistroComponent {
       const feriasData: Ferias = {
         dataInicio: new Date(this.feriasForm.value.dataInicio!),
         dataFim: new Date(this.feriasForm.value.dataFim!),
-        funcionarioId: this.funcionario?.id
+        funcionarioId: this.funcionario?.id!
       };
 
-      this.feriasService.adicionarFerias(feriasData)
-      console.log(feriasData)
+      this.feriasService.adicionarFerias(feriasData).subscribe({
+        next: (response) => {
+          console.log('Férias salvas com sucesso:', response);
+          this.modalService.fechar(); // exemplo de ação após sucesso
+        },
+        error: (err) => {
+          console.error('Erro ao salvar férias:', err);
+        }
+      });
     }
   }
 }

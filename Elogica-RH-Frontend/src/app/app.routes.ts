@@ -1,23 +1,15 @@
 import { Routes } from '@angular/router';
 
-// import { InicialComponent } from './pages/inicial/inicial.component';
-
 import { InicialComponent } from './pages/inicial/inicial.component';
-
-// import { ItensDeMenuComponent } from './pages/itens-de-menu/itens-de-menu.component';
-// import { CargosComponent } from './pages/cargos/cargos.component';
-// import { SetoresComponent } from './pages/setores/setores.component';
+import { ItensDeMenuComponent } from './pages/itens-de-menu/itens-de-menu.component';
+import { SetoresComponent } from './pages/setores/setores.component';
 
 import { HorariosComponent } from './pages/horarios/horarios.component';
-// import { FeriasComponent } from './pages/ferias/ferias.component';
-// import { PaginaNaoEncontradaComponent } from './pages/pagina-nao-encontrada/pagina-nao-encontrada.component';
-
-// import { HorariosComponent } from './pages/horarios/horarios.component';
-// import { FeriasComponent } from './pages/ferias/ferias.component';
 import { PaginaNaoEncontradaComponent } from './pages/pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { FuncionariosComponent } from './pages/funcionarios/funcionarios.component';
 import { FuncionarioCadastroComponent } from './pages/funcionario-cadastro/funcionario-cadastro.component';
 import { FuncionarioEditarComponent } from './pages/funcionario-editar/funcionario-editar.component';
+import { CargosComponent } from './pages/cargoss/cargos/cargos.component';
 import { FeriasComponent } from './pages/ferias/ferias.component';
 import { FeriasCadastroComponent } from './pages/ferias-cadastro/ferias-cadastro.component';
 import { FeriasSalvarComponent } from './pages/ferias-salvar/ferias-salvar.component';
@@ -33,18 +25,18 @@ export const routes: Routes = [
     component: InicialComponent,
     title: 'Página Inicial',
   },
-  // {
-  //   path: 'itens-de-menu',
-  //   component: ItensDeMenuComponent,
-  //   title: 'Itens de Menu'
-  // },
-  // {
-  //   path: 'cargos',
-  //   component: CargosComponent,
-  //   title: 'Cargos'
-  // },
   {
-    path: 'funcionarios',
+    path: 'itensmenu',
+    component: ItensDeMenuComponent,
+    title: 'Itens de Menu',
+  },
+  {
+    path: 'cargos',
+    component: CargosComponent,
+    title: 'Cargos',
+  },
+  {
+    path: 'cadastros',
     component: FuncionariosComponent,
     title: 'Funcionários',
   },
@@ -58,23 +50,17 @@ export const routes: Routes = [
     component: FuncionarioEditarComponent,
     title: 'Funcionário Editar',
   },
-  // {
-  //   path: 'setores',
-  //   component: SetoresComponent,
-  //   title: 'Setores'
-  // },
+  {
+    path: 'setores',
+    component: SetoresComponent,
+    title: 'Setores',
+  },
 
   {
     path: 'horarios',
     component: HorariosComponent,
-    title: 'Horários'
+    title: 'Horários',
   },
-
-  // {
-  //   path: 'horarios',
-  //   component: HorariosComponent,
-  //   title: 'Horários'
-  // },
 
   {
     path: 'ferias',

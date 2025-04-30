@@ -1,3 +1,7 @@
-.sombra {
-  box-shadow: 4px 0 8px rgba(0, 0, 0, 0.15);
+.menu-filho:hover,
+.menu-filho.active,
+.menu-pai:hover,
+.menu-pai.hovered{
+  background-color: var(--bs-secondary-bg);
+  font-weight: bold;
 }

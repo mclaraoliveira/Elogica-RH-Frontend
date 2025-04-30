@@ -2,7 +2,7 @@
   <a
     href="#"
     class="text-decoration-none small"
-    [routerLink]="['/funcionarios']"
+    [routerLink]="['/cadastros']"
     routerLinkActive="router-link-active"
     >Voltar</a
   >
@@ -111,8 +111,8 @@
         >
         <select
           class="form-select"
-          [(ngModel)]="funcionario.horario"
-          name="horario"
+          [(ngModel)]="funcionario.horariosId"
+          name="horariosId"
           required
         >
           <option value="" selected>Selecionar...</option>
@@ -131,8 +131,8 @@
         >
         <select
           class="form-select"
-          [(ngModel)]="funcionario.setor"
-          name="setor"
+          [(ngModel)]="funcionario.setoresId"
+          name="setoresId"
           required
         >
           <option value="" selected>Selecionar...</option>
@@ -148,15 +148,13 @@
         >
         <select
           class="form-select"
-          [(ngModel)]="funcionario.cargo"
-          name="cargo"
+          [(ngModel)]="funcionario.cargosId"
+          name="cargosId"
           required
         >
           <option value="" selected>Selecionar...</option>
           @for (cargo of cargos; track cargo.id) {
-          <option [value]="cargo.id">
-            {{ cargo.titulo }}
-          </option>
+          <option [value]="cargo.id">{{ cargo.titulo }}</option>
           }
         </select>
       </div>
@@ -170,6 +168,10 @@
           [(ngModel)]="funcionario.salario"
           name="salario"
           placeholder="R$ 0.000,00"
+          mask="separator.2"
+          prefix="R$ "
+          thousandSeparator="."
+          decimalMarker=","
           required
         />
       </div>

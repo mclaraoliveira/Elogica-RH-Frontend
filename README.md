@@ -1,7 +1,7 @@
 # Front-end do Sistema Elógica RH
 
 ## Descrição do Projeto
-Este projeto é o front-end de um sistema de gerenciamento de Recursos Humanos (RH), utilizando **Angular 17** e **Bootstrap 5**. O projeto visa atender às necessidades de gestão de funcionários, cargos, setores, férias e horários. O sistema inclui validações, interface responsiva e funcionalidades como modo claro/escuro, busca no menu e paginação em listagens.
+Este projeto é o front-end de um sistema de gerenciamento de Recursos Humanos (RH), utilizando **Angular 17** e **Bootstrap 5**. O projeto visa atender às necessidades de gestão de funcionários, cargos, setores, férias e horários. Também inclui validações, funcionalidades como modo claro/escuro, busca no menu e paginação em listagens.
 
 ### Funcionalidades
 - **Gestão de Funcionários**: Cadastro, edição, exclusão e visualização de dados pessoais, cargos e salários.
@@ -30,7 +30,7 @@ O projeto segue uma organização modular para facilitar manutenção e colabora
   - **services/**: Services individuais para comunicação com a API por tela.
   - **shared/**:
     - **components/**: Componentes reutilizáveis.
-    - **interfaces/**: Interface `retornoPaginado.ts` para tipagem de respostas paginadas.
+    - **interfaces/**: Interface `retornoPaginado.ts` para tipagem de respostas paginadas e interfaces específicas para páginas individuais (como `cargo.ts` e `funcionario.ts`).
     - **services/**: Services compartilhados:
       - `modal.service.ts`: Gerenciamento de modais.
       - `tratamento-erros.service.ts`: Tratamento de mensagens de erros da API para exibição em modais.
@@ -39,17 +39,14 @@ O projeto segue uma organização modular para facilitar manutenção e colabora
 - **style.css**: Define a fonte Inter como global.
 
 ### Configuração do Layout
-O layout principal é estruturado no `app.component.html` com o uso de `router-outlet` para renderização dinâmica das páginas:
+O layout principal é estruturado no `app.component.html` e o `router-outlet` foi posicionado dentro componente de menu lateral para evitar sobreposições e renderizar dinamicamente a página:
 
 ```html
 <div class="d-flex flex-column min-vh-100">
   <app-menu-cabecalho></app-menu-cabecalho>
-  <router-outlet></router-outlet>
   <app-menu-lateral></app-menu-lateral>
 </div>
 ```
-
-O `router-outlet` foi posicionado no componente de menu lateral para evitar sobreposições e garantir a correta renderização das páginas.
 
 ### Rotas
 As rotas da aplicação estão definidas no arquivo `app.routes.ts`:
@@ -68,17 +65,61 @@ import { FuncionarioCadastroComponent } from './pages/funcionario-cadastro/funci
 import { FuncionarioEditarComponent } from './pages/funcionario-editar/funcionario-editar.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/inicial', pathMatch: 'full' },
-  { path: 'inicial', component: InicialComponent, title: 'Página Inicial' },
-  { path: 'itens-de-menu', component: ItensDeMenuComponent, title: 'Itens de Menu' },
-  { path: 'cargos', component: CargosComponent, title: 'Cargos' },
-  { path: 'setores', component: SetoresComponent, title: 'Setores' },
-  { path: 'horarios', component: HorariosComponent, title: 'Horários' },
-  { path: 'ferias', component: FeriasComponent, title: 'Férias' },
-  { path: 'funcionarios', component: FuncionariosComponent, title: 'Funcionários' },
-  { path: 'funcionarios-cadastro', component: FuncionarioCadastroComponent, title: 'Funcionário Cadastro' },
-  { path: 'funcionarios-editar', component: FuncionarioEditarComponent, title: 'Funcionário Editar' },
-  { path: '**', component: PaginaNaoEncontradaComponent, title: 'Página não encontrada' },
+  { 
+    path: '', 
+    redirectTo: '/inicial', 
+    pathMatch: 'full' 
+  },
+  { 
+    path: 'inicial', 
+    component: InicialComponent, 
+    title: 'Página Inicial' 
+  },
+  { 
+    path: 'itensmenu', 
+    component: ItensDeMenuComponent, 
+    title: 'Itens de Menu' 
+  },
+  { 
+    path: 'cargos', 
+    component: CargosComponent, 
+    title: 'Cargos' 
+  },
+  { 
+    path: 'cadastros', 
+    component: FuncionariosComponent, 
+    title: 'Funcionários' 
+  },
+  { 
+    path: 'funcionarios-cadastro', 
+    component: FuncionarioCadastroComponent, 
+    title: 'Funcionário Cadastro' 
+  },
+  { 
+    path: 'funcionarios-editar/:id', 
+    component: FuncionarioEditarComponent, 
+    title: 'Funcionário Editar' 
+  },
+  { 
+    path: 'setores', 
+    component: SetoresComponent, 
+    title: 'Setores' 
+  },
+  { 
+    path: 'horarios', 
+    component: HorariosComponent, 
+    title: 'Horários' 
+  },
+  { 
+    path: 'ferias', 
+    component: FeriasComponent, 
+    title: 'Férias' 
+  },
+  { 
+    path: '**', 
+    component: PaginaNaoEncontradaComponent, 
+    title: 'Página não encontrada' 
+  },
 ];
 ```
 
@@ -90,10 +131,8 @@ export const routes: Routes = [
   - Suporta um nível de submenu.
   - Itens pai possuem ícones e não têm URLs.
   - Itens filhos possuem URLs, item pai e não têm ícones.
-  - A tela atual é destacada visualmente.
 - **Cabeçalho**:
   - Informações de perfil mockadas.
-  - Lupa funcional para busca nos itens de menu.
   - Lâmpada funcional para alternar entre modo claro/escuro.
 - **Regras Específicas**:
   - **Funcionários**: Campos de cargo e salário bloqueados até a seleção de setor e cargo, respectivamente.
@@ -105,7 +144,7 @@ export const routes: Routes = [
 ## Instalação e Configuração
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/<seu-usuario>/Elogica-RH-Frontend.git
+   git clone https://github.com/mclaraoliveira/Elogica-RH-Frontend.git
    ```
 2. Acesse o diretório do projeto:
    ```bash

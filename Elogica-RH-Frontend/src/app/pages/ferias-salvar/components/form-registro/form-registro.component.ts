@@ -40,10 +40,12 @@ export class FormRegistroComponent {
       this.feriasService.adicionarFerias(feriasData).subscribe({
         next: (response) => {
           console.log('Férias salvas com sucesso:', response);
-          this.modalService.fechar(); // exemplo de ação após sucesso
+          this.modalService.sucesso("Férias salvas com sucesso!", "As férias foram salvas com sucesso").then(() => {
+            window.location.href = '/ferias';
+          });
         },
         error: (err) => {
-          console.error('Erro ao salvar férias:', err);
+          this.modalService.erro('Erro ao salvar férias:', err);
         }
       });
     }

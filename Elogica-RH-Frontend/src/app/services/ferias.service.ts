@@ -13,7 +13,7 @@ type ResponseApiFerias = {
 })
 export class FeriasService {
 
-  private readonly UriApi = "https://localhost:7050";
+  private readonly UriApi = "http://localhost:7050";
 
   constructor(private http: HttpClient) { }
 

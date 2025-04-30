@@ -9,7 +9,7 @@ Este projeto é o front-end de um sistema de gerenciamento de Recursos Humanos (
 - **Gestão de Férias**: Solicitação e controle de férias com verificação de conflitos de datas (mínimo de 1 mês de antecedência).
 - **Horários**: Gerenciamento de horários de trabalho (8h às 20h, com intervalos de 1h ou 2h entre 12h e 14h).
 - **Itens de Menu**: Cadastro e edição de itens de menu com suporte a ícones para itens pai e URLs para itens filhos.
-- **Páginas Adicionais**: Página inicial, página não encontrada e página em construção.
+- **Páginas Adicionais**: Página inicial e página não encontrada.
 
 ## Tecnologias Utilizadas
 - **Angular 17**: Framework principal para construção do front-end.
@@ -32,6 +32,7 @@ O projeto segue uma organização modular para facilitar manutenção e colabora
     - **components/**: Componentes reutilizáveis.
     - **interfaces/**: Interface `retornoPaginado.ts` para tipagem de respostas paginadas e interfaces específicas para páginas individuais (como `cargo.ts` e `funcionario.ts`).
     - **services/**: Services compartilhados:
+    - - `menu-lateral.service.ts`: Buscar da API as rotas que serão exibidas no menu lateral.
       - `modal.service.ts`: Gerenciamento de modais.
       - `tratamento-erros.service.ts`: Tratamento de mensagens de erros da API para exibição em modais.
 - **assets/**: Contém ilustrações e recursos visuais acessíveis a todos os colaboradores.
@@ -48,80 +49,31 @@ O layout principal é estruturado no `app.component.html` e o `router-outlet` fo
 </div>
 ```
 
-### Rotas
-As rotas da aplicação estão definidas no arquivo `app.routes.ts`:
+## Rotas da Aplicação
 
-```typescript
-import { Routes } from '@angular/router';
-import { InicialComponent } from './pages/inicial/inicial.component';
-import { ItensDeMenuComponent } from './pages/itens-de-menu/itens-de-menu.component';
-import { CargosComponent } from './pages/cargos/cargos.component';
-import { SetoresComponent } from './pages/setores/setores.component';
-import { HorariosComponent } from './pages/horarios/horarios.component';
-import { FeriasComponent } from './pages/ferias/ferias.component';
-import { PaginaNaoEncontradaComponent } from './pages/pagina-nao-encontrada/pagina-nao-encontrada.component';
-import { FuncionariosComponent } from './pages/funcionarios/funcionarios.component';
-import { FuncionarioCadastroComponent } from './pages/funcionario-cadastro/funcionario-cadastro.component';
-import { FuncionarioEditarComponent } from './pages/funcionario-editar/funcionario-editar.component';
+As rotas estão configuradas no arquivo `app.routes.ts` e seguem a seguinte estrutura:
 
-export const routes: Routes = [
-  { 
-    path: '', 
-    redirectTo: '/inicial', 
-    pathMatch: 'full' 
-  },
-  { 
-    path: 'inicial', 
-    component: InicialComponent, 
-    title: 'Página Inicial' 
-  },
-  { 
-    path: 'itensmenu', 
-    component: ItensDeMenuComponent, 
-    title: 'Itens de Menu' 
-  },
-  { 
-    path: 'cargos', 
-    component: CargosComponent, 
-    title: 'Cargos' 
-  },
-  { 
-    path: 'cadastros', 
-    component: FuncionariosComponent, 
-    title: 'Funcionários' 
-  },
-  { 
-    path: 'funcionarios-cadastro', 
-    component: FuncionarioCadastroComponent, 
-    title: 'Funcionário Cadastro' 
-  },
-  { 
-    path: 'funcionarios-editar/:id', 
-    component: FuncionarioEditarComponent, 
-    title: 'Funcionário Editar' 
-  },
-  { 
-    path: 'setores', 
-    component: SetoresComponent, 
-    title: 'Setores' 
-  },
-  { 
-    path: 'horarios', 
-    component: HorariosComponent, 
-    title: 'Horários' 
-  },
-  { 
-    path: 'ferias', 
-    component: FeriasComponent, 
-    title: 'Férias' 
-  },
-  { 
-    path: '**', 
-    component: PaginaNaoEncontradaComponent, 
-    title: 'Página não encontrada' 
-  },
-];
-```
+| Rota                     | Componente                  | Título da Página        |
+|--------------------------|-----------------------------|-------------------------|
+| `/` (redireciona)        | -                           | Redireciona para `/inicial` |
+| `/inicial`               | `InicialComponent`          | Página Inicial          |
+| `/itensmenu`             | `ItensDeMenuComponent`      | Itens de Menu           |
+| `/cargos`                | `CargosComponent`           | Cargos                  |
+| `/cadastros`             | `FuncionariosComponent`     | Funcionários            |
+| `/funcionarios-cadastro` | `FuncionarioCadastroComponent` | Funcionário Cadastro    |
+| `/funcionarios-editar/:id` | `FuncionarioEditarComponent` | Funcionário Editar      |
+| `/setores`               | `SetoresComponent`          | Setores                 |
+| `/horarios`              | `HorariosComponent`         | Horários                |
+| `/ferias`                | `FeriasComponent`           | Férias                  |
+| `/ferias-cadastro`       | `FeriasCadastroComponent`   | Férias Cadastro         |
+| `/ferias-salvar`         | `FeriasSalvarComponent`     | Férias Salvar           |
+| `**`                     | `PaginaNaoEncontradaComponent` | Página não encontrada   |
+
+### Detalhes Importantes:
+- Todas as rotas seguem o padrão **kebab-case**
+- Rotas dinâmicas (como edição) usam parâmetros (ex: `:id`)
+- A rota (`**`) captura URLs inválidas
+- O caminho base (`/`) redireciona automaticamente para `/inicial`
 
 ## Informações sobre o Front-End
 - **Validações**: Todos os inputs possuem validações de tamanho máximo e máscaras (ex.: CPF com pontuação automática).

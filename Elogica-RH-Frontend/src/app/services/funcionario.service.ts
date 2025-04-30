@@ -12,10 +12,19 @@ export class FuncionarioService {
   private cargosUrl = 'https://localhost:7050/cargos';
   private horariosUrl = 'https://localhost:7050/horarios';
 
+  funcionarioSelecionado: Funcionario | null = null;
+
   constructor(private http: HttpClient) {}
 
   getFuncionarios(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
+  }
+
+  listaFuncionarios(): Observable<Funcionario[]> {
+    return this.http.get<{ success: boolean, data: Funcionario[] }>(this.apiUrl)
+      .pipe(
+        map(response => response.data) // Extrai apenas o array `data`
+      );
   }
 
   buscarPorId(id: number): Observable<{ data: Funcionario }> {

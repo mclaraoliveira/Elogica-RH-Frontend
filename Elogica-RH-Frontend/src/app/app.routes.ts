@@ -5,12 +5,14 @@ import { ItensDeMenuComponent } from './pages/itens-de-menu/itens-de-menu.compon
 import { SetoresComponent } from './pages/setores/setores.component';
 
 import { HorariosComponent } from './pages/horarios/horarios.component';
-// import { FeriasComponent } from './pages/ferias/ferias.component';
 import { PaginaNaoEncontradaComponent } from './pages/pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { FuncionariosComponent } from './pages/funcionarios/funcionarios.component';
 import { FuncionarioCadastroComponent } from './pages/funcionario-cadastro/funcionario-cadastro.component';
 import { FuncionarioEditarComponent } from './pages/funcionario-editar/funcionario-editar.component';
 import { CargosComponent } from './pages/cargoss/cargos/cargos.component';
+import { FeriasComponent } from './pages/ferias/ferias.component';
+import { FeriasCadastroComponent } from './pages/ferias-cadastro/ferias-cadastro.component';
+import { FeriasSalvarComponent } from './pages/ferias-salvar/ferias-salvar.component';
 
 export const routes: Routes = [
   {
@@ -60,11 +62,21 @@ export const routes: Routes = [
     title: 'Horários',
   },
 
-  // {
-  //   path: 'ferias',
-  //   component: FeriasComponent,
-  //   title: 'Férias'
-  // },
+  {
+    path: 'ferias',
+    component: FeriasComponent,
+    title: 'Férias'
+  },
+  {
+    path: 'ferias-cadastro',
+    component: FeriasCadastroComponent,
+    title: 'Férias-cadastro'
+  },
+  {
+    path: 'ferias-salvar',
+    component: FeriasSalvarComponent,
+    title: 'Férias-Salvar'
+  },
   {
     path: '**',
     component: PaginaNaoEncontradaComponent,

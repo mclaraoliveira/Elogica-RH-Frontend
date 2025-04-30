@@ -1,0 +1,15 @@
+<div class="container-fluid">
+  <a [routerLink]="['/ferias-cadastro']" class="d-block mb-3">Voltar</a>
+
+  <h2 class="mt-5 mb-4">Agendar Férias</h2>
+
+  <div *ngIf="!funcionario && !error" class="text-center">
+    <p>Carregando informações do funcionário...</p>
+  </div>
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <app-secao-usuario [funcionario]="funcionario"></app-secao-usuario>
+  <app-form-registro [funcionario]="funcionario"></app-form-registro>
+</div>

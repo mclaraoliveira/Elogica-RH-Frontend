@@ -1,0 +1,18 @@
+<section class="p-4">
+  <a href="#" class="d-block mb-3">Voltar</a>
+
+  <app-form-busca></app-form-busca>
+
+  <app-tabela
+    [tituloTabela]="'Férias Agendadas'"
+    #tabelaRef
+  ></app-tabela>
+
+  <app-paginacao
+    [paginaAtual]="tabelaRef.paginaAtual"
+    [totalItens]="tabelaRef.totalItens"
+    [itensPorPagina]="tabelaRef.itensPorPagina"
+    (paginaMudou)="tabelaRef.onPaginaMudou($event)"
+  ></app-paginacao>
+</section>
+

@@ -1,0 +1,53 @@
+<form class="border p-4 rounded" [formGroup]="feriasForm" (ngSubmit)="onSubmit()">
+  <div class="row g-3">
+    <div class="col-md-6">
+      <p class="fw-bold">Funcionário</p>
+      <p>{{ funcionarioService.funcionarioSelecionado!.nome }}</p>
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label">
+        <strong>Data de Início</strong>
+        <span class="text-danger">*</span>
+      </label>
+      <input
+        type="date"
+        class="form-control"
+        formControlName="dataInicio"
+        required
+        [class.is-invalid]="feriasForm.get('dataInicio')?.invalid && feriasForm.get('dataInicio')?.touched"
+      />
+      <div class="invalid-feedback" *ngIf="feriasForm.get('dataInicio')?.invalid && feriasForm.get('dataInicio')?.touched">
+        Data de início é obrigatória
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label">
+        <strong>Data de Fim</strong>
+        <span class="text-danger">*</span>
+      </label>
+      <input
+        type="date"
+        class="form-control"
+        formControlName="dataFim"
+        required
+        [class.is-invalid]="feriasForm.get('dataFim')?.invalid && feriasForm.get('dataFim')?.touched"
+      />
+      <div class="invalid-feedback" *ngIf="feriasForm.get('dataFim')?.invalid && feriasForm.get('dataFim')?.touched">
+        Data de fim é obrigatória
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end mt-4">
+    <button
+      type="submit"
+      class="btn rounded-0"
+      style="background-color: #1f3e6a; color: white"
+      [disabled]="!feriasForm.valid || !funcionario"
+    >
+      Salvar
+    </button>
+  </div>
+</form>

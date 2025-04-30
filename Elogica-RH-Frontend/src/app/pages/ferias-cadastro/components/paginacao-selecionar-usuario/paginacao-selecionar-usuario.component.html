@@ -1,0 +1,26 @@
+<nav *ngIf="totalPaginas > 1">
+  <ul class="pagination mb-0">
+    <li class="page-item" [class.disabled]="paginaAtual === 1">
+      <a class="page-link" href="#" (click)="alterarPagina($event, paginaAtual - 1)">
+        «
+      </a>
+    </li>
+
+    <li
+      class="page-item"
+      *ngFor="let pagina of paginasParaExibir()"
+      [class.active]="pagina === paginaAtual"
+    >
+      <a class="page-link" href="#" (click)="alterarPagina($event, pagina)">
+        {{ pagina }}
+      </a>
+    </li>
+
+    <li class="page-item" [class.disabled]="paginaAtual === totalPaginas">
+      <a class="page-link" href="#" (click)="alterarPagina($event, paginaAtual + 1)">
+        »
+      </a>
+    </li>
+  </ul>
+</nav>
+

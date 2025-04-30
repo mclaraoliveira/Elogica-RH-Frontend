@@ -1,0 +1,17 @@
+<section class="p-4">
+  <a [routerLink]="['/ferias']" class="d-block mb-3">Voltar</a>
+
+  <app-form-busca></app-form-busca>
+
+  <app-tabela-agendar-ferias
+    [tituloTabela]="'Férias Agendadas'"
+    #tabelaRef
+  ></app-tabela-agendar-ferias>
+
+  <app-paginacao-selecionar-usuario
+    [paginaAtual]="tabelaRef.paginaAtual"
+    [totalItens]="tabelaRef.totalItens"
+    [itensPorPagina]="tabelaRef.itensPorPagina"
+    (paginaMudou)="tabelaRef.onPaginaMudou($event)"
+  ></app-paginacao-selecionar-usuario>
+</section>
